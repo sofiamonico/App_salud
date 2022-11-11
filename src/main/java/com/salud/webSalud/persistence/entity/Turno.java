@@ -4,22 +4,21 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Consulta {
+public class Turno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer idConsulta;
     @ManyToOne
-    @JoinColumn(name = "medico_id_usuario")
+    @JoinColumn(name = "id_usuario")
     //Con el JOINCOLUM le indico que atributo va a usar para guardar la relacion en la BD, en éste caso
     // el ID del usuario
     private Medico medico;
 
     @ManyToOne
-    @JoinColumn(name = "paciente_id_usuario")
+    @JoinColumn(name = "dni")
     private Paciente paciente;
 
-    private Boolean obraSocial;
     @Temporal(TemporalType.DATE)
     private Date fechaConsulta;
     @Column(nullable= false, columnDefinition = "MEDIUMTEXT" )
@@ -28,18 +27,25 @@ public class Consulta {
     //      TEXT |        65,535 (216−1) bytes = 64 KiB
     //MEDIUMTEXT |    16,777,215 (224−1) bytes = 16 MiB
     //  LONGTEXT | 4,294,967,295 (232−1) bytes =  4 GiB
-    private String descripcion;
+    private String observaciones;
 
-    public Consulta() {
+    public Turno() {
     }
 
-    public Consulta(Integer idConsulta, Medico medico, Paciente paciente, Boolean obraSocial, Date fechaConsulta, String descripcion) {
+    public Turno(Integer idConsulta, Medico medico, Paciente paciente, Date fechaConsulta, String observaciones) {
         this.idConsulta = idConsulta;
         this.medico = medico;
         this.paciente = paciente;
-        this.obraSocial = obraSocial;
         this.fechaConsulta = fechaConsulta;
-        this.descripcion = descripcion;
+        this.observaciones = observaciones;
+    }
+
+    public Integer getIdConsulta() {
+        return idConsulta;
+    }
+
+    public void setIdConsulta(Integer idConsulta) {
+        this.idConsulta = idConsulta;
     }
 
     public Medico getMedico() {
@@ -58,14 +64,6 @@ public class Consulta {
         this.paciente = paciente;
     }
 
-    public Boolean getObraSocial() {
-        return obraSocial;
-    }
-
-    public void setObraSocial(Boolean obraSocial) {
-        this.obraSocial = obraSocial;
-    }
-
     public Date getFechaConsulta() {
         return fechaConsulta;
     }
@@ -74,11 +72,11 @@ public class Consulta {
         this.fechaConsulta = fechaConsulta;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getObservaciones() {
+        return observaciones;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 }

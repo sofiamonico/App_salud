@@ -1,0 +1,12 @@
+<h4>Se especializa en la atenciÃ³n de las mujeres durante el embarazo y el parto, y en el diagnÃ³stico y
+    tratamiento de enfermedades de los Ã³rganos reproductivos femeninos.
+    <br>
+    <br>
+    Nuestros profesionales en esta especialidad son:
+    <br>
+    <br>
+    <ul id="ginecologas" style="text-align: left;" th:each="medico : ${medicos}">
+        <li th:text="${medico.nombre} + ' ' + ${medico.apellido}"><button type="button" class="btn btn-success" btn-sm>Ver perfil</button>
+        </li>
+    </ul>
+</h4>

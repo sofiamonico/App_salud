@@ -2,12 +2,15 @@ package com.salud.webSalud.web.controller;
 
 import com.salud.webSalud.domain.exception.MyException;
 import com.salud.webSalud.domain.service.MedicoServicio;
+import com.salud.webSalud.persistence.entity.Medico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -23,13 +26,31 @@ public class PortalControlador {
     @GetMapping("/")
     public String inicio(){
 
-        return "vista inicio";
+        return "cardiologia.html";
     }
 
-    @GetMapping("/{especialidad}")
-    public String especialidad(@PathVariable String especialidad){
-
-        return "vista especialidades";
+    @GetMapping("/medicos/{especialidad}")
+    public String especialidad(@PathVariable String especialidad, ModelMap modelo){
+        List<Medico> medicos = new ArrayList();
+        medicos = medicoServicio.buscarPorEspecialidad(especialidad);
+        modelo.addAttribute("medicos", medicos);
+        String resultado="";
+        switch (especialidad){
+            case "cardiologia":
+                resultado= "Cardiología";
+                break;
+            case "ginecologia":
+                resultado="Ginecología";
+                break;
+            case "pediatria":
+                resultado="Pediatría";
+                break;
+            case "clinica":
+                resultado="Clínica";
+        }
+        modelo.put("especialidad", resultado);
+        modelo.put("espe", especialidad);
+        return "especialidad.html";
     }
 
     @GetMapping("/registrar")

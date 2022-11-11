@@ -1,0 +1,13 @@
+<h4>Es un especialista en adultos que enfoca al paciente con una concepciÃ³n integral del ser humano,
+    capacitado para prevenir, diagnosticar, tratar y rehabilitar la patologÃ­a prevalente, asÃ­ como para
+    guiar al paciente por todos los niveles de atenciÃ³n y realizar promociÃ³n de la salud.
+    <br>
+    <br>
+    Nuestros profesionales en esta especialidad son:
+    <br>
+    <br>
+    <ul id="clinico" style="text-align: left;" th:each="medico : ${medicos}">
+        <li th:text="${medico.nombre} + ' ' + ${medico.apellido}"><button type="button" class="btn btn-success" btn-sm>Ver perfil</button>
+        </li>
+    </ul>
+</h4>

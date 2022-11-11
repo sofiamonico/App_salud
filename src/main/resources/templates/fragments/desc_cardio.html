@@ -1,0 +1,12 @@
+<h4>La cardiología es la parte de la medicina que se ocupa del aparato circulatorio. Su finalidad básica
+    es el estudio, diagnostico, tratamiento y prevencion de las enfermedades cardiovasculares.
+    <br>
+    <br>
+    Nuestros profesionales en esta especialidad son:
+    <br>
+    <br>
+    <ul id="cardiologos" style="text-align: left;" th:each="medico : ${medicos}">
+        <li th:text="${medico.nombre} + ' ' + ${medico.apellido}"><button type="button" class="btn btn-success" btn-sm>Ver perfil</button>
+        </li>
+    </ul>
+</h4>

@@ -107,4 +107,9 @@ public class MedicoServicio {
         //}
     }
 
+    public List<Medico> buscarPorEspecialidad(String especialidad){
+        List<Medico> medicos = new ArrayList();
+        medicos = medicoRepositorio.buscarPorEspecialidad(especialidad.toUpperCase());
+        return medicos;
+    }
 }

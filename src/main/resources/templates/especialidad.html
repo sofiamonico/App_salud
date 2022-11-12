@@ -19,17 +19,20 @@
 <main>
     <div class="contenedor">
         <div class="foto">
-            <img src="/img/cardiologia.jpg" alt="Imagen Ilustrativa">
+            <img  th:if="${espe} == 'cardiologia'" src="/img/cardiologia.jpg" alt="Imagen Ilustrativa">
+            <img  th:if="${espe == 'ginecologia'}" src="/img/ginecologia.jpg" alt="Imagen Ilustrativa">
+            <img th:if="${espe == 'clinico'}" src="/img/clinico.jpg" alt="Imagen Ilustrativa">
+            <img th:if="${espe == 'pediatria'}" src="/img/pediatra.jpeg" alt="Imagen Ilustrativa">
         </div>
         <div class="informacion">
             <tittle id="titulo">
                 <h1 th:text="${especialidad}"><strong></strong></h1>
             </tittle>
             <p>
-            <h4 th:if="${espe == 'cardiologia'}" th:replace= "/fragments/desc_cardio :: h4"></h4>
-            <h4 th:if="${espe == 'ginecologia'}" th:replace= "/fragments/desc_ginec :: h4"></h4>
-            <h4 th:if="${espe} == 'clinica'" th:replace= "/fragments/desc_clinico :: h4"></h4>
-            <h4 th:if="${espe} == 'pediatria'" th:replace= "/fragments/desc_pediatra :: h4"></h4>
+            <h4  th:replace= "/fragments/desc_cardio :: h4"></h4>
+            <h4  th:replace= "/fragments/desc_ginec :: h4"></h4>
+            <h4 th:replace= "/fragments/desc_clinico :: h4"></h4>
+            <h4  th:replace= "/fragments/desc_pediatra :: h4"></h4>
             </p>
             <br>
         </div>

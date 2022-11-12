@@ -25,8 +25,8 @@ public class PortalControlador {
 
     @GetMapping("/")
     public String inicio(){
-
-        return "cardiologia.html";
+        //ACA VA LA PAGINA DE INICIO
+        return "";
     }
 
     @GetMapping("/medicos/{especialidad}")
@@ -45,15 +45,15 @@ public class PortalControlador {
             case "pediatria":
                 resultado="Pediatría";
                 break;
-            case "clinica":
-                resultado="Clínica";
+            case "clinico":
+                resultado="Clínico";
         }
         modelo.put("especialidad", resultado);
         modelo.put("espe", especialidad);
         return "especialidad.html";
     }
 
-    @GetMapping("/registrar")
+    @GetMapping("/registrarse")
     public String registrar() {
         return "formulario.html";
     }

@@ -1,0 +1,32 @@
+
+
+Este comando me permite ir a la rama develop, para despues traer su contenido 
+
+$ git branch --set-upstream-to=origin/develop develop
+
+
+-------------------------------------------------
+Comando para consultar los repositorios (en blanco o verde los locales, en rojo los remotos)
+
+git branch -a 
+
+
+
+----------------------------------------------------
+Comando para enviar lo del repositorio local al remoto, en este caso ematrillini es mi rama local
+
+git push origin ematrillini
+
+----------------------------------------------------
+MERGE
+para hacer un merge tengo que pararme en la rama donde quiero traer el merge
+
+git checkout develop 
+
+git pull origin develop ( esto se hace por si alguien hizo alguna modificacion en develop)
+
+git merge ematrillini (estoy trayendo esta rama a develop)
+
+git add . (para guardar todo)
+
+y ahora podriamos hacer un commit para hacer la copia y desp con un push enviar todo 

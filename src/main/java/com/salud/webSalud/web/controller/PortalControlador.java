@@ -29,6 +29,19 @@ public class PortalControlador {
         return "";
     }
 
+    //CONTROLER PARA BUSQUEDA PERSONALIZADA
+    @GetMapping("/search")
+    public String searchPorNombre(@RequestParam(required = false) String search, ModelMap modelo){
+        List<Medico> medicos = new ArrayList();
+        medicos = medicoServicio.buscarPorNombre(search);
+
+        modelo.addAttribute("medicos", medicos);
+
+
+        return "tablaBusqueda.html";
+    }
+
+
     @GetMapping("/medicos/{especialidad}")
     public String especialidad(@PathVariable String especialidad, ModelMap modelo){
         List<Medico> medicos = new ArrayList();

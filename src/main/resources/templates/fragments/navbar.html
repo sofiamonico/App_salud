@@ -42,8 +42,8 @@
             </svg>
           </button>
         </div>
-        <form role="search">
-          <input class="form-control" type="search" placeholder="Buscar profesional..."
+        <form role="search" th:action="@{/search}" method="GET">
+          <input class="form-control" type="search" name="search" placeholder="Buscar profesional..."
                  aria-label="Buscar profesional...">
         </form>
       </div>

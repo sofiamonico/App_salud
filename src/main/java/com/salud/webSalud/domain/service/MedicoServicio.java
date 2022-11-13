@@ -112,4 +112,10 @@ public class MedicoServicio {
         medicos = medicoRepositorio.buscarPorEspecialidad(especialidad.toUpperCase());
         return medicos;
     }
+
+    public List<Medico> buscarPorNombre(String nombre){
+        List<Medico> medicos = new ArrayList();
+        medicos = medicoRepositorio.busquedaPersonalizada(nombre);
+        return medicos;
+    }
 }

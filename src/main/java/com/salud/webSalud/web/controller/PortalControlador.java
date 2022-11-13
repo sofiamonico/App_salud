@@ -2,12 +2,15 @@ package com.salud.webSalud.web.controller;
 
 import com.salud.webSalud.domain.exception.MyException;
 import com.salud.webSalud.domain.service.MedicoServicio;
+import com.salud.webSalud.persistence.entity.Medico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -22,17 +25,48 @@ public class PortalControlador {
 
     @GetMapping("/")
     public String inicio(){
-
-        return "vista inicio";
+        //ACA VA LA PAGINA DE INICIO
+        return "";
     }
 
-    @GetMapping("/{especialidad}")
-    public String especialidad(@PathVariable String especialidad){
+    //CONTROLER PARA BUSQUEDA PERSONALIZADA
+    @GetMapping("/search")
+    public String searchPorNombre(@RequestParam(required = false) String search, ModelMap modelo){
+        List<Medico> medicos = new ArrayList();
+        medicos = medicoServicio.buscarPorNombre(search);
 
-        return "vista especialidades";
+        modelo.addAttribute("medicos", medicos);
+
+
+        return "tablaBusqueda.html";
     }
 
-    @GetMapping("/registrar")
+
+    @GetMapping("/medicos/{especialidad}")
+    public String especialidad(@PathVariable String especialidad, ModelMap modelo){
+        List<Medico> medicos = new ArrayList();
+        medicos = medicoServicio.buscarPorEspecialidad(especialidad);
+        modelo.addAttribute("medicos", medicos);
+        String resultado="";
+        switch (especialidad){
+            case "cardiologia":
+                resultado= "Cardiología";
+                break;
+            case "ginecologia":
+                resultado="Ginecología";
+                break;
+            case "pediatria":
+                resultado="Pediatría";
+                break;
+            case "clinico":
+                resultado="Clínico";
+        }
+        modelo.put("especialidad", resultado);
+        modelo.put("espe", especialidad);
+        return "especialidad.html";
+    }
+
+    @GetMapping("/registrarse")
     public String registrar() {
         return "formulario.html";
     }

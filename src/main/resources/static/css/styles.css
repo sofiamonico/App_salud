@@ -8,9 +8,9 @@
  }
  body{
      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-     background-image: url(imagenes/pexels-steve-johnson-1902415.jpg) ;
+     background-image: url(/img/pexels-steve-johnson-1902415.jpg) ;
  }
- 
+
  /*ESTILOS GENERALES*/
  header{
     background: purple;
@@ -23,13 +23,13 @@ header h1{
 }
  
  /*HERO*/
- 
+
  #hero{
      position: relative;
  }
 
  #hero .informacion-container{
-     
+
      display: flex;
      color: rgb(18, 71, 54);
      padding: 0px 100px;
@@ -38,13 +38,13 @@ header h1{
  #hero .informacion-container #logo{
      width: 150px;
      border-radius: 100%;
-     
+
  }
 
  #hero .informacion-container .informacion{
      margin-left: 80px;
      font-weight: bold;
-   
+
  }
  #hero .informacion-container .informacion p{
     margin-left: 30px;
@@ -63,9 +63,9 @@ header h1{
      border-radius: 100%;
      border-color: purple 12px;
  }
- 
+
  /*MAIN*/
- 
+
  main{
      padding: 30px;
      margin-bottom: 40px;
@@ -95,13 +95,13 @@ header h1{
     background-color: powderblue;
     transition: background-color .5s;
   }
-  
+
   a:hover {
     box-shadow: purple 2px 8px 8px -5px;
     transform: translate3d(1px, 3px, 0);
-   
+
   }
- 
+
   main .especialidades .area h2{
     display: flex;
     position: absolute;

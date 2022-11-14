@@ -1,65 +1,68 @@
-<!doctype html>
-<html>
-    <head>
-        <title> 🧬 CLINIXA </title>
-        <meta charset="utf-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Expletus+Sans&display=swap" rel="stylesheet">
-       
-    </head>
-        <header>
-            <h1> Clinixa</h1>
-        </header>
-    <section id="hero">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio-Medicos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<head th:replace="/fragments/navbar :: header"></head>
+<section id="hero">
 
-        <div class="informacion-container">
+    <div class="informacion-container">
 
-            <div class="imagen-container" id="logo">
-                <img src="imagenes/logo.png" alt="LOGO">
-            </div>
-            <div class="informacion">
-                <h1>CLINICA MEDICA</h1>
-                <span></span>
-                <p>Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema
-                </p>
-            </div>
-            
-            
+        <div class="imagen-container" id="logo">
+            <img src="/img/logo.png" alt="LOGO">
         </div>
-        <main>
-            <p>Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonitaDescripcion bonita
-                Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonitaDescripcion bonita
-                Descripcion bonita Descripcion bonita Descripcion bonitaDescripcion bonita Descripcion bonita Descripcion bonita Descripcion bonitaDescripcion bonita
-                Descripcion bonita Descripcion bonita Descripcion bonita</p>
-            
-            <ul class="especialidades">
-                <li><a href="" target="_blank" class="area" id="PEDIATRIA">
-                    <img src="imagenes/pediatria.jpg" alt="PEDIATRIA">
-                    <h2 style="color: whitesmoke"> PEDIATRIA </h2>
-                </a></li>
-                <li><a href="" target="_blank" class="area" id="GINECOLOGIA">
-                    <img src="imagenes/ginecologia.jpg" alt="GINECOLOGIA">
-                     <h2 style="color:black"> GINECOLOGIA </h2>
-                </a></li>
-                <li><a href="" target="_blank" class="area" id="CLINICA">
-                    <img src="imagenes/clinica.jpg" alt="CLINICA">
-                    <h2 style="color: whitesmoke"> CLINICA </h2>
-                </a></li>
-                
-                <li><a href="" target="_blank" class="area" id="CARDIOLOGIA">
-                    <img src="imagenes/cardiologia.jpg" alt="CARDIOLOGIA">
-                    
-                    <h2 style="color:black"> CARDIOLOGIA </h2>
-                </a></li>
-               
-            </ul>
-           
-        </main>
-    </section>
+        <div class="informacion">
+            <h1>CLINICA MEDICA</h1>
+            <span></span>
+            <p>Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema
+            </p>
+        </div>
 
 
+    </div>
+    <main>
+        <p>Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonitaDescripcion bonita
+            Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonita Descripcion
+            bonita Descripcion bonitaDescripcion bonita
+            Descripcion bonita Descripcion bonita Descripcion bonitaDescripcion bonita Descripcion bonita Descripcion
+            bonita Descripcion bonitaDescripcion bonita
+            Descripcion bonita Descripcion bonita Descripcion bonita</p>
 
+        <ul class="especialidades">
+            <li><a href="/medicos/pediatria"  class="area" id="PEDIATRIA">
+                <img src="/img/pediatria.jpg" alt="PEDIATRIA">
+                <h2 style="color: whitesmoke"> PEDIATRIA </h2>
+            </a></li>
+            <li><a href="/medicos/ginecologia"  class="area" id="GINECOLOGIA">
+                <img src="/img/ginecologia.jpg" alt="GINECOLOGIA">
+                <h2 style="color:black"> GINECOLOGIA </h2>
+            </a></li>
+            <li><a href="/medicos/clinico"  class="area" id="CLINICA">
+                <img src="/img/clinica.jpg" alt="CLINICA">
+                <h2 style="color: whitesmoke"> CLINICA </h2>
+            </a></li>
+
+            <li><a href="/medicos/cardiologia"  class="area" id="CARDIOLOGIA">
+                <img src="/img/cardiologia.jpg" alt="CARDIOLOGIA">
+
+                <h2 style="color:black"> CARDIOLOGIA </h2>
+            </a></li>
+
+        </ul>
+
+    </main>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+</body>
 </html>

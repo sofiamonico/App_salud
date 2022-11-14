@@ -26,7 +26,7 @@ public class PortalControlador {
     @GetMapping("/")
     public String inicio(){
         //ACA VA LA PAGINA DE INICIO
-        return "";
+        return "index.html";
     }
 
     //CONTROLER PARA BUSQUEDA PERSONALIZADA

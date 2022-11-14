@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<head th:replace= "/fragments/navbar :: header"> </head>
+<div class="col-md-7 col-lg-6 mx-auto" style="margin:20px">
+    <h4 class="mb-3">Registro médico</h4>
+    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+        <div class="card-body">
+            <h5 class="card-title">Error 👎</h5>
+            <p class="card-text" th:text="${error}"></p>
+        </div>
+    </div>
+    <div th:if="${exito != null}" class="alert alert-success d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+            <use xlink:href="#check-circle-fill"/>
+        </svg>
+        <div class="card-body">
+            <h5 class="card-title">Exito!</h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+    </div>
+    <form class="row g-3" th:action="@{/registro}" method="POST">
+        <div class="row g-3">
+            <div class="col-sm-6">
+                <label for="firstName" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" id="firstName" placeholder="" value=""
+                       required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="lastName" class="form-label">Apellido</label>
+                <input type="text" class="form-control" name="apellido" id="lastName" placeholder="" value=""
+                       required="">
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+
+
+            <div class="col-12">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="mail" id="email" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="Especialidad" class="form-label">Especialidad</label>
+                <select name="especialidad" class="form-select" id="ObraSocial" required="">
+                    <option value="">Selecione</option>
+                    <option value="Pediatria">Pediatria</option>
+                    <option value="Ginecologia">Ginecologia</option>
+                    <option value="Clinica">Clínica</option>
+                    <option value="Cardiologia">Cardiologia</option>
+                </select>
+            </div>
+
+
+            <div class="col-md-5">
+                <label>
+                    Inicio de horario para turnos: <input type="time" name="horaInicio" class="form-control"
+                                                          step="600">
+                </label>
+            </div>
+            <div class="col-md-5">
+                <label>
+                    Fin de horario para turnos: <input type="time" name="horaFinal" class="form-control"
+                                                       step="600">
+                </label>
+            </div>
+            <div class="col-md-5">
+                <label for="ObraSocial" class="form-label">¿Recibe obra social?</label>
+                <select name="obraSocial" class="form-select" id="ObraSocial" required="">
+                    <option value="">Selecione</option>
+                    <option value="true">Si</option>
+                    <option value="false">No</option>
+                </select>
+
+            </div>
+
+        </div>
+        <button class="w-100 btn btn-dark btn-lg " type="submit" style="margin:10px">Registrarse</button>
+    </form>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+</body>
+</html>

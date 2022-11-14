@@ -1,0 +1,52 @@
+<header>
+  <nav class="navbar navbar-expand-md" aria-label="Fourth navbar example">
+    <div class="container-fluid">
+      <div class="logo">
+        <img src="/img/logo.png" alt="Logo Colectivo de Salud">
+      </div>
+      <a class="navbar-brand" href="/"><strong>Profesionales de la Salud</strong></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Acerca de</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+               aria-expanded="false">Especialidades</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/medicos/cardiologia">Cardiología</a></li>
+              <li><a class="dropdown-item" href="/medicos/clinico">Clínico</a></li>
+              <li><a class="dropdown-item" href="/medicos/ginecologia">Ginecología</a></li>
+              <li><a class="dropdown-item" href="/medicos/pediatria">Pediatría</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/registrarse">¿Eres medico? Registrate</a>
+          </li>
+        </ul>
+        <div class="ingresar">
+          <button type="button" class="btn btn-outline-danger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-person-fill" viewBox="0 0 16 16">
+              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z">
+              </path>
+            </svg>
+          </button>
+        </div>
+        <form role="search" th:action="@{/search}" method="GET">
+          <input class="form-control" type="search" name="search" placeholder="Buscar profesional..."
+                 aria-label="Buscar profesional...">
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,12 @@
+<h4 th:if="${espe} == 'pediatria'">Se especializa en la prevención, el diagnóstico y el tratamiento de enfermedades y lesiones en la
+    infancia.
+    <br>
+    <br>
+    Nuestros profesionales en esta especialidad son:
+    <br>
+    <br>
+    <ul id="pediatras" style="text-align: left;" th:each="medico : ${medicos}">
+        <li th:text="${medico.nombre} + ' ' + ${medico.apellido}"><button type="button" class="btn btn-success" btn-sm>Ver perfil</button>
+        </li>
+    </ul>
+</h4>

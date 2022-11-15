@@ -13,6 +13,15 @@
 <section id="hero">
 
     <div class="informacion-container">
+        <div th:if="${exito != null}" class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                <use xlink:href="#check-circle-fill"/>
+            </svg>
+            <div class="card-body">
+                <h5 class="card-title">Exito!</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
 
         <div class="imagen-container" id="logo">
             <img src="/img/logo.png" alt="LOGO">

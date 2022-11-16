@@ -1,76 +1,81 @@
-  /*NAVBAR*/
-  header {
+/*NAVBAR*/
+header {
     background-color: purple;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 5px, 50px, 5px;
-  }
+    padding: 5px, 80px, 5px;
+}
 
-  .navbar-brand {
+.navbar-brand {
     color: black
-  }
+}
 
-  .nav-link {
+.nav-link {
     color: white;
-  }
+}
 
-  .nav-link:focus,
-  .nav-link:hover {
+.nav-link:focus,
+.nav-link:hover {
     color: black;
-  }
+}
 
-  .btn-success {
+.btn-success {
     background-color: white;
     color: purple;
     display: inline-block;
     padding: 4px 3px;
     font-size: smaller;
     border-color: purple;
-  }
+}
 
-  .btn-outline-danger {
+.btn-outline-danger {
     color: white;
     border-color: black;
     background-color: black;
-  }
+}
 
-  .form-control {
+.form-control {
     border-color: black;
     padding: 2px 3px;
     position: relative;
-    right: 60px;
-  }
+    right: 100px;
+}
 
-  .logo {
+.ingresar{
+    position: relative;
+    right: 40px;
+}
+
+.logo {
     display: flex;
-  }
+}
 
-  .logo img {
+.logo img {
     height: 100px;
-  }
+}
 
-  /*MAIN*/
-  main {
+/*MAIN*/
+main {
     font-family: Arial, Helvetica, sans-serif;
-  }
+}
 
-  #titulo {
+#titulo {
     color: purple;
     text-align: center;
-  }
+}
 
-  .foto img {
+.foto img {
     text-align: left;
     height: 500px;
-  }
+}
 
-  .informacion {
+.informacion {
     text-align: center;
     color: black;
-  }
+}
 
-  .contenedor {
+.contenedor {
     display: flex;
     align-items: flex-start;
-  }
+}
 

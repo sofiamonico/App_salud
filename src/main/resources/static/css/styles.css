@@ -11,13 +11,8 @@
      background-image: url(/img/pexels-steve-johnson-1902415.jpg) ;
  }
 
- /*ESTILOS GENERALES*/
- header{
-    background: purple;
-    padding: 10px 50px;
-    display: flex;
-    align-items: center;
-}
+/*ESTILOS GENERALES*/
+
 header h1{
     margin-left: 30px;
 }

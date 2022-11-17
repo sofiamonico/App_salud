@@ -1,39 +1,107 @@
 package com.salud.webSalud.persistence.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import com.salud.webSalud.persistence.enums.Especialidad;
+import com.salud.webSalud.persistence.enums.Rol;
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Medico extends Usuario{
+public class Medico {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Integer idUsuario;
+    private String nombre;
+    private String apellido;
+    private String mail;
+    @Column(nullable = true)
+    private String contrasenia;
+    //Por defecto inicia en TRUE
+    @Column(nullable=true, columnDefinition="boolean default true")
+    private Boolean alta;
+    @Column(nullable = true)
     private Integer horarioInicio;
+    @Column(nullable = true)
     private Integer horarioFinal;
+    @Column(nullable = true)
     private Double valorConsulta;
-    private String especialidad;
     private Boolean obraSocial;
-    //Por defecto inicia en False
-    @Column(columnDefinition="tinyint(1) default 1")
-    private Boolean isAdmin;
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+    @Enumerated(EnumType.STRING)
+    private Especialidad especialidad;
 
     //Con ésto le indico a JPA que del lado de la Consulta,
     // va a tener un atributo medico que va a ser el que une la relacion
     @OneToMany(mappedBy = "medico")
-    private List<Consulta> consultas;
+    private List<Turno> turnos;
 
     public Medico() {
     }
 
-    public Medico(Integer idUsuario, String nombre, String apellido, String mail, String contrasenia, Boolean alta, Integer horarioInicio, Integer horarioFinal, Double valorConsulta, String especialidad, Boolean obraSocial, Boolean isAdmin, List<Consulta> consultas) {
-        super(idUsuario, nombre, apellido, mail, contrasenia, alta);
+    public Medico(Integer idUsuario, String nombre, String apellido, String mail, String contrasenia, Boolean alta, Integer horarioInicio, Integer horarioFinal, Double valorConsulta, Boolean obraSocial, Rol rol, Especialidad especialidad, List<Turno> turnos) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.contrasenia = contrasenia;
+        this.alta = alta;
         this.horarioInicio = horarioInicio;
         this.horarioFinal = horarioFinal;
         this.valorConsulta = valorConsulta;
-        this.especialidad = especialidad;
         this.obraSocial = obraSocial;
-        this.isAdmin = isAdmin;
-        this.consultas = consultas;
+        this.rol = rol;
+        this.especialidad = especialidad;
+        this.turnos = turnos;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public Boolean getAlta() {
+        return alta;
+    }
+
+    public void setAlta(Boolean alta) {
+        this.alta = alta;
     }
 
     public Integer getHorarioInicio() {
@@ -60,14 +128,6 @@ public class Medico extends Usuario{
         this.valorConsulta = valorConsulta;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
     public Boolean getObraSocial() {
         return obraSocial;
     }
@@ -76,19 +136,27 @@ public class Medico extends Usuario{
         this.obraSocial = obraSocial;
     }
 
-    public Boolean getAdmin() {
-        return isAdmin;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setAdmin(Boolean admin) {
-        isAdmin = admin;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
-    public List<Consulta> getConsultas() {
-        return consultas;
+    public Especialidad getEspecialidad() {
+        return especialidad;
     }
 
-    public void setConsultas(List<Consulta> consultas) {
-        this.consultas = consultas;
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public List<Turno> getTurnos() {
+        return turnos;
+    }
+
+    public void setTurnos(List<Turno> turnos) {
+        this.turnos = turnos;
     }
 }

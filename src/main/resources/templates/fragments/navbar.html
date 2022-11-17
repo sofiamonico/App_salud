@@ -58,7 +58,7 @@
                                 <li>
                                     <hr class="dropdown-divider" th:if="${session.usuariosession != null}">
                                 </li>
-                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="#">Cerrar sesión</a></li>
+                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="/logout">Cerrar sesión</a></li>
                                 <li><a class="dropdown-item" th:if="${session.usuariosession == null}" href="/login">Ingresar</a></li>
                                 <li><a class="dropdown-item" th:if="${session.usuariosession == null}" href="/registrarse">Registrarse</a></li>
                             </ul>

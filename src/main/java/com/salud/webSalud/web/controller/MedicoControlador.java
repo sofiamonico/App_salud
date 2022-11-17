@@ -19,7 +19,7 @@ public class MedicoControlador {
     @Autowired
     MedicoServicio medicoServicio;
 
-    @GetMapping("/medicos/{especialidad}")
+    @GetMapping("/{especialidad}")
     public String especialidad(@PathVariable String especialidad, ModelMap modelo){
         List<Medico> medicos = new ArrayList();
         medicos = medicoServicio.buscarPorEspecialidad(especialidad);

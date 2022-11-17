@@ -8,16 +8,11 @@
  }
  body{
      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-     background-image: url(/img/pexels-steve-johnson-1902415.jpg) ;
+     
  }
 
- /*ESTILOS GENERALES*/
- header{
-    background: purple;
-    /* padding: 10px 50px;*/
-    display: flex;
-    align-items: center;
-}
+/*ESTILOS GENERALES*/
+
 header h1{
     margin-left: 30px;
 }
@@ -34,6 +29,13 @@ header h1{
      color: rgb(18, 71, 54);
      padding: 0px 100px;
      justify-content: center;
+ }
+ 
+ #hero .informacion-container {
+      background-image: url(/img/fondoConteiner2.jpg);
+     
+      width: 1366px;
+      display: inline-block;
  }
  #hero .informacion-container #logo{
      width: 150px;

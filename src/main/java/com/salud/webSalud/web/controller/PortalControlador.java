@@ -15,12 +15,18 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class PortalControlador {
-    //Tiene que haber uno que devuelva la vista general con las tarjetas de especialidades
-    //Otro que devuelva cada especialidad de las tarjetas
-    //Otro con el formulario para meter usuarios(POR AHORA SOLO USUARIOS BASE, LOS MEDICOS LOS VAMOS A
-    //METER MANUALMENTE PARA PODER DEVOLVER LAS VISTAS A LA TARJETA)
     @Autowired
     MedicoServicio medicoServicio;
+
+
+    @GetMapping("/login")
+    public String login( @RequestParam(required = false) String error, ModelMap modelo){
+        if (error != null) {
+            modelo.put("error", "Usuario o Contraseña invalidos!");
+        }
+
+        return "loginprueba.html";
+    }
 
 
     @GetMapping("/")
@@ -42,50 +48,32 @@ public class PortalControlador {
     }
 
 
-    @GetMapping("/medicos/{especialidad}")
-    public String especialidad(@PathVariable String especialidad, ModelMap modelo){
-        List<Medico> medicos = new ArrayList();
-        medicos = medicoServicio.buscarPorEspecialidad(especialidad);
-        modelo.addAttribute("medicos", medicos);
-        String resultado="";
-        switch (especialidad){
-            case "cardiologia":
-                resultado= "Cardiología";
-                break;
-            case "ginecologia":
-                resultado="Ginecología";
-                break;
-            case "pediatria":
-                resultado="Pediatría";
-                break;
-            case "clinico":
-                resultado="Clínico";
-        }
-        modelo.put("especialidad", resultado);
-        modelo.put("espe", especialidad);
-        return "especialidad.html";
-    }
+
 
     @GetMapping("/registrarse")
     public String registrar() {
-        return "formulario.html";
+        return "formularioprueba.html";
     }
 
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String apellido,
                            @RequestParam String mail, @RequestParam String especialidad,
                            @RequestParam String obraSocial, @RequestParam String horaInicio,
-                           @RequestParam String horaFinal,  ModelMap modelo){
+                           @RequestParam String horaFinal,@RequestParam String contrasenia,
+                           @RequestParam String contrasenia2,  ModelMap modelo){
             //VER FORMATO DE LOS HORARIOS
             //RECIBE PERFECTO LOS PARAMETROS
-        try {
-            medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial);
+       try {
+            //FALTA AGREGAR CONTRASEÑA AL FORMULARIO PARA PODER PASARLA AL SERVICE
+            medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial, contrasenia, contrasenia2);
             modelo.put("exito", "El medico fue registrado correctamente!");
+            return "formularioprueba.html";
         } catch (MyException e) {
             modelo.put("error", e.getMessage());
+            return "formularioprueba.html";
         }
 
-        return "formulario.html";
+
     }
 
 }

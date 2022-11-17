@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MedicoRepositorio extends JpaRepository<Medico,Integer> {
-
+    @Query( value = "SELECT * FROM medico WHERE medico.mail = :email", nativeQuery = true)
+    public Medico buscarPorEmail(@Param("email") String email);
     @Query(value = "SELECT * FROM medico WHERE medico.nombre LIKE %:nombre% OR medico.apellido LIKE %:nombre%", nativeQuery = true)
     public List<Medico> busquedaPersonalizada(@Param("nombre") String nombre);
 

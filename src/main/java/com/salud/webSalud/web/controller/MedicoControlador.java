@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,5 +42,21 @@ public class MedicoControlador {
         modelo.put("especialidad", resultado);
         modelo.put("espe", especialidad);
         return "especialidad.html";
+    }
+
+
+    @GetMapping("/perfil")
+    public String verPerfilMedico(HttpSession session, ModelMap modelo){
+
+        Medico usuario = (Medico) session.getAttribute("usuariosession");
+        modelo.addAttribute("usuario", usuario);
+        return "perfilMedico.html";
+    }
+
+
+    @GetMapping("/misturnos")
+    public String administrarMisTurnos(){
+
+        return "administrarTurnos.html";
     }
 }

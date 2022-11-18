@@ -19,6 +19,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -62,6 +63,8 @@ public class MedicoServicio implements UserDetailsService {
         }else{
             medico.setObraSocial(false);
         }
+
+
         medicoRepositorio.save(medico);
     }
 

@@ -11,7 +11,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarsExample04">
+            <div class="collapse navbar-collapse" id="navbarsExample">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Inicio</a>
@@ -35,7 +35,7 @@
                 </ul>
 
                 <form role="search" th:action="@{/search}" method="GET">
-                    <input class="form-control" type="search" name="search" placeholder="Buscar profesional..."
+                    <input class="form-control2" type="search" name="search" placeholder="Buscar profesional..."
                            aria-label="Buscar profesional...">
                 </form>
 
@@ -52,8 +52,15 @@
                                 </button>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Ingresar</a></li>
-                                <li><a class="dropdown-item" href="#">Registrarse</a></li>
+                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="#">Ver perfil</a></li>
+                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="#">Modificar perfil</a></li>
+                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="#">Listado de pacientes</a></li>
+                                <li>
+                                    <hr class="dropdown-divider" th:if="${session.usuariosession != null}">
+                                </li>
+                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="/logout">Cerrar sesión</a></li>
+                                <li><a class="dropdown-item" th:if="${session.usuariosession == null}" href="/login">Ingresar</a></li>
+                                <li><a class="dropdown-item" th:if="${session.usuariosession == null}" href="/registrarse">Registrarse</a></li>
                             </ul>
                         </li>
                     </ul>

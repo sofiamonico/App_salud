@@ -21,86 +21,21 @@
                 <p class="text-muted">No tiene turnos creados</p>
             </div>
         </div>
-        <form th:action="@{/registro}" method="POST">
-            <div class="row">
-                <h4 class="fw-bold">Agregar turnos</h4>
-                <div class="col d-flex align-items-start">
-                    <div>
-                        <h4 class="fw-semibold mb-0">Elije un dia de la semana</h4>
-                        <div class="list-group mx-0 w-auto">
-                            <label class="list-group-item d-flex gap-2">
-                                <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
-                                       id="lunes" value="Lunes" checked="">
-                                <span>
-                            Lunes
-                             </span>
-                            </label>
-                            <label class="list-group-item d-flex gap-2">
-                                <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
-                                       id="martes" value="Martes">
-                                <span>
-                            Martes
-                        </span>
-                            </label>
-                            <label class="list-group-item d-flex gap-2">
-                                <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
-                                       id="miercoles" value="Miércoles">
-                                <span>
-                            Miércoles
-                             </span>
-                            </label>
-                            <label class="list-group-item d-flex gap-2">
-                                <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
-                                       id="jueves" value="Jueves">
-                                <span>
-                            Jueves
-                             </span>
-                            </label>
-                            <label class="list-group-item d-flex gap-2">
-                                <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
-                                       id="viernes" value="Viernes">
-                                <span>
-                            Viernes
-                             </span>
-                            </label>
-                            <label class="list-group-item d-flex gap-2">
-                                <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
-                                       id="sabado" value="Sábado">
-                                <span>
-                            Sábado
-                             </span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col d-flex align-items-start">
-                        <div style="margin-left: 50px">
-                            <h4 class="fw-semibold mb-0">Elije horario</h4>
-                            <div class="list-group mx-0 w-auto">
-
-                                <div class="col-md-12">
-                                    <label for="inputState" class="form-label">Elija un horario</label>
-                                    <select id="inputState" class="form-select">
-                                        <option selected>Seleccione</option>
-                                        <option value="6:00">6:00</option>
-                                        <option value="7:00">7:00</option>
-                                        <option value="8:00">8:00</option>
-                                        <option value="9:00">9:00</option>
-                                        <option value="10:00">10:00</option>
-                                        <option value="11:00">11:00</option>
-                                        <option value="12:00">12:00</option>
-                                        <option value="13:00">13:00</option>
-                                        <option value="14:00">14:00</option>
-                                        <option value="15:00">15:00</option>
-                                        <option value="16:00">16:00</option>
-                                        <option value="17:00">17:00</option>
-                                        <option value="18:00">18:00</option>
-                                        <option value="19:00">19:00</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <form th:action="@{/turnos/guardarturno}" method="POST">
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold lh-1 mb-3">Administrar turnos:</h1>
+                <p class="lead">
+                    <label for="party">Ingrese fecha y horario del turno</label>
+                    <input
+                            id="party"
+                            type="datetime-local"
+                            name="fecha"
+                            value="2022-06-01T08:30" />
+                </p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     <button class="w-100 btn btn-dark btn-lg " type="submit" style="margin:10px">Agregar turno</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>

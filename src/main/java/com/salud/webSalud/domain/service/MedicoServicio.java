@@ -92,10 +92,14 @@ public class MedicoServicio implements UserDetailsService {
 
     }
 
-    public void eliminar(Integer idMedico) throws MyException {
-
-        medicoRepositorio.deleteById(idMedico);
-
+    public void darDeBajaAlta(Integer idMedico) throws MyException {
+        Medico medico = getOne(idMedico);
+        if(medico.getAlta() == true){
+            medico.setAlta(false);
+        }else{
+            medico.setAlta(true);
+        }
+        medicoRepositorio.save(medico);
     }
 
     public Medico getOne(Integer idMedico) {

@@ -55,6 +55,7 @@
                                 <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="#">Ver perfil</a></li>
                                 <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="#">Modificar perfil</a></li>
                                 <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="#">Listado de pacientes</a></li>
+                                <li><a sec.authorize="hasRole('ADMIN')" class="dropdown-item" th:if="${session.usuariosession != null}" href="#">Panel Administrativo</a></li>
                                 <li>
                                     <hr class="dropdown-divider" th:if="${session.usuariosession != null}">
                                 </li>

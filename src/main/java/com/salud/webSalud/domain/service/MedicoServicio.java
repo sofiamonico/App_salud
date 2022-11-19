@@ -156,7 +156,8 @@ public class MedicoServicio implements UserDetailsService {
             session.setAttribute("usuariosession", medico);
             return new User(medico.getMail(), medico.getContrasenia(), permisos);
         }else{
-            return null;
+            throw new
+                    UsernameNotFoundException("User not exist with name :" +email);
         }
     }
 }

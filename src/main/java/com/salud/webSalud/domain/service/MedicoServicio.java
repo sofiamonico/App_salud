@@ -92,10 +92,14 @@ public class MedicoServicio implements UserDetailsService {
 
     }
 
-    public void eliminar(Integer idMedico) throws MyException {
-
-        medicoRepositorio.deleteById(idMedico);
-
+    public void darDeBajaAlta(Integer idMedico) throws MyException {
+        Medico medico = getOne(idMedico);
+        if(medico.getAlta() == true){
+            medico.setAlta(false);
+        }else{
+            medico.setAlta(true);
+        }
+        medicoRepositorio.save(medico);
     }
 
     public Medico getOne(Integer idMedico) {
@@ -152,7 +156,8 @@ public class MedicoServicio implements UserDetailsService {
             session.setAttribute("usuariosession", medico);
             return new User(medico.getMail(), medico.getContrasenia(), permisos);
         }else{
-            return null;
+            throw new
+                    UsernameNotFoundException("User not exist with name :" +email);
         }
     }
 }

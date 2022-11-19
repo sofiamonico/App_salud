@@ -18,11 +18,11 @@
                 </style><strong>Ingrese a su perfil</strong></h1>
             <form class="formulario" th:action="@{/logincheck}" method="POST">
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <input type="email" class="form-control" name="mail" id="floatingInput" placeholder="name@example.com">
                     <label for="floatingInput">Email</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input type="password" class="form-control" name="contrasenia" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">Contraseña</label>
                 </div>
 

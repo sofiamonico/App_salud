@@ -1,13 +1,23 @@
-/*ESTILOS GENERALES*/
 
+
+/*ESTILOS GENERALES*/
+body{
+    margin: 0px;
+    padding: 0px;
+}
 header h1{
     margin-left: 30px;
+    color: black;
+    
 }
  
- /*HERO*/
+ /* CONTAINER 1 HERO*/  /*MAIN*/
 
  #hero{
      position: relative;
+     background-image: url(/img/fondo3.jpg);
+     height: 672px;
+     width: 1366px;
  }
 
  #hero .informacion-container{
@@ -17,10 +27,10 @@ header h1{
      padding: 0px 100px;
      justify-content: center;
  }
- #hero .informacion-container #logo{
-     width: 150px;
-     border-radius: 100%;
-
+ 
+ #hero .informacion-container {
+     object-fit: contain;
+    
  }
 
  #hero .informacion-container .informacion{
@@ -29,11 +39,19 @@ header h1{
 
  }
  #hero .informacion-container .informacion p{
-    margin-left: 30px;
+  font-family: montserrat;
+  font-size: 40px;
+  margin-left: -700px;
+  color: #263238;
  }
  #hero .informacion-container .informacion h1{
-    margin-top: 50px;
-    margin-left: 20px;
+    margin-top: 400px;
+    margin-left: -800px;
+    color:black;
+    font-family: 'Montserrat' , 'Helvetica Neue', Helvetica, Arial, 'sans-serif';
+    font-size: 60px;
+   
+     
 }
  #hero .informacion-container .informacion span{
      display:inline-block;
@@ -41,39 +59,106 @@ header h1{
      margin-bottom: 20px;
  }
  #hero .informacion-container #logo img{
+     /*
     width: 200px;
-     border-radius: 100%;
-     border-color: purple 12px;
+     border-radius: 100%;*/
+     size: 39px; 
+     margin-top: -60px;
+     margin-left: 250px;
+     display: flex;
+     align-items: flex-start;
+    
  }
 
- /*MAIN*/
-
- main{
-     padding: 30px;
-     margin-bottom: 40px;
+ /*CONTEINER 2 ABOUT US - NOSOTROS */
+ 
+ #Nosotros{
+     background-image: url(/img/fondo5.jpg);
+    padding: 30px;    
      margin-top: -20px;
+     height: 672px;
+     width: 1366px; 
  }
- main .especialidades{
+ 
+ #rectanguloLila {
+  
+  border-left: 32px solid #8F3A84;
+  margin: 144px 0px;
+  width: 100%;
+  height: 384px;
+ }
+ 
+ #Nosotros .titulo2{
+  font-family: 'Montserrat' , 'Helvetica Neue', Helvetica, Arial, 'sans-serif';
+  font-size: 45px;
+  padding-left: 267px;
+  margin-top: -500px;
+  color: #8F3A84;
+ }
+p.textoNosotros {
+  width: 768px;
+  height: 197px;
+ /* margin-top: -500px;*/
+  margin-left: 250px;
+  font-size: 20px;
+  color: #263238;
+  font-family: 'Montserrat' , 'Helvetica Neue', Helvetica, Arial, 'sans-serif';
+ }
+ /*CONTEINER 3 ESPECIALIDADES */
+ 
+#Especialidades{
+   background:  #8F3A84;
+   width: 1366px;
+  height: 672px; 
+  position: relative;
+  z-index: 1;
+
+     
+}
+
+#rectanguloGris{
+  /*left: 968px;*/
+  width: 398px;
+  height: 672px;
+  background: #90A4AE;
+  position: absolute;
+  z-index: 2;
+}
+
+
+.especialidades1{
+    
      display: flex;
      justify-content: center;
      margin-top: 30px;
+     margin-left: 600px;
      list-style: none;
- }
- main .especialidades img{
+}
+#Especialidades .especialidades1 img{
      max-height: 180px;
      border-radius: 8%;
  }
- main .especialidades li{
+ 
+#Especialidades .especialidades1 li{
      margin-left: 8px;
  }
- main .especialidades .area{
+ #Especialidades .especialidades1 li .fila1{
+    /*margin-left: 400px; */
+    padding: 800px;
+     width: 398px;
+     height: 672px;
+ }
+ #Especialidades .especialidades1 li .fila2{
+     
+ }
+ #Especialidades .especialidades1 .area{
      display: flex;
      justify-content: center;
      align-items: center;
      margin: 10px;
      box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(106, 8, 163, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
  }
- main .especialidades .area a {
+ #Especialidades .especialidades1 .area a {
     background-color: powderblue;
     transition: background-color .5s;
   }
@@ -84,10 +169,36 @@ header h1{
 
   }
 
-  main .especialidades .area h2{
+ #Especialidades .especialidades1 .area h2{
     display: flex;
     position: absolute;
     font-weight: bold;
     align-content: space-around;
     font-family: 'Expletus Sans', 'Arial Narrow', Arial, sans-serif;
+    }
+    
+ /*CONTEINER 4 TURNOS */
+    #Turnos{
+     padding: 30px;
+     margin-bottom: 40px;
+     margin-top: -20px;
+     height: 672px;
+     width: 1366px;
+    }
+  
+    /*CONTEINER 5 REGISTRO MÉDICOS - MEDICOS */
+    #Medicos{
+        padding: 30px;
+     margin-bottom: 40px;
+     margin-top: -20px;
+     height: 672px;
+     width: 1366px;
+    }
+    /*CONTEINER 6 FOOTER - PIE   */
+    #Pie{
+        padding: 30px;
+     margin-bottom: 40px;
+     margin-top: -20px;
+     height: 672px;
+     width: 1366px;
     }

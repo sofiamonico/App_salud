@@ -11,9 +11,15 @@
 
     <body>
     <head th:replace= "/fragments/navbar :: header"> </head>
-
+    <div class="container-fluid m-5 contenedor">
+        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+            <div class="card-body">
+                <h5 class="card-title">Error!</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
     <main class="form-signin w-100 m-auto">
-        <div class="text-center"> 
+        <div class="text-center">
             <h1 class="h3 mb-3 fw-normal">
                 </style><strong>Ingrese a su perfil</strong></h1>
             <form class="formulario" th:action="@{/logincheck}" method="POST">
@@ -22,7 +28,9 @@
                     <label for="floatingInput">Email</label>
                 </div>
                 <div class="form-floating">
+
                     <input type="password" class="form-control" name="contrasenia" id="floatingPassword" placeholder="Password">
+
                     <label for="floatingPassword">Contraseña</label>
                 </div>
 

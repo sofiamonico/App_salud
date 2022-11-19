@@ -52,7 +52,7 @@ public class PortalControlador {
 
     @GetMapping("/registrarse")
     public String registrar() {
-        return "formularioprueba.html";
+        return "formulario.html";
     }
 
     @PostMapping("/registro")
@@ -64,13 +64,13 @@ public class PortalControlador {
             //VER FORMATO DE LOS HORARIOS
             //RECIBE PERFECTO LOS PARAMETROS
        try {
-            //FALTA AGREGAR CONTRASEÑA AL FORMULARIO PARA PODER PASARLA AL SERVICE
+
             medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial, contrasenia, contrasenia2);
             modelo.put("exito", "El medico fue registrado correctamente!");
-            return "formularioprueba.html";
+            return "redirect:/";
         } catch (MyException e) {
             modelo.put("error", e.getMessage());
-            return "formularioprueba.html";
+            return "formulario.html";
         }
 
 

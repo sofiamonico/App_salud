@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profesionales</title>
+
+    <link rel="stylesheet" href="/css/style-tabla.css">
+</head>
+<body>
+
+<main>
+    <div class="datagrid">
+        <table>
+            <thead>
+                <tr>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th>Especialidad</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <div id="paging">
+                            <ul>
+                                <li><a href="#"><span>Previous</span></a></li>
+                                <li><a href="#" class="active"><span>1</span></a></li>
+                                <li><a href="#"><span>2</span></a></li>
+                                <li><a href="#"><span>3</span></a></li>
+                                <li><a href="#"><span>4</span></a></li>
+                                <li><a href="#"><span>5</span></a></li>
+                                <li><a href="#"><span>Next</span></a></li>
+                            </ul>
+                        </div>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr th:each="medico : ${medicos}">
+                    <td><button class="button-6" role="button" th:text="${medico.apellido}"> </button></td>
+                    <td th:text="${medico.nombre}"></td>
+                    <td th:text="${medico.especialidad}"></td>
+                    <td><button class="button-7" role="button" name="alta-baja" th:id="'alta-' + ${medico.idUsuario}" th:if="${medico.alta == false}">Alta</button><button name="alta-baja" th:id="'baja-' + ${medico.idUsuario}" class="button-8" role="button" th:if="${medico.alta == true}">Baja</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+<script>
+const buttons = document.querySelectorAll('[name="alta-baja"]')
+
+const enviarId = async (button) => {
+   //uso el id del boton para obtener el id del input remplazando la palabra
+   const getBotonId = (buttonId) => parseInt(buttonId.split("-")[1]);
+   //obtengo el id del button
+   const buttonId = button.target.id;
+
+   console.log(buttonId)
+
+   //hago el fetch con el method post y le paso el json
+   const response = await fetch(`/admin/listamedicos/${getBotonId(buttonId)}`, {
+    method: 'POST', // or 'PUT'
+
+})
+location.reload();
+
+}
+
+buttons.forEach((button) =>
+          button.addEventListener("click", enviarId)
+        );
+</script>
+</html>

@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+ img{
+    width: 100%;
+ }
+ body{
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     background-image: url(/img/pexels-steve-johnson-1902415.jpg) ;
+ }
+
+ /*ESTILOS GENERALES*/
+ header{
+    background: purple;
+    padding: 10px 50px;
+    display: flex;
+    align-items: center;
+}
+header h1{
+    margin-left: 30px;
+}
+ 
+ /*HERO*/
+
+ #hero{
+     position: relative;
+ }
+
+ #hero .informacion-container{
+
+     display: flex;
+     color: rgb(18, 71, 54);
+     padding: 0px 100px;
+     justify-content: center;
+ }
+ #hero .informacion-container #logo{
+     width: 150px;
+     border-radius: 100%;
+
+ }
+
+ #hero .informacion-container .informacion{
+     margin-left: 80px;
+     font-weight: bold;
+
+ }
+ #hero .informacion-container .informacion p{
+    margin-left: 30px;
+ }
+ #hero .informacion-container .informacion h1{
+    margin-top: 50px;
+    margin-left: 20px;
+}
+ #hero .informacion-container .informacion span{
+     display:inline-block;
+     color: rgb(240, 231, 106);
+     margin-bottom: 20px;
+ }
+ #hero .informacion-container #logo img{
+    width: 200px;
+     border-radius: 100%;
+     border-color: purple 12px;
+ }
+
+ /*MAIN*/
+
+ main{
+     padding: 30px;
+     margin-bottom: 40px;
+     margin-top: -20px;
+ }
+ main .especialidades{
+     display: flex;
+     justify-content: center;
+     margin-top: 30px;
+     list-style: none;
+ }
+ main .especialidades img{
+     max-height: 180px;
+     border-radius: 8%;
+ }
+ main .especialidades li{
+     margin-left: 8px;
+ }
+ main .especialidades .area{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin: 10px;
+     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(106, 8, 163, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+ }
+ main .especialidades .area a {
+    background-color: powderblue;
+    transition: background-color .5s;
+  }
+
+  a:hover {
+    box-shadow: purple 2px 8px 8px -5px;
+    transform: translate3d(1px, 3px, 0);
+
+  }
+
+  main .especialidades .area h2{
+    display: flex;
+    position: absolute;
+    font-weight: bold;
+    align-content: space-around;
+    font-family: 'Expletus Sans', 'Arial Narrow', Arial, sans-serif;
+    }

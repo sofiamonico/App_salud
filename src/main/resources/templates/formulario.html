@@ -19,15 +19,7 @@
             <p class="card-text" th:text="${error}"></p>
         </div>
     </div>
-    <div th:if="${exito != null}" class="alert alert-success d-flex align-items-center" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-            <use xlink:href="#check-circle-fill"/>
-        </svg>
-        <div class="card-body">
-            <h5 class="card-title">Exito!</h5>
-            <p class="card-text" th:text="${exito}"></p>
-        </div>
-    </div>
+
     <form class="row g-3" th:action="@{/registro}" method="POST">
         <div class="row g-3">
             <div class="col-sm-6">

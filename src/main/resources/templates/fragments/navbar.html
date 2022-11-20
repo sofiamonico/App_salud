@@ -4,7 +4,9 @@
       <div class="logo">
         <img src="/img/logo.png" alt="Logo Colectivo de Salud">
       </div>
-      <a class="navbar-brand" href="#"><strong>Profesionales de la Salud</strong></a>
+
+      <a class="navbar-brand" href="/"><strong>Profesionales de la Salud</strong></a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
               data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false"
               aria-label="Toggle navigation">
@@ -14,7 +16,9 @@
       <div class="collapse navbar-collapse" id="navbarsExample04">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+
+            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Acerca de</a>
@@ -42,8 +46,10 @@
             </svg>
           </button>
         </div>
-        <form role="search">
-          <input class="form-control" type="search" placeholder="Buscar profesional..."
+
+        <form role="search" th:action="@{/search}" method="GET">
+          <input class="form-control" type="search" name="search" placeholder="Buscar profesional..."
+
                  aria-label="Buscar profesional...">
         </form>
       </div>

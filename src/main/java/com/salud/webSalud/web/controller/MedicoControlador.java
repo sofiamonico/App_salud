@@ -3,12 +3,14 @@ package com.salud.webSalud.web.controller;
 import com.salud.webSalud.domain.service.MedicoServicio;
 import com.salud.webSalud.persistence.entity.Medico;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,7 @@ public class MedicoControlador {
         modelo.put("espe", especialidad);
         return "especialidad.html";
     }
+
     /* @GetMapping("/{medico}")
     public String especialidad(@PathVariable String especialidad, ModelMap modelo){
         List<Medico> medicos = new ArrayList();
@@ -55,4 +58,31 @@ public class MedicoControlador {
         return "especialidad.html";
     }*/
     
+
+
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @GetMapping("/perfil")
+    public String verPerfilMedico(HttpSession session, ModelMap modelo){
+
+        Medico usuario = (Medico) session.getAttribute("usuariosession");
+        modelo.addAttribute("usuario", usuario);
+        return "perfilMedico.html";
+    }
+
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @GetMapping("/misturnos")
+    public String administrarMisTurnos(){
+
+        return "administrarTurnos.html";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @GetMapping("/mispacientes")
+    public String administrarMisPacientes(){
+
+        return "administrarPacientes.html";
+    }
+
 }

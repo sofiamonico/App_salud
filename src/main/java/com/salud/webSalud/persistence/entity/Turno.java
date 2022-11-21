@@ -1,5 +1,7 @@
 package com.salud.webSalud.persistence.entity;
 
+import com.salud.webSalud.persistence.enums.FechaConsulta;
+import com.salud.webSalud.persistence.enums.Hora;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -18,9 +20,17 @@ public class Turno {
     @ManyToOne
     @JoinColumn(name = "dni")
     private Paciente paciente;
-
-    @Temporal(TemporalType.DATE)
-    private Date fechaConsulta;
+//LO COMENTO PARA PASAR LOS PARAMETROS COMO STRING TODO LO QUE SEA DATE 
+//    @Temporal(TemporalType.DATE)
+//    private Date fechaConsulta;
+//    @Temporal(TemporalType.DATE)
+//    private Date hora;
+//    @Enumerated(EnumType.STRING)
+//    private FechaConsulta fechaConsulta;
+//    @Enumerated(EnumType.STRING)
+//    private Hora hora;
+    private String fechaConsulta;
+    private String hora;
     @Column(nullable= false, columnDefinition = "MEDIUMTEXT" )
     //Con el MEDIIUMTEXT le indicamos a la BD el tamaño que va a tener el string en Bytes
     //TINYTEXT |           255 (2 8−1) bytes
@@ -32,14 +42,51 @@ public class Turno {
     public Turno() {
     }
 
-    public Turno(Integer idConsulta, Medico medico, Paciente paciente, Date fechaConsulta, String observaciones) {
+    public Turno(Integer idConsulta, Medico medico, Paciente paciente, String fechaConsulta, String hora, String observaciones) {
         this.idConsulta = idConsulta;
         this.medico = medico;
         this.paciente = paciente;
         this.fechaConsulta = fechaConsulta;
+        this.hora = hora;
         this.observaciones = observaciones;
     }
 
+    public String getFechaConsulta() {
+        return fechaConsulta;
+    }
+
+    public void setFechaConsulta(String fechaConsulta) {
+        this.fechaConsulta = fechaConsulta;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+ 
+
+//    public FechaConsulta getFechaConsulta() {
+//        return fechaConsulta;
+//    }
+//
+//    public void setFechaConsulta(FechaConsulta fechaConsulta) {
+//        this.fechaConsulta = fechaConsulta;
+//    }
+//
+//    public Hora getHora() {
+//        return hora;
+//    }
+//
+//    public void setHora(Hora hora) {
+//        this.hora = hora;
+//    }
+//
+//    
+        
     public Integer getIdConsulta() {
         return idConsulta;
     }
@@ -64,13 +111,6 @@ public class Turno {
         this.paciente = paciente;
     }
 
-    public Date getFechaConsulta() {
-        return fechaConsulta;
-    }
-
-    public void setFechaConsulta(Date fechaConsulta) {
-        this.fechaConsulta = fechaConsulta;
-    }
 
     public String getObservaciones() {
         return observaciones;

@@ -1,0 +1,23 @@
+main {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#titulo {
+    color: purple;
+    text-align: center;
+}
+
+.foto img {
+    text-align: left;
+    height: 500px;
+}
+
+.informacion {
+    text-align: center;
+    color: black;
+}
+
+.contenedor {
+    display: flex;
+    align-items: flex-start;
+}

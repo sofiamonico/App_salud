@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
 <head>
     <meta charset="UTF-8">
@@ -10,6 +12,10 @@
     <!--BootStrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/navbar.css">
+
+
     <link rel="stylesheet" href="/css/estilo.css">
 </head>
 
@@ -24,18 +30,12 @@
             <img th:if="${espe == 'clinico'}" src="/img/clinico.jpg" alt="Imagen Ilustrativa">
             <img th:if="${espe == 'pediatria'}" src="/img/pediatra.jpeg" alt="Imagen Ilustrativa">
         </div>
-        <div class="informacion">
-            <tittle id="titulo">
-                <h1 th:text="${especialidad}"><strong></strong></h1>
-            </tittle>
-            <p>
-            <h4  th:replace= "/fragments/desc_cardio :: h4"></h4>
-            <h4  th:replace= "/fragments/desc_ginec :: h4"></h4>
-            <h4 th:replace= "/fragments/desc_clinico :: h4"></h4>
-            <h4  th:replace= "/fragments/desc_pediatra :: h4"></h4>
-            </p>
-            <br>
-        </div>
+
+        <div  th:replace= "/fragments/desc_cardio :: div"></div>
+        <div  th:replace= "/fragments/desc_ginec :: div"></div>
+        <div th:replace= "/fragments/desc_clinico :: div"></div>
+        <div  th:replace= "/fragments/desc_pediatra :: div"></div>
+
     </div>
 </main>
 

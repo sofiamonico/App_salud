@@ -9,4 +9,28 @@
         <li th:text="${medico.nombre} + ' ' + ${medico.apellido}"><button type="button" class="btn btn-success" btn-sm>Ver perfil</button>
         </li>
     </ul>
+
 </h4>
+<div th:if="${espe} == 'pediatria'" class="informacion">
+    <tittle id="titulo">
+        <h1><strong>Pediatría</strong></h1>
+    </tittle>
+    <p>
+    <h4>Se especializa en la prevención, el diagnóstico y el tratamiento de enfermedades y lesiones en la
+        infancia.</h4>
+    <br>
+    <h5>
+        Nuestros profesionales en esta especialidad son:
+    </h5>
+    <br>
+    <br>
+    <ul id="pediatras" style="text-align: left;" th:each="medico : ${medicos}">
+        <li >
+            <button class="button-6" role="button" th:text="${medico.nombre} + ' ' + ${medico.apellido}"></button>
+        </li>
+    </ul>
+
+    </p>
+    <br>
+</div>
+

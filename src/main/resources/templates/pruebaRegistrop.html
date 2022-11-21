@@ -4,19 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registrarse</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-
-
     <link rel="stylesheet" href="/css/navbar.css">
-
-
 </head>
 <body>
 <head th:replace= "/fragments/navbar :: header"> </head>
 <div class="col-md-7 col-lg-6 mx-auto" style="margin:20px">
-    <h4 class="mb-3">Registro médico</h4>
+    <h4 class="mb-3">Registro paciente</h4>
     <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
         <div class="card-body">
             <h5 class="card-title">Error 👎</h5>
@@ -24,11 +20,37 @@
         </div>
     </div>
 
-    <form class="row g-3" th:action="@{/registro}" method="POST">
+    <form class="row g-3" th:action="@{/pacientes/registro}" method="POST">
         <div class="row g-3">
             <div class="col-sm-6">
                 <label for="firstName" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" id="firstName" placeholder="" value=""
+                <input type="text" class="form-control" name="nombre_paciente" id="firstName" placeholder="" value=""
+                       required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="" value=""
+                       required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="mail" id="email" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <label for="dni" class="form-label">DNI</label>
+                <input type="text" class="form-control" name="dni" id="dni" placeholder="" value=""
                        required="">
                 <div class="invalid-feedback">
                     Valid first name is required.
@@ -36,64 +58,18 @@
             </div>
 
             <div class="col-sm-6">
-                <label for="lastName" class="form-label">Apellido</label>
-                <input type="text" class="form-control" name="apellido" id="lastName" placeholder="" value=""
+                <label for="dni2" class="form-label">Confirmar DNI</label>
+                <input type="text" class="form-control" name="dni2" id="dni2" placeholder="" value=""
                        required="">
                 <div class="invalid-feedback">
-                    Valid last name is required.
+                    Valid first name is required.
                 </div>
             </div>
 
-            <div class="col-12">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="mail" id="email" placeholder="you@example.com" required="@">
-                <div class="invalid-feedback">
-                    Please enter a valid email address for shipping updates.
-                </div>
-            </div>
 
-            <div class="col-12">
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" name="contrasenia" id="contrasena" placeholder="" required="">
-                <div class="invalid-feedback">
-                    Valid password is required
-                </div>
-            </div>
-
-            <div class="col-12">
-                <label for="password" class="form-label">Confirmar Contraseña</label>
-                <input type="password" class="form-control" name="contrasenia2" id="contrasena" placeholder="" required="password">
-                <div class="invalid-feedback">
-                    Please enter the same password.
-                </div>
-            </div>
-
-            <div class="col-12">
-                <label for="Especialidad" class="form-label">Especialidad</label>
-                <select name="especialidad" class="form-select" id="ObraSocial" required="">
-                    <option value="">Selecione</option>
-                    <option value="Pediatria">Pediatria</option>
-                    <option value="Ginecologia">Ginecologia</option>
-                    <option value="Clinica">Clínica</option>
-                    <option value="Cardiologia">Cardiologia</option>
-                </select>
-            </div>
-
-
+           
             <div class="col-md-5">
-                <label>
-                    Inicio de horario para turnos: <input type="time" name="horaInicio" class="form-control"
-                                                          step="600">
-                </label>
-            </div>
-            <div class="col-md-5">
-                <label>
-                    Fin de horario para turnos: <input type="time" name="horaFinal" class="form-control"
-                                                       step="600">
-                </label>
-            </div>
-            <div class="col-md-5">
-                <label for="ObraSocial" class="form-label">¿Recibe obra social?</label>
+                <label for="ObraSocial" class="form-label">¿Tiene obra social?</label>
                 <select name="obraSocial" class="form-select" id="ObraSocial" required="">
                     <option value="">Selecione</option>
                     <option value="true">Si</option>

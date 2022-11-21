@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>>>>>>> 4020b4c451114c45f10abb6ce37f43dd801de2f6
 <head>
     <meta charset="UTF-8">
     <title>Inicio-Medicos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/estilo.css">
+
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/index.css">
+     <link href="https://fonts.googleapis.com/css?family=Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800,900" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
 </head>
 <body>
 <head th:replace="/fragments/navbar :: header"></head>
-<section id="hero">
+  <section id="hero">
+    <main class="informacion-container">
+          
 
-    <div class="informacion-container">
         <div th:if="${exito != null}" class="alert alert-success d-flex align-items-center" role="alert">
             <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
                 <use xlink:href="#check-circle-fill"/>
@@ -27,46 +33,73 @@
             <img src="/img/logo.png" alt="LOGO">
         </div>
         <div class="informacion">
-            <h1>CLINICA MEDICA</h1>
+
+            
+            <h1><strong>PROFESIONALES DE LA SALUD</strong></h1>
             <span></span>
-            <p>Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema Lema
+            <br>
+            <p>Comprometidos con tu bienestar
             </p>
         </div>
+      
+    </main>
+  </section>
+  <div id="Nosotros"> 
+      <div id="rectanguloLila"></div>
+      <div class="aboutUs">
+        <h2 class="titulo2"> NOSOTROS </h2>
+        <p class="textoNosotros">  Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonitaDescripcion bonita
 
-
-    </div>
-    <main>
-        <p>Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonitaDescripcion bonita
             Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonita Descripcion bonita Descripcion
             bonita Descripcion bonitaDescripcion bonita
             Descripcion bonita Descripcion bonita Descripcion bonitaDescripcion bonita Descripcion bonita Descripcion
             bonita Descripcion bonitaDescripcion bonita
-            Descripcion bonita Descripcion bonita Descripcion bonita</p>
 
-        <ul class="especialidades">
-            <li><a href="/medicos/pediatria"  class="area" id="PEDIATRIA">
+            Descripcion bonita Descripcion bonita Descripcion bonita
+        </p>
+       </div>
+  </div>
+   <div id="Especialidades"> 
+            
+       <div id="rectanguloGris">
+          
+          <ul class="especialidades1">
+            <li class="fila1"><a href="/medicos/pediatria"  class="area" id="PEDIATRIA">
                 <img src="/img/pediatria.jpg" alt="PEDIATRIA">
                 <h2 style="color: whitesmoke"> PEDIATRIA </h2>
             </a></li>
-            <li><a href="/medicos/ginecologia"  class="area" id="GINECOLOGIA">
+            <li class="fila1"><a href="/medicos/ginecologia"  class="area" id="GINECOLOGIA">
                 <img src="/img/ginecologia.jpg" alt="GINECOLOGIA">
                 <h2 style="color:black"> GINECOLOGIA </h2>
             </a></li>
-            <li><a href="/medicos/clinico"  class="area" id="CLINICA">
+            <br>
+            <li class="fila2"><a href="/medicos/clinico"  class="area" id="CLINICA">
+
                 <img src="/img/clinica.jpg" alt="CLINICA">
                 <h2 style="color: whitesmoke"> CLINICA </h2>
             </a></li>
 
-            <li><a href="/medicos/cardiologia"  class="area" id="CARDIOLOGIA">
+
+            <li class="fila2"><a href="/medicos/cardiologia"  class="area" id="CARDIOLOGIA">
+
                 <img src="/img/cardiologia.jpg" alt="CARDIOLOGIA">
 
                 <h2 style="color:black"> CARDIOLOGIA </h2>
             </a></li>
 
-        </ul>
 
-    </main>
-</section>
+            </ul>
+       </div>
+  </div>
+  <div id="Turnos"> 
+  </div>
+  <div id="Medicos"> 
+  </div>
+<footer id="Pie">
+    
+    
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>

@@ -15,10 +15,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class PortalControlador {
-    //Tiene que haber uno que devuelva la vista general con las tarjetas de especialidades
-    //Otro que devuelva cada especialidad de las tarjetas
-    //Otro con el formulario para meter usuarios(POR AHORA SOLO USUARIOS BASE, LOS MEDICOS LOS VAMOS A
-    //METER MANUALMENTE PARA PODER DEVOLVER LAS VISTAS A LA TARJETA)
     @Autowired
     MedicoServicio medicoServicio;
 
@@ -69,13 +65,15 @@ public class PortalControlador {
             //VER FORMATO DE LOS HORARIOS
             //RECIBE PERFECTO LOS PARAMETROS
        try {
-            //FALTA AGREGAR CONTRASEÑA AL FORMULARIO PARA PODER PASARLA AL SERVICE
+
+
             medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial, contrasenia, contrasenia2);
             modelo.put("exito", "El medico fue registrado correctamente!");
-            return "formularioprueba.html";
+            return "redirect:/";
         } catch (MyException e) {
             modelo.put("error", e.getMessage());
-            return "formularioprueba.html";
+            return "formulario.html";
+
         }
 
 

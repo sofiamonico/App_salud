@@ -14,8 +14,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -59,6 +63,8 @@ public class MedicoServicio implements UserDetailsService {
         }else{
             medico.setObraSocial(false);
         }
+
+
         medicoRepositorio.save(medico);
     }
 
@@ -72,7 +78,10 @@ public class MedicoServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void actualizar(Integer idUsuario, String nombre, String apellido, String mail, String contrasenia, String especialidad, String contrasenia2) throws MyException {
+
+    public void actualizar(Integer idUsuario, String nombre, String apellido, String mail,
+                           String contrasenia,String contrasenia2, String especialidad) throws MyException {
+
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
         Optional<Medico> respuesta = medicoRepositorio.findById(idUsuario);
 
@@ -88,10 +97,14 @@ public class MedicoServicio implements UserDetailsService {
 
     }
 
-    public void eliminar(Integer idMedico) throws MyException {
-
-        medicoRepositorio.deleteById(idMedico);
-
+    public void darDeBajaAlta(Integer idMedico) throws MyException {
+        Medico medico = getOne(idMedico);
+        if(medico.getAlta() == true){
+            medico.setAlta(false);
+        }else{
+            medico.setAlta(true);
+        }
+        medicoRepositorio.save(medico);
     }
 
     public Medico getOne(Integer idMedico) {
@@ -119,6 +132,7 @@ public class MedicoServicio implements UserDetailsService {
         if (!contrasenia.equals(contrasenia2)) {
             throw new MyException("Las contraseñas ingresadas deben ser iguales");
         }
+
     }
 
     public List<Medico> buscarPorEspecialidad(String especialidad){
@@ -126,7 +140,6 @@ public class MedicoServicio implements UserDetailsService {
         medicos = medicoRepositorio.buscarPorEspecialidad(especialidad.toUpperCase());
         return medicos;
     }
-
 
     public List<Medico> buscarPorNombre(String nombre){
         List<Medico> medicos = new ArrayList();
@@ -141,10 +154,16 @@ public class MedicoServicio implements UserDetailsService {
             List<GrantedAuthority> permisos = new ArrayList();
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_"+medico.getRol().toString());
             permisos.add(p);
+            //Esta configuracion sirve para mandar la informacion del usuario que está logueado
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession session = attr.getRequest().getSession(true);
+
+            session.setAttribute("usuariosession", medico);
             return new User(medico.getMail(), medico.getContrasenia(), permisos);
         }else{
-            return null;
+            throw new
+                    UsernameNotFoundException("User not exist with name :" +email);
         }
     }
-
 }

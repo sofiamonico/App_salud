@@ -20,6 +20,8 @@ public class Medico {
     //Por defecto inicia en TRUE
     @Column(nullable=true, columnDefinition="boolean default true")
     private Boolean alta;
+
+    //VER
     @Column(nullable = true)
     private Integer horarioInicio;
     @Column(nullable = true)

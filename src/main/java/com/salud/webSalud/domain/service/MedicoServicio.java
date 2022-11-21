@@ -19,6 +19,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -62,6 +63,8 @@ public class MedicoServicio implements UserDetailsService {
         }else{
             medico.setObraSocial(false);
         }
+
+
         medicoRepositorio.save(medico);
     }
 
@@ -92,10 +95,14 @@ public class MedicoServicio implements UserDetailsService {
 
     }
 
-    public void eliminar(Integer idMedico) throws MyException {
-
-        medicoRepositorio.deleteById(idMedico);
-
+    public void darDeBajaAlta(Integer idMedico) throws MyException {
+        Medico medico = getOne(idMedico);
+        if(medico.getAlta() == true){
+            medico.setAlta(false);
+        }else{
+            medico.setAlta(true);
+        }
+        medicoRepositorio.save(medico);
     }
 
     public Medico getOne(Integer idMedico) {
@@ -152,7 +159,8 @@ public class MedicoServicio implements UserDetailsService {
             session.setAttribute("usuariosession", medico);
             return new User(medico.getMail(), medico.getContrasenia(), permisos);
         }else{
-            return null;
+            throw new
+                    UsernameNotFoundException("User not exist with name :" +email);
         }
     }
 }

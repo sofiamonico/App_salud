@@ -22,14 +22,14 @@ public class PacienteServicio {
     @Transactional
     public void registrarPaciente(String nombre_paciente, String dni, String dni2, Integer telefono, String mail, String obraSocial)throws MyException{
         validar(nombre_paciente, dni, dni2, telefono, mail);
-        System.out.println("Estoy mal");
+
         Paciente paciente = new Paciente();
         paciente.setNombre_paciente(nombre_paciente);
         paciente.setDni(Integer.parseInt(dni));
         paciente.setTelefono(telefono);
         paciente.setMail(mail);
         
-        if(obraSocial.equals("True")){
+        if(obraSocial.equals("true")){
             paciente.setObraSocial(true);
         }else{
             paciente.setObraSocial(false);

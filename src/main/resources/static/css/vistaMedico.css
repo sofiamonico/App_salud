@@ -1,0 +1,26 @@
+/*ESTILOS GENERALES*/
+body{
+    margin: 0px;
+    padding: 0px;
+}
+header h1{
+    margin-left: 30px;
+    color: black;
+    
+}
+
+
+/*MEDICOS*/
+
+contenedorMedico {
+    position: relative;
+    height: 672px;
+    width: 1366px;
+}
+
+fotoMedico{
+    background-image: url(/img/UsuarioDefecto.jpg);
+}
+h4 {
+color: black;
+}

@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 
-@Controller
-@RequestMapping("/medicos")
-public class MedicoControlador {
+    @Controller
+    @RequestMapping("/medicos")
+    public class MedicoControlador {
 
     @Autowired
     MedicoServicio medicoServicio;
@@ -47,6 +47,21 @@ public class MedicoControlador {
         modelo.put("espe", especialidad);
         return "especialidad.html";
     }
+
+    /* @GetMapping("/{medico}")
+    public String especialidad(@PathVariable String especialidad, ModelMap modelo){
+        List<Medico> medicos = new ArrayList();
+        medicos = medicoServicio.listar;
+        modelo.addAttribute("medicos", medicos);
+        String resultado="";
+        
+       
+        modelo.put("especialidad", resultado);
+        modelo.put("espe", especialidad);
+        return "especialidad.html";
+    }*/
+    
+
 
 
 

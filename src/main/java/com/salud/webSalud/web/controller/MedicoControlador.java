@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
-@RequestMapping("/medicos")
-public class MedicoControlador {
+    @Controller
+    @RequestMapping("/medicos")
+    public class MedicoControlador {
 
     @Autowired
     MedicoServicio medicoServicio;

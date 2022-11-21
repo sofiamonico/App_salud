@@ -45,6 +45,21 @@ import java.util.List;
         return "especialidad.html";
     }
 
+    /* @GetMapping("/{medico}")
+    public String especialidad(@PathVariable String especialidad, ModelMap modelo){
+        List<Medico> medicos = new ArrayList();
+        medicos = medicoServicio.listar;
+        modelo.addAttribute("medicos", medicos);
+        String resultado="";
+        
+       
+        modelo.put("especialidad", resultado);
+        modelo.put("espe", especialidad);
+        return "especialidad.html";
+    }*/
+    
+
+
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/perfil")
@@ -69,4 +84,5 @@ import java.util.List;
 
         return "administrarPacientes.html";
     }
+
 }

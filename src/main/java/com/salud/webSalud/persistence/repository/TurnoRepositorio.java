@@ -13,8 +13,8 @@ public interface TurnoRepositorio extends JpaRepository<Turno,Integer> {
    @Query(value = "SELECT * FROM turno WHERE turno.fechaConsulta = :fechaConsulta", nativeQuery = true)
     public List<Medico> buscarPorFechaConsulta(@Param("fechaConsulta")String fechaConsulta);  
 
-//
-//    @Query(value = "SELECT * FROM turno WHERE turno.id_usuario = :id", nativeQuery = true)
-//    public List<Turno> listarTurnos(@Param("especialidad")Integer id);
+
+    @Query(value = "SELECT * FROM turno WHERE turno.id_usuario = :id", nativeQuery = true)
+   public List<Turno> listarTurnos(@Param("id")Integer id);
 
 }

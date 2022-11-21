@@ -1,7 +1,10 @@
 package com.salud.webSalud.web.controller;
 
 import com.salud.webSalud.domain.service.MedicoServicio;
+import com.salud.webSalud.domain.service.TurnoServicio;
 import com.salud.webSalud.persistence.entity.Medico;
+import com.salud.webSalud.persistence.entity.Paciente;
+import com.salud.webSalud.persistence.entity.Turno;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -23,8 +28,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
     @Autowired
     MedicoServicio medicoServicio;
+    @Autowired
+    TurnoServicio turnoServicio;
 
-    @GetMapping("/{especialidad}")
+    @GetMapping("/especialidad/{especialidad}")
     public String especialidad(@PathVariable String especialidad, ModelMap modelo){
         List<Medico> medicos = new ArrayList();
         medicos = medicoServicio.buscarPorEspecialidad(especialidad);
@@ -48,22 +55,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
         return "especialidad.html";
     }
 
-    /* @GetMapping("/{medico}")
-    public String especialidad(@PathVariable String especialidad, ModelMap modelo){
-        List<Medico> medicos = new ArrayList();
-        medicos = medicoServicio.listar;
-        modelo.addAttribute("medicos", medicos);
-        String resultado="";
-        
-       
-        modelo.put("especialidad", resultado);
-        modelo.put("espe", especialidad);
-        return "especialidad.html";
-    }*/
-    
+    @GetMapping("/{id}")
+    public String vistaMedico(@PathVariable Integer id, ModelMap modelo) {
+        Medico medico = medicoServicio.getOne(id);
+        modelo.addAttribute("medico", medico);
+        List<Turno> turnos = turnoServicio.listaTurnosPorMedico(id);
+        modelo.addAttribute("turnos", turnos);
 
-
-
+        return "medico.html";
+    }
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/perfil")
@@ -79,14 +79,27 @@ import org.springframework.security.access.prepost.PreAuthorize;
     @GetMapping("/misturnos")
     public String administrarMisTurnos(HttpSession session, ModelMap modelo){
              Medico usuario = (Medico) session.getAttribute("usuariosession");
-             modelo.addAttribute("usuario", usuario);
+            List<Turno> turnos = turnoServicio.listaTurnosPorMedico(usuario.getIdUsuario());
+            modelo.addAttribute("turnos", turnos);
+            modelo.addAttribute("usuario", usuario);
         return "administrarTurnos.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/mispacientes")
-    public String administrarMisPacientes(){
-
+    public String administrarMisPacientes(HttpSession session, ModelMap modelo){
+        Medico usuario = (Medico) session.getAttribute("usuariosession");
+        List<Turno> turnos = turnoServicio.listaTurnosPorMedico(usuario.getIdUsuario());
+        Iterator<Turno> it = turnos.iterator();
+        List<Paciente> pacientes = new ArrayList<>();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        while (it.hasNext()) {
+            Turno turno = it.next();
+            if(turno.getPaciente() != null){
+                pacientes.add(turno.getPaciente());
+            }
+        }
+        modelo.addAttribute("pacientes", pacientes);
         return "administrarPacientes.html";
     }
 

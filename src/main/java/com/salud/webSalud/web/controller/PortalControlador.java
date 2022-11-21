@@ -59,15 +59,12 @@ public class PortalControlador {
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String apellido,
                            @RequestParam String mail, @RequestParam String especialidad,
-                           @RequestParam String obraSocial, @RequestParam String horaInicio,
-                           @RequestParam String horaFinal,@RequestParam String contrasenia,
+                           @RequestParam String obraSocial, @RequestParam Integer valorConsulta,@RequestParam String contrasenia,
                            @RequestParam String contrasenia2,  ModelMap modelo){
             //VER FORMATO DE LOS HORARIOS
             //RECIBE PERFECTO LOS PARAMETROS
        try {
-
-
-            medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial, contrasenia, contrasenia2);
+            medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial, contrasenia, contrasenia2, Double.valueOf(valorConsulta));
             modelo.put("exito", "El medico fue registrado correctamente!");
             return "redirect:/";
         } catch (MyException e) {

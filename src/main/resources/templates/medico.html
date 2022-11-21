@@ -21,68 +21,37 @@
     <div class="contenedorMedico">
         <div class="fotoMedico">
          <figure class="figure">
-            <img src="../FRONT SALUD/img/UsuarioDefecto.jpg" class="figure-img img-fluid rounded" alt="fotoMedicoPorDefecto">
+            <img src="/img/UsuarioDefecto.jpeg" class="figure-img img-fluid rounded" alt="fotoMedicoPorDefecto">
             <figcaption class="figure-caption">Nuestro servicio a su disposición </figcaption>
           </figure>
         </div>
         <div class="informacionMedico">
             <tittle id="nombreMEdico">
-              /*<h1 th:text="${medico}"><strong></strong></h1> */
+              <h1><strong th:text="${medico.nombre} + ' '+ ${medico.apellido}"></strong></h1>
             </tittle>
              <br>
             <div class="especialidad">
-               <h4 th:text="${especialidad}"></h4> 
+               <h4 th:text="${medico.especialidad}"></h4>
             </div>                            
            
         </div>
         <div class="turnoMedico">
+            <form action="/turnos/registrarpaciente" method="POST">
             <div class="dias">
-             <select class="form-select" aria-label="Default select example">
-                <option selected>Selecciona un día</option>
-                <option value="1">Lunes</option>
-                <option value="2">Martes</option>
-                <option value="3">Miercoles</option>
-                <option value="4">Jueves</option>
-                <option value="5">Viernes</option>
-              </select>    
+                <select name="turno" class="form-select"  aria-label="Default select example">
+                    <option th:disabled="${turno.paciente != null}" th:each="turno: ${turnos}"  th:value="${turno.idConsulta}"  th:text="${turno.fechaConsulta} + ' ' + ${turno.hora} " > </option>
+                </select>
             </div>
             <div class="horario">
-                 <select class="form-select" aria-label="Default select example">
-                <option selected>Selecciona un horario</option>
-                <option value="1">8:00</option>
-                <option value="2">8:30</option>
-                <option value="3">9:00</option>
-                <option value="4">9:30</option>
-                <option value="5">10:00</option>
-                <option value="6">10:30</option>
-                <option value="7">11:00</option>
-                <option value="8">11:30</option>
-                <option value="9">12:00</option>
-                <option value="10">12:30</option>
-                <option value="11">13:00</option>
-                <option value="12">13:30</option>
-              </select>
+
             </div>
             <div class="dobraSocial">
-                <select class="form-select" aria-label="Default select example">
-                <option selected>Selecciona un horario</option>
-                <option value="1">8:00</option>
-                <option value="2">8:30</option>
-                <option value="3">9:00</option>
-                <option value="4">9:30</option>
-                <option value="5">10:00</option>
-                <option value="6">10:30</option>
-                <option value="7">11:00</option>
-                <option value="8">11:30</option>
-                <option value="9">12:00</option>
-                <option value="10">12:30</option>
-                <option value="11">13:00</option>
-                <option value="12">13:30</option>
-              </select> 
+
             </div>
             <div class="botonSacarTurno">
-              <button type="button" class="btn btn-secondary btn-lg">Sacar Turno</button>   
-            </div>            
+              <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal"   class="btn btn-secondary btn-lg">Sacar Turno</button>
+            </div>
+            </form>
         </div>
     </div>
 </main>

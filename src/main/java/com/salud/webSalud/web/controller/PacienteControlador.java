@@ -13,11 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -29,17 +25,19 @@ public class PacienteControlador {
     @Autowired
     private PacienteServicio pacienteServicio;
     
-    @GetMapping("/registrarse")
-    public String registrarPaciente(){
+    @GetMapping("/registrarse/{idTurno}")
+    public String registrarPaciente(@PathVariable Integer idTurno, ModelMap modelo){
+        modelo.put("idTurno", idTurno);
         return "pruebaRegistrop.html";
     }
     
     @PostMapping("/registro")
-    public String registroPaciente(@RequestParam String nombre_paciente,  @RequestParam String dni,  @RequestParam String dni2, @RequestParam String telefono, @RequestParam String mail, @RequestParam String obraSocial, ModelMap modelo){
+    public String registroPaciente(@RequestParam String nombre_paciente, @RequestParam Integer idTurno,  @RequestParam String dni,  @RequestParam String dni2, @RequestParam String telefono, @RequestParam String mail, @RequestParam String obraSocial, ModelMap modelo){
         try{
             pacienteServicio.registrarPaciente(nombre_paciente, dni, dni2, Integer.parseInt(telefono), mail, obraSocial);
             modelo.put("exito", "El paciente fue registrado correctamente!");
-        return "pruebaRegistrop.html";
+
+        return "redirect:/turnos/reservarTurno/" + idTurno+ "/"+ dni;
         }catch(MyException ex){
             System.out.println(ex.getMessage());
             return "pruebaRegistrop.html";
@@ -54,6 +52,21 @@ public class PacienteControlador {
         modelo.addAttribute("pacientes", pacientes);
         return "paciente_list.html";
                
+    }
+
+
+    @PostMapping("/reserva")
+    public String buscarPaciente(@RequestParam String dni,@RequestParam Integer idTurno, ModelMap modelo) throws MyException {
+        Paciente paciente=  pacienteServicio.findById(Integer.parseInt(dni));
+        if(paciente== null){
+
+            return "redirect:/pacientes/registrarse/" + idTurno;
+        }else{
+            modelo.addAttribute("paciente", paciente);
+            modelo.put("idTurno", idTurno);
+            return "infoPaciente.html";
+        }
+
     }
     
     @PostMapping("/actualizar/{dni}")

@@ -19,7 +19,7 @@ contenedorMedico {
 }
 
 fotoMedico{
-    background-image: url(/img/UsuarioDefecto.jpg);
+    /* background-image: url(/img/UsuarioDefecto.jpg); */
 }
 h4 {
 color: black;

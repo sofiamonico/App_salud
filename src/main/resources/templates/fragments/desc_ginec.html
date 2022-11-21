@@ -25,9 +25,9 @@
     <h5>Profesionales en esta especialidad son:</h5>
     <br>
     <br>
-    <ul id="ginecologas" style="text-align: left;" th:each="medico : ${medicos}">
-        <li >
-            <button class="button-6" role="button" th:text="${medico.nombre} + ' ' + ${medico.apellido}"></button>
+    <ul id="ginecologas" style="text-align: left;">
+        <li  th:each="medico : ${medicos}" >
+            <a th:href="@{'/medicos/' + ${medico.idUsuario}}" class="button-6" role="button" th:text="${medico.nombre} + ' ' + ${medico.apellido}"></a>
         </li>
     </ul>
     </p>

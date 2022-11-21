@@ -81,6 +81,21 @@ public class TurnoServicio  implements UserDetailsService {
    
         turnoRepositorio.save(turno);
     }
+
+    public List<Turno> listaTurnosPorMedico(Integer id){
+        List<Turno> turnos = new ArrayList();
+        turnos = turnoRepositorio.listarTurnos(id);
+        return turnos;
+    }
+
+    public void reservarTurno(Integer dni, Integer idTurno){
+        Paciente paciente= pacienteServicio.getOne(dni);
+        Turno turno = getOne(idTurno);
+
+        turno.setPaciente(paciente);
+
+        turnoRepositorio.save(turno);
+    }
     
     @Transactional(/*readOnly = true*/)
     public List<Turno> listarTurnos(){

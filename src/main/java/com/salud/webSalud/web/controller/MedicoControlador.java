@@ -14,9 +14,9 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
-@RequestMapping("/medicos")
-public class MedicoControlador {
+    @Controller
+    @RequestMapping("/medicos")
+    public class MedicoControlador {
 
     @Autowired
     MedicoServicio medicoServicio;

@@ -8,6 +8,8 @@ package com.salud.webSalud.web.controller;
 
 import com.salud.webSalud.domain.exception.MyException;
 import com.salud.webSalud.domain.service.PacienteServicio;
+import com.salud.webSalud.persistence.entity.Paciente;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -44,5 +46,36 @@ public class PacienteControlador {
         }
         
         
+    }
+    
+    @GetMapping("/lista") 
+    public String listarPacientes(ModelMap modelo){
+        List<Paciente> pacientes = pacienteServicio.listarPacientes();
+        modelo.addAttribute("pacientes", pacientes);
+        return "paciente_list.html";
+               
+    }
+    
+    @PostMapping("/actualizar/{dni}")
+    public String actualizarPaciente(String nombre_paciente, @PathVariable String dni, String dni2, Integer telefono, String mail, String obraSocial, ModelMap modelo){
+        try {
+            pacienteServicio.actualizar(nombre_paciente, dni, dni2, telefono, mail, obraSocial);
+            return "redirect:../lista";
+        } catch (MyException ex) {
+           modelo.put("error", ex.getMessage());
+           return "paciente_actualizar.html";
+        }
+    
+    }
+    
+    @PostMapping("/eliminar/{dni}")
+    public String eliminarPaciente(@PathVariable String dni, ModelMap modelo){
+        try{
+            pacienteServicio.eliminar(Integer.parseInt(dni));
+            return"redirect:../lista";
+        }catch(MyException ex){
+            modelo.put("error", ex.getMessage());
+            return"redirect:../lista";
+        }
     }
 }

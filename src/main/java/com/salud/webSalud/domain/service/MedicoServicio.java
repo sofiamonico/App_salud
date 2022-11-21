@@ -78,8 +78,10 @@ public class MedicoServicio implements UserDetailsService {
     }
 
     @Transactional
+
     public void actualizar(Integer idUsuario, String nombre, String apellido, String mail,
                            String contrasenia,String contrasenia2, String especialidad) throws MyException {
+
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
         Optional<Medico> respuesta = medicoRepositorio.findById(idUsuario);
 
@@ -130,6 +132,7 @@ public class MedicoServicio implements UserDetailsService {
         if (!contrasenia.equals(contrasenia2)) {
             throw new MyException("Las contraseñas ingresadas deben ser iguales");
         }
+
     }
 
     public List<Medico> buscarPorEspecialidad(String especialidad){

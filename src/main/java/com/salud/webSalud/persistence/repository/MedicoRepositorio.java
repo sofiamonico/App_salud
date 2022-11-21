@@ -6,7 +6,9 @@ import com.salud.webSalud.persistence.entity.Turno;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 import org.springframework.stereotype.Repository;
+
 
 
 @Repository
@@ -21,3 +23,5 @@ public interface MedicoRepositorio extends JpaRepository<Medico,Integer> {
 
 
 }
+
+

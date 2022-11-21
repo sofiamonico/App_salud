@@ -46,13 +46,14 @@ public class PortalControlador {
 
         return "tablaBusqueda.html";
     }
+   
 
 
 
 
     @GetMapping("/registrarse")
     public String registrar() {
-        return "formulario.html";
+        return "formularioprueba.html";
     }
 
     @PostMapping("/registro")
@@ -65,12 +66,14 @@ public class PortalControlador {
             //RECIBE PERFECTO LOS PARAMETROS
        try {
 
+
             medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial, contrasenia, contrasenia2);
             modelo.put("exito", "El medico fue registrado correctamente!");
             return "redirect:/";
         } catch (MyException e) {
             modelo.put("error", e.getMessage());
             return "formulario.html";
+
         }
 
 

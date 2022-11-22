@@ -7,7 +7,11 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/estilo.css">
+
+
+    <link rel="stylesheet" href="/css/navbar.css">
+
+
 </head>
 <body>
 <head th:replace= "/fragments/navbar :: header"> </head>
@@ -19,15 +23,7 @@
             <p class="card-text" th:text="${error}"></p>
         </div>
     </div>
-    <div th:if="${exito != null}" class="alert alert-success d-flex align-items-center" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-            <use xlink:href="#check-circle-fill"/>
-        </svg>
-        <div class="card-body">
-            <h5 class="card-title">Exito!</h5>
-            <p class="card-text" th:text="${exito}"></p>
-        </div>
-    </div>
+
     <form class="row g-3" th:action="@{/registro}" method="POST">
         <div class="row g-3">
             <div class="col-sm-6">
@@ -48,12 +44,27 @@
                 </div>
             </div>
 
-
             <div class="col-12">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="mail" id="email" placeholder="you@example.com">
+                <input type="email" class="form-control" name="mail" id="email" placeholder="you@example.com" required="@">
                 <div class="invalid-feedback">
                     Please enter a valid email address for shipping updates.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" name="contrasenia" id="contrasena" placeholder="" required="">
+                <div class="invalid-feedback">
+                    Valid password is required
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="password" class="form-label">Confirmar Contraseña</label>
+                <input type="password" class="form-control" name="contrasenia2" id="contrasena" placeholder="" required="password">
+                <div class="invalid-feedback">
+                    Please enter the same password.
                 </div>
             </div>
 
@@ -71,16 +82,10 @@
 
             <div class="col-md-5">
                 <label>
-                    Inicio de horario para turnos: <input type="time" name="horaInicio" class="form-control"
-                                                          step="600">
+                    Valor de consulta: <input type="number" name="valorConsulta" class="form-control"
                 </label>
             </div>
-            <div class="col-md-5">
-                <label>
-                    Fin de horario para turnos: <input type="time" name="horaFinal" class="form-control"
-                                                       step="600">
-                </label>
-            </div>
+
             <div class="col-md-5">
                 <label for="ObraSocial" class="form-label">¿Recibe obra social?</label>
                 <select name="obraSocial" class="form-select" id="ObraSocial" required="">

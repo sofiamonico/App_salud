@@ -6,30 +6,45 @@ import com.salud.webSalud.persistence.enums.Especialidad;
 import com.salud.webSalud.persistence.enums.Rol;
 import com.salud.webSalud.persistence.repository.MedicoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MedicoServicio {
+public class MedicoServicio implements UserDetailsService {
     @Autowired
     MedicoRepositorio medicoRepositorio;
 
+
+    //VA A RECIBIR DOBLE CONTRASEÑA PORQUE SE USA PARA VERIFICAR QUE SEAN IGUALES
+    //PERO LA CONTRASEÑA2 NO SE GUARDA
     @Transactional
-    public void registrarMedico(String nombre, String apellido, String mail,String especialidad, String obraSocial) throws MyException {
-        validar(nombre, apellido, mail, especialidad);
+    public void registrarMedico(String nombre, String apellido, String mail,String especialidad,
+                                String obraSocial, String contrasenia,String contrasenia2, Double valorConsulta) throws MyException {
+        validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
 
         Medico medico = new Medico();
         medico.setNombre(nombre);
         medico.setApellido(apellido);
         medico.setMail(mail);
-        //medico.setContrasenia(new BCryptPasswordEncoder().encode(contrasenia));
+        medico.setContrasenia(new BCryptPasswordEncoder().encode(contrasenia));
         medico.setRol(Rol.USER);
         medico.setAlta(true);
+        medico.setValorConsulta(valorConsulta);
         switch (especialidad.toUpperCase()){
             case "CARDIOLOGIA":
                 medico.setEspecialidad(Especialidad.CARDIOLOGIA);
@@ -44,11 +59,13 @@ public class MedicoServicio {
                 medico.setEspecialidad(Especialidad.CLINICO);
                 break;
         }
-        if(obraSocial.equals("True")){
+        if(obraSocial.equals("true")){
             medico.setObraSocial(true);
         }else{
             medico.setObraSocial(false);
         }
+
+
         medicoRepositorio.save(medico);
     }
 
@@ -62,8 +79,12 @@ public class MedicoServicio {
     }
 
     @Transactional
-    public void actualizar(Integer idUsuario, String nombre, String apellido, String mail, String contrasenia, String especialidad) throws MyException {
-        validar(nombre, apellido, mail, especialidad);
+
+    public void actualizar(Integer idUsuario, String nombre, String apellido, String mail,
+                           String contrasenia,String contrasenia2, String especialidad,
+                           String obraSocial, Double valorConsulta) throws MyException {
+
+        validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
         Optional<Medico> respuesta = medicoRepositorio.findById(idUsuario);
 
         if (respuesta.isPresent()) {
@@ -78,17 +99,22 @@ public class MedicoServicio {
 
     }
 
-    public void eliminar(Integer idMedico) throws MyException {
-
-        medicoRepositorio.deleteById(idMedico);
-
+    public void darDeBajaAlta(Integer idMedico) throws MyException {
+        Medico medico = getOne(idMedico);
+        if(medico.getAlta() == true){
+            medico.setAlta(false);
+        }else{
+            medico.setAlta(true);
+        }
+        medicoRepositorio.save(medico);
     }
 
     public Medico getOne(Integer idMedico) {
         return medicoRepositorio.getOne(idMedico);
     }
 
-    public void validar(String nombre, String apellido, String mail, String especialidad) throws MyException {
+    public void validar(String nombre, String apellido, String mail,
+                        String especialidad, String contrasenia, String contrasenia2) throws MyException {
 
         if (nombre == null || nombre.isEmpty()) {
             throw new MyException("El nombre no puede ser nulo o estar vacío");
@@ -102,9 +128,13 @@ public class MedicoServicio {
         if (mail.isEmpty() || mail == null) {
             throw new MyException("El mail no puede ser nulo o estar vacío");
         }
-        //if (contrasenia.isEmpty() || contrasenia == null || contrasenia.length() <= 5) {
-          //  throw new MyException("La contraseña no puede ser nula o estar vacía, y debe tener más de 5 dígitos");
-        //}
+        if (contrasenia.isEmpty() || contrasenia == null || contrasenia.length() <= 5) {
+            throw new MyException("La contraseña no puede ser nula o estar vacía, y debe tener más de 5 dígitos");
+        }
+        if (!contrasenia.equals(contrasenia2)) {
+            throw new MyException("Las contraseñas ingresadas deben ser iguales");
+        }
+
     }
 
     public List<Medico> buscarPorEspecialidad(String especialidad){
@@ -117,5 +147,25 @@ public class MedicoServicio {
         List<Medico> medicos = new ArrayList();
         medicos = medicoRepositorio.busquedaPersonalizada(nombre);
         return medicos;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Medico medico = medicoRepositorio.buscarPorEmail(email);
+        if(medico != null){
+            List<GrantedAuthority> permisos = new ArrayList();
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_"+medico.getRol().toString());
+            permisos.add(p);
+            //Esta configuracion sirve para mandar la informacion del usuario que está logueado
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession session = attr.getRequest().getSession(true);
+
+            session.setAttribute("usuariosession", medico);
+            return new User(medico.getMail(), medico.getContrasenia(), permisos);
+        }else{
+            throw new
+                    UsernameNotFoundException("User not exist with name :" +email);
+        }
     }
 }

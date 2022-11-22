@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Ingresar</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/navbar.css">
+        <link rel="stylesheet" href="/css/login.css"
+    </head>
+
+    <body>
+    <head th:replace= "/fragments/navbar :: header"> </head>
+    <div class="container-fluid m-5 contenedor">
+        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+            <div class="card-body">
+                <h5 class="card-title">Error!</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+    <main class="form-signin w-100 m-auto">
+        <div class="text-center">
+            <h1 class="h3 mb-3 fw-normal">
+                </style><strong>Ingrese a su perfil</strong></h1>
+            <form class="formulario" th:action="@{/logincheck}" method="POST">
+                <div class="form-floating">
+                    <input type="email" class="form-control" name="mail" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email</label>
+                </div>
+                <div class="form-floating">
+
+                    <input type="password" class="form-control" name="contrasenia" id="floatingPassword" placeholder="Password">
+
+                    <label for="floatingPassword">Contraseña</label>
+                </div>
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Recuerdame
+                    </label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
+                <p class="mt-5 mb-3 text-muted">&copy; Profesionales de la Salud</p>
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>

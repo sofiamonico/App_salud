@@ -1,12 +1,23 @@
-<h4 th:if="${espe} == 'cardiologia'" >La cardiología es la parte de la medicina que se ocupa del aparato circulatorio. Su finalidad básica
-    es el estudio, diagnostico, tratamiento y prevencion de las enfermedades cardiovasculares.
+
+<div th:if="${espe} == 'cardiologia'" class="informacion">
+    <tittle id="titulo">
+        <h1><strong>Cardiología</strong></h1>
+    </tittle>
+    <p>
+    <h4>La cardiología es la parte de la medicina que se ocupa del aparato circulatorio. Su finalidad básica
+        es el estudio, diagnóstico, tratamiento y prevención de las enfermedades cardiovasculares.
+        <br>
+
+        <h5> Nuestros profesionales en esta especialidad son:</h5>
+        <br>
+        <br>
+        <ul id="cardiologos" style="text-align: left;">
+            <li  th:each="medico : ${medicos}" >
+                <a th:href="@{'/medicos/' + ${medico.idUsuario}}" class="button-6" role="button" th:text="${medico.nombre} + ' ' + ${medico.apellido}"></a>
+            </li>
+        </ul>
+    </h4>
+    </p>
     <br>
-    <br>
-    Nuestros profesionales en esta especialidad son:
-    <br>
-    <br>
-    <ul id="cardiologos" style="text-align: left;" th:each="medico : ${medicos}">
-        <li th:text="${medico.nombre} + ' ' + ${medico.apellido}"><button type="button" class="btn btn-success" btn-sm>Ver perfil</button>
-        </li>
-    </ul>
-</h4>
+</div>
+

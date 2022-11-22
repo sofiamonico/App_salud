@@ -10,4 +10,27 @@
         <li th:text="${medico.nombre} + ' ' + ${medico.apellido}"><button type="button" class="btn btn-success" btn-sm>Ver perfil</button>
         </li>
     </ul>
+
 </h4>
+<div th:if="${espe == 'ginecologia'}" class="informacion">
+    <tittle id="titulo">
+        <h1><strong>GINECOLOGÍA</strong></h1>
+    </tittle>
+    <p>
+
+    <h4>Se especializa en la atención de las mujeres durante el embarazo y el parto, y en el diagnóstico y
+        tratamiento de enfermedades de los organos reproductivos femeninos.</h4>
+    <br>
+
+    <h5>Profesionales en esta especialidad son:</h5>
+    <br>
+    <br>
+    <ul id="ginecologas" style="text-align: left;">
+        <li  th:each="medico : ${medicos}" >
+            <a th:href="@{'/medicos/' + ${medico.idUsuario}}" class="button-6" role="button" th:text="${medico.nombre} + ' ' + ${medico.apellido}"></a>
+        </li>
+    </ul>
+    </p>
+    <br>
+</div>
+

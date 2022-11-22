@@ -77,6 +77,17 @@ public class PacienteServicio {
         return pacienteRepositorio.getOne(dni);
     }
 
+    public Paciente findById(Integer dni){
+        Optional<Paciente> respuesta = pacienteRepositorio.findById(dni);
+
+        if (respuesta.isPresent()) {
+            Paciente paciente = respuesta.get();
+            return paciente;
+        }
+
+        return null;
+    }
+
     private void validar(String nombre_paciente, String dni, String dni2, Integer telefono, String mail) throws MyException {
 
         if (nombre_paciente == null || nombre_paciente.isEmpty()) {

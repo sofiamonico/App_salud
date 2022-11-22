@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
->>>>>>> 4020b4c451114c45f10abb6ce37f43dd801de2f6
 <head>
     <meta charset="UTF-8">
     <title>Inicio-Medicos</title>
@@ -15,19 +14,20 @@
 </head>
 <body>
 <head th:replace="/fragments/navbar :: header"></head>
+<div th:if="${exito != null}" class="alert alert-success d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+        <use xlink:href="#check-circle-fill"/>
+    </svg>
+    <div class="card-body">
+        <h5 class="card-title">Exito!</h5>
+        <p class="card-text" th:text="${exito}"></p>
+    </div>
+</div>
   <section id="hero">
     <main class="informacion-container">
           
 
-        <div th:if="${exito != null}" class="alert alert-success d-flex align-items-center" role="alert">
-            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-                <use xlink:href="#check-circle-fill"/>
-            </svg>
-            <div class="card-body">
-                <h5 class="card-title">Exito!</h5>
-                <p class="card-text" th:text="${exito}"></p>
-            </div>
-        </div>
+
 
         <div class="imagen-container" id="logo">
             <img src="/img/logo.png" alt="LOGO">
@@ -64,23 +64,23 @@
        <div id="rectanguloGris">
           
           <ul class="especialidades1">
-            <li class="fila1"><a href="/medicos/pediatria"  class="area" id="PEDIATRIA">
+            <li class="fila1"><a href="/medicos/especialidad/pediatria"  class="area" id="PEDIATRIA">
                 <img src="/img/pediatria.jpg" alt="PEDIATRIA">
                 <h2 style="color: whitesmoke"> PEDIATRIA </h2>
             </a></li>
-            <li class="fila1"><a href="/medicos/ginecologia"  class="area" id="GINECOLOGIA">
+            <li class="fila1"><a href="/medicos/especialidad/ginecologia"  class="area" id="GINECOLOGIA">
                 <img src="/img/ginecologia.jpg" alt="GINECOLOGIA">
                 <h2 style="color:black"> GINECOLOGIA </h2>
             </a></li>
             <br>
-            <li class="fila2"><a href="/medicos/clinico"  class="area" id="CLINICA">
+            <li class="fila2"><a href="/medicos/especialidad/clinico"  class="area" id="CLINICA">
 
                 <img src="/img/clinica.jpg" alt="CLINICA">
                 <h2 style="color: whitesmoke"> CLINICA </h2>
             </a></li>
 
 
-            <li class="fila2"><a href="/medicos/cardiologia"  class="area" id="CARDIOLOGIA">
+            <li class="fila2"><a href="/medicos/especialidad/cardiologia"  class="area" id="CARDIOLOGIA">
 
                 <img src="/img/cardiologia.jpg" alt="CARDIOLOGIA">
 

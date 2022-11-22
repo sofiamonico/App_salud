@@ -10,7 +10,6 @@
 </head>
 <body>
 <head th:replace="/fragments/navbar :: header"></head>
-
 <div th:if="${exito != null}" class="alert alert-success d-flex align-items-center" role="alert">
     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
         <use xlink:href="#check-circle-fill"/>
@@ -20,18 +19,25 @@
         <p class="card-text" th:text="${exito}"></p>
     </div>
 </div>
-<div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="/img/logo.png" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold" th:text="'Bienvenido ' + ${usuario.nombre}"></h1>
-    <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Es momento de administrar tu perfil de Médico</p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a type="button" href="/medicos/misturnos" class="btn btn-dark btn-lg px-4 gap-3">Administrar turnos</a>
-            <a type="button" href="/medicos/mispacientes" class="btn btn-outline-secondary btn-lg px-4">Ver Pacientes</a>
-        </div>
+
+<div class="card text-center">
+    <h2>¿Sos ésta persona?</h2>
+    <div class="card-header" th:text="${paciente.nombre_paciente}">
+    </div>
+    <div class="card-body">
+        <p class="card-text" th:text="${paciente.dni}" >No tiene Obra Social</p>
+        <h5 class="card-title" th:text="'Telefono: ' + ${paciente.telefono}">Special title treatment</h5>
+        <p class="card-text" th:text="'Email: ' + ${paciente.mail}">With supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text" th:if="${paciente.obraSocial} == true" >Tiene Obra Social</p>
+        <p class="card-text" th:if="${paciente.obraSocial} == false" >No tiene Obra Social</p>
+    </div>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <form th:action="@{'/turnos/reservarTurno/' + ${idTurno}} + '/'+ ${paciente.dni}" method="GET">
+            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Si</button>
+        </form>
+        <button type="button" class="btn btn-outline-secondary btn-lg px-4">No</button>
     </div>
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

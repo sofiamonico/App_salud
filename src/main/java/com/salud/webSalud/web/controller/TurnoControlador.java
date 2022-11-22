@@ -3,16 +3,15 @@ package com.salud.webSalud.web.controller;
 
 import com.salud.webSalud.domain.exception.MyException;
 import com.salud.webSalud.domain.service.TurnoServicio;
+import com.salud.webSalud.persistence.entity.Turno;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequestMapping("/turnos")
@@ -21,8 +20,11 @@ public class TurnoControlador {
     @Autowired
     private TurnoServicio turnoServicio;
     
-    @GetMapping("/registrarpaciente")
-    public String registrarTurno(){
+    @PostMapping("/registrarpaciente")
+    //turno es el ID del tuRno
+    public String registrarTurno(@RequestParam Integer turno, ModelMap modelo){
+        Turno turno2 = turnoServicio.getOne(turno);
+        modelo.addAttribute("turno", turno2);
         return "turno.html";
     }
 
@@ -35,6 +37,22 @@ public class TurnoControlador {
         turnoServicio.registrarTurno(dia," ", Integer.parseInt(id) , " ", hora);
         System.out.println(dia+ "------------" + hora + "------------------------------");
         return "redirect:/medicos/misturnos";
+    }
+
+    @GetMapping("/reservarTurno/{idTurno}/{dni}")
+    public String reservarTurno (@PathVariable Integer dni, @PathVariable Integer idTurno, ModelMap modelo){
+
+        turnoServicio.reservarTurno(dni,idTurno);
+        modelo.put("exito", "El turno fue registrado correctamente!");
+        return "index.html";
+    }
+
+    @PostMapping("/observaciones")
+    public String changeObservaciones (@RequestParam String observaciones,@RequestParam Integer idTurno){
+
+        turnoServicio.changeObservaciones(observaciones,idTurno);
+
+        return "redirect:/medicos/mispacientes";
     }
 
     @PostMapping("/registropac")

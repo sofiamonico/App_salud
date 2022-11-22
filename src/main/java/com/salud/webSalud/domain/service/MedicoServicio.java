@@ -34,7 +34,7 @@ public class MedicoServicio implements UserDetailsService {
     //PERO LA CONTRASEÑA2 NO SE GUARDA
     @Transactional
     public void registrarMedico(String nombre, String apellido, String mail,String especialidad,
-                                String obraSocial, String contrasenia,String contrasenia2) throws MyException {
+                                String obraSocial, String contrasenia,String contrasenia2, Double valorConsulta) throws MyException {
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
 
         Medico medico = new Medico();
@@ -44,6 +44,7 @@ public class MedicoServicio implements UserDetailsService {
         medico.setContrasenia(new BCryptPasswordEncoder().encode(contrasenia));
         medico.setRol(Rol.USER);
         medico.setAlta(true);
+        medico.setValorConsulta(valorConsulta);
         switch (especialidad.toUpperCase()){
             case "CARDIOLOGIA":
                 medico.setEspecialidad(Especialidad.CARDIOLOGIA);
@@ -80,7 +81,8 @@ public class MedicoServicio implements UserDetailsService {
     @Transactional
 
     public void actualizar(Integer idUsuario, String nombre, String apellido, String mail,
-                           String contrasenia,String contrasenia2, String especialidad) throws MyException {
+                           String contrasenia,String contrasenia2, String especialidad,
+                           String obraSocial, Double valorConsulta) throws MyException {
 
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
         Optional<Medico> respuesta = medicoRepositorio.findById(idUsuario);

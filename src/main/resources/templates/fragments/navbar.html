@@ -24,10 +24,10 @@
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
                            aria-expanded="false">Especialidades</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/medicos/cardiologia">Cardiología</a></li>
-                            <li><a class="dropdown-item" href="/medicos/clinico">Clínico</a></li>
-                            <li><a class="dropdown-item" href="/medicos/ginecologia">Ginecología</a></li>
-                            <li><a class="dropdown-item" href="/medicos/pediatria">Pediatría</a></li>
+                            <li><a class="dropdown-item" href="/medicos/especialidad/cardiologia">Cardiología</a></li>
+                            <li><a class="dropdown-item" href="/medicos/especialidad/clinico">Clínico</a></li>
+                            <li><a class="dropdown-item" href="/medicos/especialidad/ginecologia">Ginecología</a></li>
+                            <li><a class="dropdown-item" href="/medicos/especialidad/pediatria">Pediatría</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -55,7 +55,7 @@
                             <ul class="dropdown-menu">
 
                                 <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="/medicos/perfil">Ver perfil</a></li>
-                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="/medicos/modificar">Modificar perfil</a></li>
+                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" th:href="@{'/medicos/modificar/' + ${session.usuariosession.idUsuario}}">Modificar perfil</a></li>
                                 <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="/medicos/mispacientes">Listado de pacientes</a></li>
                                 <li><a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:if="${session.usuariosession != null}" href="/admin/dashboard">Panel Administrativo</a></li>
 

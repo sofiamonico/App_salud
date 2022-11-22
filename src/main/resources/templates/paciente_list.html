@@ -13,8 +13,8 @@
         <h1 class="display-5 fw-bold">Pacientes encontrados:</h1>
         <div class="col-lg-6 mx-auto">
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-
-                <thead>
+                <table class="table">
+                    <thead>
                     <tr>
                         <th scope="col">DNI</th>
                         <th scope="col">Mail</th>
@@ -22,8 +22,8 @@
                         <th scope="col">Teléfono</th>
                         <th scope="col">Obra Social</th>
                     </tr>
-                </thead>
-                <tbody th:each="paciente : ${pacientes}">
+                    </thead>
+                    <tbody th:each="paciente : ${pacientes}">
                     <tr>
                         <th scope="row" th:text="${paciente.dni}"></th>
                         <td th:text="${paciente.mail}"></td>
@@ -32,8 +32,9 @@
                         <td th:if="${paciente.obraSocial} == true">Si</td>
                         <td th:if="${paciente.obraSocial} == false">No</td>
                     </tr>
-                </tbody>
-                
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>

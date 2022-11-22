@@ -44,7 +44,15 @@ public class TurnoControlador {
 
         turnoServicio.reservarTurno(dni,idTurno);
         modelo.put("exito", "El turno fue registrado correctamente!");
-        return "redirect:/";
+        return "index.html";
+    }
+
+    @PostMapping("/observaciones")
+    public String changeObservaciones (@RequestParam String observaciones,@RequestParam Integer idTurno){
+
+        turnoServicio.changeObservaciones(observaciones,idTurno);
+
+        return "redirect:/medicos/mispacientes";
     }
 
     @PostMapping("/registropac")

@@ -11,7 +11,15 @@
 <body>
 <head th:replace="/fragments/navbar :: header"></head>
 
-
+<div th:if="${exito != null}" class="alert alert-success d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+        <use xlink:href="#check-circle-fill"/>
+    </svg>
+    <div class="card-body">
+        <h5 class="card-title">Exito!</h5>
+        <p class="card-text" th:text="${exito}"></p>
+    </div>
+</div>
 <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="/img/logo.png" alt="" width="72" height="57">
     <h1 class="display-5 fw-bold" th:text="'Bienvenido ' + ${usuario.nombre}"></h1>

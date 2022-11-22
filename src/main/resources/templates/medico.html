@@ -18,10 +18,36 @@
 <head th:replace= "/fragments/navbar :: header"> </head>
 <!--Main-->
 <main>
-    <div class="contenedorMedico">
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+                <img src="/img/UsuarioDefecto.jpeg" class="figure-img img-fluid rounded" alt="fotoMedicoPorDefecto">
+            </div>
+            <div class="col-lg-6">
+                <tittle id="nombreMEdico">
+                    <h1><strong th:text="${medico.nombre} + ' '+ ${medico.apellido}"></strong></h1>
+                </tittle>
+                <p class="lead"><div class="especialidad">
+                <h4 th:text="${medico.especialidad}"></h4>
+            </div>    </p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <form action="/turnos/registrarpaciente" method="POST">
+                        <div class="dias">
+                            <label for="turno" class="form-label">Turnos del medico:</label>
+                            <select name="turno" id="turno" class="form-select"  aria-label="Default select example">
+                                <option th:disabled="${turno.paciente != null}" th:each="turno: ${turnos}"  th:value="${turno.idConsulta}"  th:text="${turno.fechaConsulta} + ' ' + ${turno.hora} " > </option>
+                            </select>
+                        </div>
+                        <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal"   class="btn btn-secondary btn-lg">Sacar Turno</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="contenedorMedico">
         <div class="fotoMedico">
          <figure class="figure">
-            <img src="/img/UsuarioDefecto.jpeg" class="figure-img img-fluid rounded" alt="fotoMedicoPorDefecto">
+
             <figcaption class="figure-caption">Nuestro servicio a su disposición </figcaption>
           </figure>
         </div>
@@ -53,7 +79,7 @@
             </div>
             </form>
         </div>
-    </div>
+    </div> -->
 </main>
 
 

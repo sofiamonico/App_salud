@@ -96,6 +96,14 @@ public class TurnoServicio  implements UserDetailsService {
 
         turnoRepositorio.save(turno);
     }
+
+    public void changeObservaciones(String observaciones, Integer idTurno){
+        Turno turno = getOne(idTurno);
+
+        turno.setObservaciones(observaciones);
+
+        turnoRepositorio.save(turno);
+    }
     
     @Transactional(/*readOnly = true*/)
     public List<Turno> listarTurnos(){

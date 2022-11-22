@@ -81,7 +81,8 @@ public class MedicoServicio implements UserDetailsService {
     @Transactional
 
     public void actualizar(Integer idUsuario, String nombre, String apellido, String mail,
-                           String contrasenia,String contrasenia2, String especialidad) throws MyException {
+                           String contrasenia,String contrasenia2, String especialidad,
+                           String obraSocial, Double valorConsulta) throws MyException {
 
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
         Optional<Medico> respuesta = medicoRepositorio.findById(idUsuario);

@@ -11,6 +11,7 @@ import com.salud.webSalud.domain.service.PacienteServicio;
 import com.salud.webSalud.persistence.entity.Paciente;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +46,7 @@ public class PacienteControlador {
         
         
     }
-    
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/lista") 
     public String listarPacientes(ModelMap modelo){
         List<Paciente> pacientes = pacienteServicio.listarPacientes();

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class PacienteServicio {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
+
     
     @Transactional
     public void registrarPaciente(String nombre_paciente, String dni, String dni2, Integer telefono, String mail, String obraSocial)throws MyException{
@@ -68,9 +69,7 @@ public class PacienteServicio {
     }
     @Transactional
     public void eliminar(Integer dni) throws MyException {
-
         pacienteRepositorio.deleteById(dni);
-
     }
 
     public Paciente getOne(Integer dni) {

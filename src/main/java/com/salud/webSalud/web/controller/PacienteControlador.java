@@ -8,6 +8,8 @@ package com.salud.webSalud.web.controller;
 
 import com.salud.webSalud.domain.exception.MyException;
 import com.salud.webSalud.domain.service.PacienteServicio;
+import com.salud.webSalud.domain.service.TurnoServicio;
+import com.salud.webSalud.persistence.entity.Medico;
 import com.salud.webSalud.persistence.entity.Paciente;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,13 @@ import org.springframework.web.bind.annotation.*;
 public class PacienteControlador {
     @Autowired
     private PacienteServicio pacienteServicio;
+    @Autowired
+    private TurnoServicio turnoServicio;
     
     @GetMapping("/registrarse/{idTurno}")
     public String registrarPaciente(@PathVariable Integer idTurno, ModelMap modelo){
         modelo.put("idTurno", idTurno);
-        return "pruebaRegistrop.html";
+        return "registro_paciente.html";
     }
     
     @PostMapping("/registro")
@@ -41,7 +45,7 @@ public class PacienteControlador {
         return "redirect:/turnos/reservarTurno/" + idTurno+ "/"+ dni;
         }catch(MyException ex){
             System.out.println(ex.getMessage());
-            return "pruebaRegistrop.html";
+            return "registro_paciente.html";
         }
         
         
@@ -69,23 +73,36 @@ public class PacienteControlador {
         }
 
     }
-    
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @GetMapping("/actualizar/{dni}")
+    public String modificarPaciente(@PathVariable Integer dni, ModelMap modelo){
+        Paciente paciente = pacienteServicio.getOne(dni);
+        modelo.addAttribute("paciente", paciente);
+        return "modificar_paciente.html";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/actualizar/{dni}")
-    public String actualizarPaciente(String nombre_paciente, @PathVariable String dni, String dni2, Integer telefono, String mail, String obraSocial, ModelMap modelo){
+    public String actualizarPaciente(@PathVariable String dni, @RequestParam String dni2,
+                                     @RequestParam Integer telefono,@RequestParam String mail,
+                                     @RequestParam String obraSocial, @RequestParam String nombre_paciente, 
+                                     ModelMap modelo){
         try {
             pacienteServicio.actualizar(nombre_paciente, dni, dni2, telefono, mail, obraSocial);
             return "redirect:../lista";
         } catch (MyException ex) {
            modelo.put("error", ex.getMessage());
-           return "paciente_actualizar.html";
+           return "modificar_paciente.html";
         }
     
     }
     
     @PostMapping("/eliminar/{dni}")
-    public String eliminarPaciente(@PathVariable String dni, ModelMap modelo){
+    public String eliminarPaciente(@PathVariable Integer dni, ModelMap modelo){
         try{
-            pacienteServicio.eliminar(Integer.parseInt(dni));
+            turnoServicio.deletePacientes(dni);
+            pacienteServicio.eliminar(dni);
             return"redirect:../lista";
         }catch(MyException ex){
             modelo.put("error", ex.getMessage());

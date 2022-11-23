@@ -57,7 +57,7 @@
                                 <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="/medicos/perfil">Ver perfil</a></li>
                                 <li><a class="dropdown-item" th:if="${session.usuariosession != null}" th:href="@{'/medicos/modificar/' + ${session.usuariosession.idUsuario}}">Modificar perfil</a></li>
                                 <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="/medicos/mispacientes">Listado de pacientes</a></li>
-                                <li><a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:if="${session.usuariosession != null}" href="/admin/dashboard">Panel Administrativo</a></li>
+                                <li><a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:if="${session.usuariosession != null}" href="/admin/dashboard">Panel Administrativo</a></li>
 
                                 <li>
                                     <hr class="dropdown-divider" th:if="${session.usuariosession != null}">

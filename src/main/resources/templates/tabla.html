@@ -61,7 +61,7 @@ const enviarId = async (button) => {
 
    console.log(buttonId)
 
-   //hago el fetch con el method post y le paso el json
+   //hago el fetch con el method post
    const response = await fetch(`/admin/listamedicos/${getBotonId(buttonId)}`, {
     method: 'POST', // or 'PUT'
 

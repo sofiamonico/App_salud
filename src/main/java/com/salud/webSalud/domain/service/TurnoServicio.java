@@ -40,45 +40,7 @@ public class TurnoServicio  implements UserDetailsService {
         turno.setObservaciones(observaciones);
         turno.setFechaConsulta(fechaConsulta);
         turno.setHora(hora);
-        
-//        switch (fechaConsulta.toUpperCase()){
-//            case "LUNES" :
-//                turno.setFechaConsulta( FechaConsulta.LUNES );
-//                break;
-//            case "MARTES" :
-//                turno.setFechaConsulta(FechaConsulta.MARTES);
-//                break;
-//            case "MIERCOLES" :
-//                turno.setFechaConsulta(FechaConsulta.MIERCOLES);
-//                break;
-//            case "JUEVES" :
-//                turno.setFechaConsulta(FechaConsulta.JUEVES );
-//                break;
-//            case "VIERNES" :
-//                turno.setFechaConsulta(FechaConsulta.VIERNES);
-//                break;
-//        }
-//        
-//        switch(hora.toUpperCase() ){
-//            case "TURNO1" :
-//                turno.setHora(Hora.TURNO1);
-//                break;
-//            case "TURNO2" :
-//                turno.setHora(Hora.TURNO2);
-//               break;
-//            case "TURNO3" :
-//                turno.setHora(Hora.TURNO3);
-//               break;
-//            case "TURNO4" :
-//                turno.setHora(Hora.TURNO4);
-//               break;
-//            case "TURNO5" :
-//                turno.setHora(Hora.TURNO5);
-//               break;
-//        }
-        
-        
-   
+
         turnoRepositorio.save(turno);
     }
 
@@ -86,6 +48,18 @@ public class TurnoServicio  implements UserDetailsService {
         List<Turno> turnos = new ArrayList();
         turnos = turnoRepositorio.listarTurnos(id);
         return turnos;
+    }
+
+    public void cambiarFechaTurno(Integer id, String fecha, String hora) throws MyException {
+        if(id != null && fecha !=null && hora != null){
+            Turno turno = getOne(id);
+            turno.setFechaConsulta(fecha);
+            turno.setHora(hora);
+
+            turnoRepositorio.save(turno);
+        }else{
+            throw new MyException("Faltan datos, no se pudo actualizar el turno");
+        }
     }
 
     public void reservarTurno(Integer dni, Integer idTurno){

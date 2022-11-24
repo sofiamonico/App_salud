@@ -38,6 +38,8 @@ public class Medico {
     // va a tener un atributo medico que va a ser el que une la relacion
     @OneToMany(mappedBy = "medico")
     private List<Turno> turnos;
+    @OneToOne
+    private Imagen imagen;
 
     public Medico() {
     }
@@ -161,4 +163,14 @@ public class Medico {
     public void setTurnos(List<Turno> turnos) {
         this.turnos = turnos;
     }
+
+    public Imagen getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
+    }
+    
+    
 }

@@ -107,6 +107,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
     public String administrarMisTurnos(HttpSession session, ModelMap modelo){
              Medico usuario = (Medico) session.getAttribute("usuariosession");
             List<Turno> turnos = turnoServicio.listaTurnosPorMedico(usuario.getIdUsuario());
+            LocalDate hoy = LocalDate.now();
+            modelo.put("fechaHoy", hoy);
             modelo.addAttribute("turnos", turnos);
             modelo.addAttribute("usuario", usuario);
         return "administrarTurnos.html";

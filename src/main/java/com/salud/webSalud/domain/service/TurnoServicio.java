@@ -24,10 +24,10 @@ public class TurnoServicio  implements UserDetailsService {
     private TurnoRepositorio turnoRepositorio;
     
     @Autowired
-    MedicoServicio medicoServicio;
+    private MedicoServicio medicoServicio;
     
-    @Autowired 
-    PacienteServicio pacienteServicio;
+    @Autowired
+    private PacienteServicio pacienteServicio;
     
     @Transactional
     public void registrarTurno(String fechaConsulta,String observaciones, Integer IdMedico, String dnipaciente, String hora) throws MyException{
@@ -103,6 +103,15 @@ public class TurnoServicio  implements UserDetailsService {
         turno.setObservaciones(observaciones);
 
         turnoRepositorio.save(turno);
+    }
+
+    public void deletePacientes(Integer dni){
+        List<Turno> turnos = turnoRepositorio.listarTurnosPorPacientes(dni);
+        for (Turno turno:
+             turnos) {
+            turno.setPaciente(null);
+            turnoRepositorio.save(turno);
+        }
     }
     
     @Transactional(/*readOnly = true*/)

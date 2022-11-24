@@ -28,6 +28,9 @@ public class TurnoServicio  implements UserDetailsService {
     
     @Autowired
     private PacienteServicio pacienteServicio;
+
+    @Autowired
+    private EmailSenderService senderService;
     
     @Transactional
     public void registrarTurno(String fechaConsulta,String observaciones, Integer IdMedico, String dnipaciente, String hora) throws MyException{
@@ -55,7 +58,17 @@ public class TurnoServicio  implements UserDetailsService {
             Turno turno = getOne(id);
             turno.setFechaConsulta(fecha);
             turno.setHora(hora);
-
+            if(turno.getPaciente() != null){
+                Paciente paciente = turno.getPaciente();
+                String mailPaciente = paciente.getMail();
+                String motivo = "Cambio de turno";
+                String mensaje = "Buenas tardes " + paciente.getNombre_paciente() + " nos comunicamos por éste medio " +
+                        "para decirle que el doctor " + turno.getMedico().getNombre() + " ha tenido que modificar su turno." +
+                        "El nuevo turno sería el día: " + fecha + " a las: " + hora + "." +
+                        "Le pedimos que confirme su asistencia en el siguiente link: "+
+                        "http://localhost:8080/turnos/confirmar/" + turno.getIdConsulta() + "/" + paciente.getDni();
+                senderService.sendEmail(mailPaciente,motivo,mensaje);
+            }
             turnoRepositorio.save(turno);
         }else{
             throw new MyException("Faltan datos, no se pudo actualizar el turno");
@@ -113,10 +126,19 @@ public class TurnoServicio  implements UserDetailsService {
     }
     }
          public void eliminar(Integer IdConsulta) throws MyException{
-
-        turnoRepositorio.deleteById(IdConsulta);
-
-    }
+            Turno turno = getOne(IdConsulta);
+            if(turno.getPaciente() != null){
+                Paciente paciente = turno.getPaciente();
+                String mailPaciente = paciente.getMail();
+                String motivo = "Cancelacion de turno";
+                String mensaje = "Buenas tardes " + paciente.getNombre_paciente() + " nos comunicamos por " +
+                        "éste medio para avisarle que el turno del día " + turno.getFechaConsulta() +
+                        " con el medico: " + turno.getMedico().getNombre() + " ha sido cancelado. Le pedimos que vuelva" +
+                        " a reservar otro turno. Desde ya, muchas gracias!";
+                senderService.sendEmail(mailPaciente,motivo,mensaje);
+            }
+            turnoRepositorio.deleteById(IdConsulta);
+        }
   
      public Turno getOne(Integer IdConsulta){
          return turnoRepositorio.getOne(IdConsulta);

@@ -2,7 +2,9 @@
 package com.salud.webSalud.web.controller;
 
 import com.salud.webSalud.domain.exception.MyException;
+import com.salud.webSalud.domain.service.PacienteServicio;
 import com.salud.webSalud.domain.service.TurnoServicio;
+import com.salud.webSalud.persistence.entity.Paciente;
 import com.salud.webSalud.persistence.entity.Turno;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,9 @@ public class TurnoControlador {
     
     @Autowired
     private TurnoServicio turnoServicio;
+    @Autowired
+    private PacienteServicio pacienteServicio;
+
     
     @PostMapping("/registrarpaciente")
     //turno es el ID del tuRno
@@ -105,5 +110,20 @@ public class TurnoControlador {
             return "administrarTurnos.html";
         }
 
+    }
+
+    @GetMapping("/confirmar/{idTurno}/{dni}")
+    public String confirmarTurnoModificado(@PathVariable Integer idTurno, @PathVariable Integer dni, ModelMap modelo){
+        Paciente paciente = pacienteServicio.getOne(dni);
+        Turno turno = turnoServicio.getOne(idTurno);
+        modelo.addAttribute("paciente", paciente);
+        modelo.addAttribute("turno", turno);
+        return "confirmarTurno.html";
+    }
+
+    @PostMapping("/cancelarTurno/{dni}")
+    public String cancelarTurnoPaciente (@PathVariable Integer dni){
+        turnoServicio.deletePacientes(dni);
+        return "";
     }
 }

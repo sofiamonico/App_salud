@@ -23,6 +23,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class MedicoServicio implements UserDetailsService {
@@ -34,7 +35,7 @@ public class MedicoServicio implements UserDetailsService {
     //PERO LA CONTRASEÑA2 NO SE GUARDA
     @Transactional
     public void registrarMedico(String nombre, String apellido, String mail,String especialidad,
-                                String obraSocial, String contrasenia,String contrasenia2, Double valorConsulta) throws MyException {
+                                String obraSocial, String contrasenia,String contrasenia2, Double valorConsulta, MultipartFile archivo) throws MyException {
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
 
         Medico medico = new Medico();

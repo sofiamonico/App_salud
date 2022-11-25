@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.multipart.MultipartFile;
 
     @Controller
     @RequestMapping("/medicos")
@@ -84,7 +85,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
         public String modificandoMedico(@PathVariable Integer id,@RequestParam String nombre, @RequestParam String apellido,
                                         @RequestParam String mail, @RequestParam String especialidad,
                                         @RequestParam String obraSocial, @RequestParam Double valorConsulta, @RequestParam String contrasenia,
-                                        @RequestParam String contrasenia2, ModelMap modelo) throws MyException {
+                                        @RequestParam String contrasenia2, ModelMap modelo, MultipartFile archivo) throws MyException {
             try {
                 medicoServicio.actualizar(id,nombre,apellido,mail,contrasenia,contrasenia2,especialidad,obraSocial, Double.valueOf(valorConsulta));
                 modelo.put("exito", "El medico fue modificado correctamente!");

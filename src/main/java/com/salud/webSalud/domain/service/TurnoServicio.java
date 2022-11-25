@@ -63,7 +63,7 @@ public class TurnoServicio  implements UserDetailsService {
                 String mailPaciente = paciente.getMail();
                 String motivo = "Cambio de turno";
                 String mensaje = "Buenas tardes " + paciente.getNombre_paciente() + " nos comunicamos por éste medio " +
-                        "para decirle que el doctor " + turno.getMedico().getNombre() + " ha tenido que modificar su turno." +
+                        "para decirle que el doctor " + turno.getMedico().getApellido() + " ha tenido que modificar su turno." +
                         "El nuevo turno sería el día: " + fecha + " a las: " + hora + "." +
                         "Le pedimos que confirme su asistencia en el siguiente link: "+
                         "http://localhost:8080/turnos/confirmar/" + turno.getIdConsulta() + "/" + paciente.getDni();

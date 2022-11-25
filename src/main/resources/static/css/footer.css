@@ -10,12 +10,14 @@
 .pie-pagina{
     width: 100%;
     background-color: #8F3A84;
+    height: 250px;
+    width: 1366px;
 }
 
 .pie-pagina .grupo-1{
-    width: 100%;
-    max-width: 1200px;
-    margin:auto;
+   /* height: 250px;
+    width: 1366px;*/
+    margin:40px;
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-gap: 50px;
@@ -31,6 +33,7 @@
 }
 
 .pie-pagina .grupo-1 .box h2{
+
     color:white;
     margin-bottom: 25px;
     font-size: 20px;
@@ -38,6 +41,7 @@
 }
 
 .pie-pagina .grupo-1 .box p{
+
     color:#efefef;
     margin-bottom: 10px;
 }

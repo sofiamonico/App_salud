@@ -1,5 +1,4 @@
 header {
-    height: 100px;
     width: 1366px;
     background-color: #8F3A84;
     align-items: center;
@@ -20,6 +19,7 @@ header {
 .nav-link:hover {
     color: black;
     margin-right: 40px;
+
 }
 
 .btn-success {

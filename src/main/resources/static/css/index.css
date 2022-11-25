@@ -151,9 +151,10 @@ p.textoNosotros {
 }
 #Especialidades .especialidades1 img{
      max-height: 180px;
+     max-width: 300px;
      border-radius: 8%;
  }
- 
+
 #Especialidades .especialidades1 li{
      margin-left: 8px;
  }
@@ -182,7 +183,7 @@ p.textoNosotros {
     align-content: space-around;
     font-family: 'Expletus Sans', 'Arial Narrow', Arial, sans-serif;
     }
-    
+
  /*CONTEINER 4 TURNOS */
     #Turnos{
      padding: 30px;
@@ -192,21 +193,21 @@ p.textoNosotros {
      width: 1366px;
      background: #48C9B0;
      z-index: 1;
-     
-     
+
+
     }
     #Turnos .imagenTurnos{
      z-index: 2;
      margin-left: 100px;
      margin-top: -90px;
      height: 672px;
-        
+
     }
-    
+
     #Turnos img{
         height: 732px;
     }
-  
+
     /*CONTEINER 5 REGISTRO MÉDICOS - MEDICOS */
     #Medicos{
         padding: 0px;
@@ -218,11 +219,11 @@ p.textoNosotros {
     #rectanguloGris2{
      background:  #90A4AE;
      width: 1366px;
-     height: 672px; 
+     height: 672px;
      position: relative;
      z-index: 1;
-     left: 0px;   
-        
+     left: 0px;
+
     }
     #rectanguloGris2 h1{
       font-family: 'Montserrat' , 'Helvetica Neue', Helvetica, Arial, 'sans-serif';
@@ -232,15 +233,14 @@ p.textoNosotros {
       margin-top: 0px;
       color: #263238;
     }
-    
+
     #rectanguloGris2 .imagenMedicoIndex{
       margin-top: -265px;
       height: 672px;
     }
-    
+
     #rectanguloGris2 .bontonMedico{
         margin-left: 950px;
         margin-top: -400px;
     }
     /*CONTEINER 6 FOOTER - PIE   */
-    

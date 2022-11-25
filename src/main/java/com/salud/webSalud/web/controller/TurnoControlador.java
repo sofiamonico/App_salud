@@ -6,6 +6,7 @@ import com.salud.webSalud.domain.service.PacienteServicio;
 import com.salud.webSalud.domain.service.TurnoServicio;
 import com.salud.webSalud.persistence.entity.Paciente;
 import com.salud.webSalud.persistence.entity.Turno;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -52,12 +54,15 @@ public class TurnoControlador {
         modelo.put("exito", "El turno fue registrado correctamente!");
         return "index.html";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("/observaciones")
-    public String changeObservaciones (@RequestParam String observaciones,@RequestParam Integer idTurno){
-
-        turnoServicio.changeObservaciones(observaciones,idTurno);
-
+    public String changeObservaciones (@RequestParam Optional<String> observaciones0, @RequestParam Optional<Integer> idTurno0, @RequestParam Optional<String> observaciones1, @RequestParam Optional<Integer> idTurno1){
+        if (observaciones0.isPresent() && idTurno0.isPresent()) {
+            turnoServicio.changeObservaciones(observaciones0.get(), idTurno0.get());
+        }
+        if (observaciones1.isPresent() && idTurno1.isPresent()) {
+            turnoServicio.changeObservaciones(observaciones1.get(), idTurno1.get());
+        }
         return "redirect:/medicos/mispacientes";
     }
 
@@ -75,7 +80,7 @@ public class TurnoControlador {
     }
          
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String vistaModificar(@PathVariable Integer id, ModelMap modelo){
        Turno turno =  turnoServicio.getOne(id);
@@ -84,7 +89,7 @@ public class TurnoControlador {
         modelo.addAttribute("turno", turno);
         return "modificar_turno.html";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificarTurno(@PathVariable Integer id,@RequestParam String fecha, ModelMap modelo) throws MyException {
         try {
@@ -120,6 +125,7 @@ public class TurnoControlador {
         modelo.addAttribute("turno", turno);
         return "confirmarTurno.html";
     }
+
 
     @PostMapping("/cancelarTurno/{dni}")
     public String cancelarTurnoPaciente (@PathVariable Integer dni){

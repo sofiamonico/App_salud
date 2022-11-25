@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Especialistas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <head>
+        <meta charset="UTF-8">
+        <title>Especialistas</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/css/navbar.css">
+        <link rel="stylesheet" href="/css/navbar.css">
+        <link rel="stylesheet" href="/css/footer.css">
+        <!--Iconos Footer-->
+        <script src="https://kit.fontawesome.com/5c022e6466.js" crossorigin="anonymous"></script>
 
-</head>
-<body>
-<head th:replace="/fragments/navbar :: header"></head>
-<div class="px-4 py-5 my-5 text-center">
-    <h1 class="display-5 fw-bold">Especialistas encontrados:</h1>
-    <div class="col-lg-6 mx-auto">
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Especialidad</th>
-                    <th scope="col">Obra Social</th>
-                </tr>
-                </thead>
-                <tbody th:each="medico : ${medicos}">
-                <tr>
-                    <th scope="row" th:text="${medico.nombre}"></th>
-                    <td th:text="${medico.apellido}"></td>
-                    <td th:text="${medico.especialidad}"></td>
-                    <td th:if="${medico.obraSocial} == true">Si</td>
-                    <td th:if="${medico.obraSocial} == false">No</td>
-                </tr>
-                </tbody>
+    </head>
+    <body>
+    <head th:replace="/fragments/navbar :: header"></head>
+    <div class="tabla-busqueda">
+        <h1 class="display-5 fw-bold">Especialistas encontrados:</h1>
+        <div class="col-lg-6 mx-auto">
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Especialidad</th>
+                            <th scope="col">Obra Social</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="medico : ${medicos}">
+                        <tr>
+                            <th scope="row" th:text="${medico.nombre}"></th>
+                            <td th:text="${medico.apellido}"></td>
+                            <td th:text="${medico.especialidad}"></td>
+                            <td th:if="${medico.obraSocial} == true">Si</td>
+                            <td th:if="${medico.obraSocial} == false">No</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
-        
     </div>
-</div>
 
-</table>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+            integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+    crossorigin="anonymous"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
-        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
-        crossorigin="anonymous"></script>
+<footer th:replace="/fragments/footer :: footer"></footer>
 </body>
 </html>

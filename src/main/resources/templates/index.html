@@ -9,7 +9,10 @@
 
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/index.css">
-     <link href="https://fonts.googleapis.com/css?family=Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800,900" rel="stylesheet"> 
+    <link rel="stylesheet" href="/css/footer.css">
+    <!--Iconos Footer-->
+    <script src="https://kit.fontawesome.com/5c022e6466.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800,900" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -122,14 +125,11 @@
               <img src="/img/medicogeneral3.png" alt="FotoMedico">
           </div>
           <div class="bontonMedico">
-             <button type="button" class="btn btn-secondary btn-lg">Click aquí</button>
+             <button type="button" class="btn btn-secondary btn-lg" href="/registrarse">Click aquí</button>
           </div>
       </div>
   </div>
-<footer id="Pie">
-    
-    
-</footer>
+<footer th:replace="/fragments/footer :: footer"></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

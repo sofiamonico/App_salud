@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrarse</title>
+    <title>Registro Paciente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/registropaciente.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <!--Iconos Footer-->
+    <script src="https://kit.fontawesome.com/5c022e6466.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <head th:replace= "/fragments/navbar :: header"> </head>
 <div class="col-md-7 col-lg-6 mx-auto" style="margin:20px">
-    <h4 class="mb-3">Registro paciente</h4>
+    <h4 class="mb-3">Datos del paciente</h4>
     <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
         <div class="card-body">
             <h5 class="card-title">Error 👎</h5>
@@ -79,10 +83,11 @@
             </div>
             <input type="number" th:value="${idTurno}" hidden name="idTurno"/>
         </div>
-        <button class="w-100 btn btn-dark btn-lg " type="submit" style="margin:10px">Registrarse</button>
+        <button class="button-34" role="button">Enviar</button>
     </form>
 
 </div>
+<footer th:replace="/fragments/footer :: footer"></footer>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

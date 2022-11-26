@@ -1,10 +1,12 @@
 package com.salud.webSalud.domain.service;
 
 import com.salud.webSalud.domain.exception.MyException;
+import com.salud.webSalud.persistence.entity.Imagen;
 import com.salud.webSalud.persistence.entity.Medico;
 import com.salud.webSalud.persistence.enums.Especialidad;
 import com.salud.webSalud.persistence.enums.Rol;
 import com.salud.webSalud.persistence.repository.MedicoRepositorio;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,7 +31,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class MedicoServicio implements UserDetailsService {
     @Autowired
     MedicoRepositorio medicoRepositorio;
-
+    @Autowired
+    ImagenServicio imagenServicio;
 
     //VA A RECIBIR DOBLE CONTRASEÑA PORQUE SE USA PARA VERIFICAR QUE SEAN IGUALES
     //PERO LA CONTRASEÑA2 NO SE GUARDA
@@ -46,6 +49,9 @@ public class MedicoServicio implements UserDetailsService {
         medico.setRol(Rol.USER);
         medico.setAlta(true);
         medico.setValorConsulta(valorConsulta);
+        
+        Imagen imagen = imagenServicio.guardar(archivo);
+        medico.setImagen(imagen);
         switch (especialidad.toUpperCase()){
             case "CARDIOLOGIA":
                 medico.setEspecialidad(Especialidad.CARDIOLOGIA);
@@ -81,9 +87,9 @@ public class MedicoServicio implements UserDetailsService {
 
     @Transactional
 
-    public void actualizar(Integer idUsuario, String nombre, String apellido, String mail,
+    public void actualizar(MultipartFile archivo, Integer idUsuario, String nombre, String apellido, String mail,
                            String contrasenia,String contrasenia2, String especialidad,
-                           String obraSocial, Double valorConsulta) throws MyException {
+                           String obraSocial, Double valorConsulta) throws MyException, IOException {
 
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
         Optional<Medico> respuesta = medicoRepositorio.findById(idUsuario);
@@ -94,7 +100,15 @@ public class MedicoServicio implements UserDetailsService {
             medico.setApellido(apellido);
             medico.setMail(mail);
             medico.setContrasenia(new BCryptPasswordEncoder().encode(contrasenia));
-
+            String idImagen = null;
+            if(medico.getImagen() != null){
+                idImagen = medico.getImagen().getMime(); // deberia ser  id de la imagen
+                
+            }
+            
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+           medico.setImagen(imagen);
+            
             medicoRepositorio.save(medico);
         }
 

@@ -6,6 +6,7 @@ import com.salud.webSalud.domain.service.TurnoServicio;
 import com.salud.webSalud.persistence.entity.Medico;
 import com.salud.webSalud.persistence.entity.Paciente;
 import com.salud.webSalud.persistence.entity.Turno;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.multipart.MultipartFile;
 
     @Controller
     @RequestMapping("/medicos")
@@ -78,12 +80,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
         @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
         @PostMapping("/modificar/{id}")
-        public String modificandoMedico(@PathVariable Integer id,@RequestParam String nombre, @RequestParam String apellido,
+        public String modificandoMedico(@PathVariable MultipartFile archivo, @PathVariable Integer id,@RequestParam String nombre, @RequestParam String apellido,
                                         @RequestParam String mail, @RequestParam String especialidad,
                                         @RequestParam String obraSocial, @RequestParam Double valorConsulta, @RequestParam String contrasenia,
-                                        @RequestParam String contrasenia2, ModelMap modelo) throws MyException {
+                                        @RequestParam String contrasenia2, ModelMap modelo) throws MyException, IOException {
             try {
-                medicoServicio.actualizar(id,nombre,apellido,mail,contrasenia,contrasenia2,especialidad,obraSocial, Double.valueOf(valorConsulta));
+                medicoServicio.actualizar(archivo,id,nombre,apellido,mail,contrasenia,contrasenia2,especialidad,obraSocial, Double.valueOf(valorConsulta));
                 modelo.put("exito", "El medico fue modificado correctamente!");
                 return "redirect:/medicos/perfil";
             } catch (MyException e) {

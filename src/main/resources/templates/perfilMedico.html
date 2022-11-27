@@ -25,10 +25,26 @@
 </div>
 <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="/img/logo.png" alt="" width="72" height="57">
+     <img class ="file" th:src="@{/imagen/perfil/__${session.usuariosession.idUsuario}__" alt="foto medico">
     <h1 class="display-5 fw-bold" th:text="'Bienvenido ' + ${usuario.nombre}"></h1>
     <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">Es momento de administrar tu perfil de Médico</p>
+         
+        
+         <!-- 
+           <div class="container">
+        
+        <a class= "d-flex align-items-center">
+ <img class ="logo" th:src="@{/imagen/perfil/__${session.usuariosession.idUsuario}__" alt="foto medico">
+       </a>
+           </div>  
+
        <!-- <img class ="logo" th:src="@{/medicos/perfil/__${session.usuariosession.idUsuario}__" alt="img logo egg">-->
+       
+       
+       
+       
+       
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <a type="button" href="/medicos/misturnos" class="btn btn-dark btn-lg px-4 gap-3">Administrar turnos</a>
             <a type="button" href="/medicos/mispacientes" class="btn btn-outline-secondary btn-lg px-4">Ver Pacientes</a>

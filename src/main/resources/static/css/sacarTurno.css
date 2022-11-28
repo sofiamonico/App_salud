@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+
+.turno{
+    height: 350px;
+    width: 750px;
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.h4{
+    vertical-align: inherit;
+}
+
+.turno .confirmar-turno{
+    justify-content: center;
+    align-items: center;
+}
+
+.turno .confirmar-turno .form-control{
+    padding: 8px 10px;
+}
+.button-34 {
+  background-color: #8F3A84;
+  border-radius: 999px;
+  color: white;
+  font-size: 16px;
+  font-weight: 10;
+  line-height: 4px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 18px 22px;
+  border: 0;
+}

@@ -13,7 +13,7 @@
         <br>
         <br>
     <ul id="clinicos" style="text-align: left;" >
-        <li th:each="medico : ${medicos}" >
+        <li th:hidden="${medico.alta == false}" th:each="medico : ${medicos}" >
             <a th:href="@{'/medicos/' + ${medico.idUsuario}}" class="button-6" role="button" th:text="${medico.nombre} + ' ' + ${medico.apellido}"></a>
         </li>
     </ul>

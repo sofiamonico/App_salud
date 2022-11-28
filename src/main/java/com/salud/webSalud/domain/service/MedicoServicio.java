@@ -3,6 +3,7 @@ package com.salud.webSalud.domain.service;
 import com.salud.webSalud.domain.exception.MyException;
 import com.salud.webSalud.persistence.entity.Imagen;
 import com.salud.webSalud.persistence.entity.Medico;
+import com.salud.webSalud.persistence.entity.Turno;
 import com.salud.webSalud.persistence.enums.Especialidad;
 import com.salud.webSalud.persistence.enums.Rol;
 import com.salud.webSalud.persistence.repository.MedicoRepositorio;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
@@ -128,6 +130,7 @@ public class MedicoServicio implements UserDetailsService {
         }
         medicoRepositorio.save(medico);
     }
+
 
     public Medico getOne(Integer idMedico) {
         return medicoRepositorio.getOne(idMedico);

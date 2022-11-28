@@ -20,6 +20,8 @@ public class Medico {
     //Por defecto inicia en TRUE
     @Column(nullable=true, columnDefinition="boolean default true")
     private Boolean alta;
+
+    //VER
     @Column(nullable = true)
     private Integer horarioInicio;
     @Column(nullable = true)
@@ -36,11 +38,13 @@ public class Medico {
     // va a tener un atributo medico que va a ser el que une la relacion
     @OneToMany(mappedBy = "medico")
     private List<Turno> turnos;
+    @OneToOne
+    private Imagen imagen;
 
     public Medico() {
     }
 
-    public Medico(Integer idUsuario, String nombre, String apellido, String mail, String contrasenia, Boolean alta, Integer horarioInicio, Integer horarioFinal, Double valorConsulta, Boolean obraSocial, Rol rol, Especialidad especialidad, List<Turno> turnos) {
+    public Medico(Integer idUsuario, String nombre, String apellido, String mail, String contrasenia, Boolean alta, Integer horarioInicio, Integer horarioFinal, Double valorConsulta, Boolean obraSocial, Rol rol, Especialidad especialidad, List<Turno> turnos, Imagen imagen) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -54,6 +58,7 @@ public class Medico {
         this.rol = rol;
         this.especialidad = especialidad;
         this.turnos = turnos;
+        this.imagen = imagen;
     }
 
     public Integer getIdUsuario() {
@@ -159,4 +164,14 @@ public class Medico {
     public void setTurnos(List<Turno> turnos) {
         this.turnos = turnos;
     }
+
+    public Imagen getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
+    }
+    
+    
 }

@@ -1,10 +1,13 @@
 package com.salud.webSalud.domain.service;
 
 import com.salud.webSalud.domain.exception.MyException;
+import com.salud.webSalud.persistence.entity.Imagen;
 import com.salud.webSalud.persistence.entity.Medico;
+import com.salud.webSalud.persistence.entity.Turno;
 import com.salud.webSalud.persistence.enums.Especialidad;
 import com.salud.webSalud.persistence.enums.Rol;
 import com.salud.webSalud.persistence.repository.MedicoRepositorio;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,21 +22,25 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class MedicoServicio implements UserDetailsService {
     @Autowired
     MedicoRepositorio medicoRepositorio;
-
+    @Autowired
+    ImagenServicio imagenServicio;
 
     //VA A RECIBIR DOBLE CONTRASEÑA PORQUE SE USA PARA VERIFICAR QUE SEAN IGUALES
     //PERO LA CONTRASEÑA2 NO SE GUARDA
     @Transactional
     public void registrarMedico(String nombre, String apellido, String mail,String especialidad,
-                                String obraSocial, String contrasenia,String contrasenia2) throws MyException {
+                                String obraSocial, String contrasenia,String contrasenia2, Double valorConsulta, MultipartFile archivo) throws MyException {
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
 
         Medico medico = new Medico();
@@ -43,6 +50,10 @@ public class MedicoServicio implements UserDetailsService {
         medico.setContrasenia(new BCryptPasswordEncoder().encode(contrasenia));
         medico.setRol(Rol.USER);
         medico.setAlta(true);
+        medico.setValorConsulta(valorConsulta);
+        
+        Imagen imagen = imagenServicio.guardar(archivo);
+        medico.setImagen(imagen);
         switch (especialidad.toUpperCase()){
             case "CARDIOLOGIA":
                 medico.setEspecialidad(Especialidad.CARDIOLOGIA);
@@ -62,6 +73,8 @@ public class MedicoServicio implements UserDetailsService {
         }else{
             medico.setObraSocial(false);
         }
+
+
         medicoRepositorio.save(medico);
     }
 
@@ -75,8 +88,11 @@ public class MedicoServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void actualizar(Integer idUsuario, String nombre, String apellido, String mail,
-                           String contrasenia,String contrasenia2, String especialidad) throws MyException {
+
+    public void actualizar(MultipartFile archivo, Integer idUsuario, String nombre, String apellido, String mail,
+                           String contrasenia,String contrasenia2, String especialidad,
+                           String obraSocial, Double valorConsulta) throws MyException, IOException {
+
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
         Optional<Medico> respuesta = medicoRepositorio.findById(idUsuario);
 
@@ -85,18 +101,36 @@ public class MedicoServicio implements UserDetailsService {
             medico.setNombre(nombre);
             medico.setApellido(apellido);
             medico.setMail(mail);
+            if(obraSocial.equals("true")){
+                medico.setObraSocial(true);
+            }else{
+                medico.setObraSocial(false);
+            }
+            medico.setValorConsulta(valorConsulta);
             medico.setContrasenia(new BCryptPasswordEncoder().encode(contrasenia));
+            Integer idImagen = null;
+            if(medico.getImagen() != null){
+                idImagen = medico.getImagen().getIdImagen(); // deberia ser  id de la imagen
+            }
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            medico.setImagen(imagen);
 
             medicoRepositorio.save(medico);
+
         }
 
     }
 
-    public void eliminar(Integer idMedico) throws MyException {
-
-        medicoRepositorio.deleteById(idMedico);
-
+    public void darDeBajaAlta(Integer idMedico) throws MyException {
+        Medico medico = getOne(idMedico);
+        if(medico.getAlta() == true){
+            medico.setAlta(false);
+        }else{
+            medico.setAlta(true);
+        }
+        medicoRepositorio.save(medico);
     }
+
 
     public Medico getOne(Integer idMedico) {
         return medicoRepositorio.getOne(idMedico);
@@ -123,6 +157,7 @@ public class MedicoServicio implements UserDetailsService {
         if (!contrasenia.equals(contrasenia2)) {
             throw new MyException("Las contraseñas ingresadas deben ser iguales");
         }
+
     }
 
     public List<Medico> buscarPorEspecialidad(String especialidad){
@@ -152,7 +187,8 @@ public class MedicoServicio implements UserDetailsService {
             session.setAttribute("usuariosession", medico);
             return new User(medico.getMail(), medico.getContrasenia(), permisos);
         }else{
-            return null;
+            throw new
+                    UsernameNotFoundException("User not exist with name :" +email);
         }
     }
 }

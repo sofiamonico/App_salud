@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/")
@@ -46,31 +47,31 @@ public class PortalControlador {
 
         return "tablaBusqueda.html";
     }
+   
 
 
 
 
     @GetMapping("/registrarse")
     public String registrar() {
-        return "formularioprueba.html";
+        return "formulario.html";
     }
 
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String apellido,
                            @RequestParam String mail, @RequestParam String especialidad,
-                           @RequestParam String obraSocial, @RequestParam String horaInicio,
-                           @RequestParam String horaFinal,@RequestParam String contrasenia,
-                           @RequestParam String contrasenia2,  ModelMap modelo){
+                           @RequestParam String obraSocial, @RequestParam Integer valorConsulta,@RequestParam String contrasenia,
+                           @RequestParam String contrasenia2,  ModelMap modelo, MultipartFile archivo){
             //VER FORMATO DE LOS HORARIOS
             //RECIBE PERFECTO LOS PARAMETROS
        try {
-            //FALTA AGREGAR CONTRASEÑA AL FORMULARIO PARA PODER PASARLA AL SERVICE
-            medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial, contrasenia, contrasenia2);
+            medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial, contrasenia, contrasenia2, Double.valueOf(valorConsulta),archivo);
             modelo.put("exito", "El medico fue registrado correctamente!");
-            return "formularioprueba.html";
+            return "redirect:/";
         } catch (MyException e) {
             modelo.put("error", e.getMessage());
-            return "formularioprueba.html";
+            return "formulario.html";
+
         }
 
 

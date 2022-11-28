@@ -87,7 +87,7 @@
     display: flex;
     align-items: flex-start;
   }
-  
+
   ul {
     margin-top: -30px;
     list-style-type: square;
@@ -142,3 +142,4 @@
     color: rgba(0, 0, 0, 0.65);
     transform: translateY(0);
   }
+

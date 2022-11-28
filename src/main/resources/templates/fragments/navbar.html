@@ -1,4 +1,5 @@
 <header>
+
     <nav class="navbar navbar-expand-md" aria-label="Fourth navbar example">
         <div class="container-fluid">
             <div class="logo">
@@ -23,10 +24,10 @@
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
                            aria-expanded="false">Especialidades</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/medicos/cardiologia">Cardiología</a></li>
-                            <li><a class="dropdown-item" href="/medicos/clinico">Clínico</a></li>
-                            <li><a class="dropdown-item" href="/medicos/ginecologia">Ginecología</a></li>
-                            <li><a class="dropdown-item" href="/medicos/pediatria">Pediatría</a></li>
+                            <li><a class="dropdown-item" href="/medicos/especialidad/cardiologia">Cardiología</a></li>
+                            <li><a class="dropdown-item" href="/medicos/especialidad/clinico">Clínico</a></li>
+                            <li><a class="dropdown-item" href="/medicos/especialidad/ginecologia">Ginecología</a></li>
+                            <li><a class="dropdown-item" href="/medicos/especialidad/pediatria">Pediatría</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -52,9 +53,12 @@
                                 </button>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="#">Ver perfil</a></li>
-                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="#">Modificar perfil</a></li>
-                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="#">Listado de pacientes</a></li>
+
+                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="/medicos/perfil">Ver perfil</a></li>
+                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" th:href="@{'/medicos/modificar/' + ${session.usuariosession.idUsuario}}">Modificar perfil</a></li>
+                                <li><a class="dropdown-item" th:if="${session.usuariosession != null}" href="/medicos/mispacientes">Listado de pacientes</a></li>
+                                <li><a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:if="${session.usuariosession != null}" href="/admin/dashboard">Panel Administrativo</a></li>
+
                                 <li>
                                     <hr class="dropdown-divider" th:if="${session.usuariosession != null}">
                                 </li>
@@ -69,3 +73,4 @@
         </div>
     </nav>
 </header>
+

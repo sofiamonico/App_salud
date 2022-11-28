@@ -6,6 +6,7 @@ import com.salud.webSalud.domain.service.TurnoServicio;
 import com.salud.webSalud.persistence.entity.Medico;
 import com.salud.webSalud.persistence.entity.Paciente;
 import com.salud.webSalud.persistence.entity.Turno;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -82,15 +83,16 @@ import org.springframework.web.multipart.MultipartFile;
 
         @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
         @PostMapping("/modificar/{id}")
-        public String modificandoMedico(@PathVariable Integer id,@RequestParam String nombre, @RequestParam String apellido,
+        public String modificandoMedico(@PathVariable Integer id, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido,
                                         @RequestParam String mail, @RequestParam String especialidad,
                                         @RequestParam String obraSocial, @RequestParam Double valorConsulta, @RequestParam String contrasenia,
-                                        @RequestParam String contrasenia2, ModelMap modelo, MultipartFile archivo) throws MyException {
+                                        @RequestParam String contrasenia2, ModelMap modelo) throws MyException {
+
             try {
-                medicoServicio.actualizar(id,nombre,apellido,mail,contrasenia,contrasenia2,especialidad,obraSocial, Double.valueOf(valorConsulta));
+                medicoServicio.actualizar(archivo,id,nombre,apellido,mail,contrasenia,contrasenia2,especialidad,obraSocial, Double.valueOf(valorConsulta));
                 modelo.put("exito", "El medico fue modificado correctamente!");
                 return "redirect:/medicos/perfil";
-            } catch (MyException e) {
+            } catch (MyException | IOException e) {
                 modelo.put("error", e.getMessage());
                 return "medico_modificar.html";
             }

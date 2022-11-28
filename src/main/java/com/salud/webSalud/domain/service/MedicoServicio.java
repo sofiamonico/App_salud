@@ -99,17 +99,22 @@ public class MedicoServicio implements UserDetailsService {
             medico.setNombre(nombre);
             medico.setApellido(apellido);
             medico.setMail(mail);
-            medico.setContrasenia(new BCryptPasswordEncoder().encode(contrasenia));
-            String idImagen = null;
-            if(medico.getImagen() != null){
-                idImagen = medico.getImagen().getMime(); // deberia ser  id de la imagen
-                
+            if(obraSocial.equals("true")){
+                medico.setObraSocial(true);
+            }else{
+                medico.setObraSocial(false);
             }
-            
+            medico.setValorConsulta(valorConsulta);
+            medico.setContrasenia(new BCryptPasswordEncoder().encode(contrasenia));
+            Integer idImagen = null;
+            if(medico.getImagen() != null){
+                idImagen = medico.getImagen().getIdImagen(); // deberia ser  id de la imagen
+            }
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
-           medico.setImagen(imagen);
-            
+            medico.setImagen(imagen);
+
             medicoRepositorio.save(medico);
+
         }
 
     }

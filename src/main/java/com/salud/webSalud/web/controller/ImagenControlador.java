@@ -29,10 +29,11 @@ public class ImagenControlador {
     MedicoServicio medicoServicio;
     
      @GetMapping("/perfil/{id}")
-    public ResponseEntity<byte[]> imagenusuario(@PathVariable String idUsuario){
-        Medico medico = medicoServicio.getOne(Integer.parseInt(idUsuario));
+    public ResponseEntity<byte[]> imagenusuario(@PathVariable Integer id){
+        Medico medico = medicoServicio.getOne(id);
         
         byte[] imagen = medico.getImagen().getContenido();
+
         
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);

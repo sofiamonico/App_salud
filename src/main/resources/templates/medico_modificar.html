@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <form class="row g-3" th:action="@{/medicos/modificar/__${medico.idUsuario}__}" method="POST">
+  <form class="row g-3" th:action="@{/medicos/modificar/__${medico.idUsuario}__}" method="POST" enctype="multipart/form-data">
     <input type = "number" hidden name ="id" th:value ="${medico.idUsuario}" />
     <div class="row g-3">
       <div class="col-sm-6">

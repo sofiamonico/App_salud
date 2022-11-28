@@ -80,7 +80,7 @@ import org.springframework.web.multipart.MultipartFile;
 
         @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
         @PostMapping("/modificar/{id}")
-        public String modificandoMedico(@PathVariable MultipartFile archivo, @PathVariable Integer id,@RequestParam String nombre, @RequestParam String apellido,
+        public String modificandoMedico(@PathVariable Integer id, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido,
                                         @RequestParam String mail, @RequestParam String especialidad,
                                         @RequestParam String obraSocial, @RequestParam Double valorConsulta, @RequestParam String contrasenia,
                                         @RequestParam String contrasenia2, ModelMap modelo) throws MyException, IOException {

@@ -23,7 +23,7 @@
 
         </div>
 
-        <form class="row g-3" th:action="@{/registro}" method="POST">
+        <form class="row g-3" th:action="@{/registro}" method="POST" enctype="multipart/form-data">
             <div class="row g-3">
                 <div class="col-sm-6">
                     <label for="firstName" class="form-label">Nombre</label>
@@ -50,6 +50,11 @@
                     <div class="invalid-feedback">
                         Please enter a valid email address for shipping updates.
                     </div>
+                </div>
+                
+                 <div class="col-12">
+                    <label for="file" class="form-label">Subir imagén del perfil</label>
+                    <input type="file" class="form-control" name="archivo" id="archivo">
                 </div>
 
                 <div class="col-12">

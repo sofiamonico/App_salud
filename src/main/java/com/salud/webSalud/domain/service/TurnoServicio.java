@@ -24,10 +24,13 @@ public class TurnoServicio  implements UserDetailsService {
     private TurnoRepositorio turnoRepositorio;
     
     @Autowired
-    MedicoServicio medicoServicio;
+    private MedicoServicio medicoServicio;
     
-    @Autowired 
-    PacienteServicio pacienteServicio;
+    @Autowired
+    private PacienteServicio pacienteServicio;
+
+    @Autowired
+    private EmailSenderService senderService;
     
     @Transactional
     public void registrarTurno(String fechaConsulta,String observaciones, Integer IdMedico, String dnipaciente, String hora) throws MyException{
@@ -40,45 +43,7 @@ public class TurnoServicio  implements UserDetailsService {
         turno.setObservaciones(observaciones);
         turno.setFechaConsulta(fechaConsulta);
         turno.setHora(hora);
-        
-//        switch (fechaConsulta.toUpperCase()){
-//            case "LUNES" :
-//                turno.setFechaConsulta( FechaConsulta.LUNES );
-//                break;
-//            case "MARTES" :
-//                turno.setFechaConsulta(FechaConsulta.MARTES);
-//                break;
-//            case "MIERCOLES" :
-//                turno.setFechaConsulta(FechaConsulta.MIERCOLES);
-//                break;
-//            case "JUEVES" :
-//                turno.setFechaConsulta(FechaConsulta.JUEVES );
-//                break;
-//            case "VIERNES" :
-//                turno.setFechaConsulta(FechaConsulta.VIERNES);
-//                break;
-//        }
-//        
-//        switch(hora.toUpperCase() ){
-//            case "TURNO1" :
-//                turno.setHora(Hora.TURNO1);
-//                break;
-//            case "TURNO2" :
-//                turno.setHora(Hora.TURNO2);
-//               break;
-//            case "TURNO3" :
-//                turno.setHora(Hora.TURNO3);
-//               break;
-//            case "TURNO4" :
-//                turno.setHora(Hora.TURNO4);
-//               break;
-//            case "TURNO5" :
-//                turno.setHora(Hora.TURNO5);
-//               break;
-//        }
-        
-        
-   
+
         turnoRepositorio.save(turno);
     }
 
@@ -86,6 +51,28 @@ public class TurnoServicio  implements UserDetailsService {
         List<Turno> turnos = new ArrayList();
         turnos = turnoRepositorio.listarTurnos(id);
         return turnos;
+    }
+
+    public void cambiarFechaTurno(Integer id, String fecha, String hora) throws MyException {
+        if(id != null && fecha !=null && hora != null){
+            Turno turno = getOne(id);
+            turno.setFechaConsulta(fecha);
+            turno.setHora(hora);
+            if(turno.getPaciente() != null){
+                Paciente paciente = turno.getPaciente();
+                String mailPaciente = paciente.getMail();
+                String motivo = "Cambio de turno";
+                String mensaje = "Buenas tardes " + paciente.getNombre_paciente() + " nos comunicamos por éste medio " +
+                        "para decirle que el doctor " + turno.getMedico().getApellido() + " ha tenido que modificar su turno." +
+                        "El nuevo turno sería el día: " + fecha + " a las: " + hora + "." +
+                        "Le pedimos que confirme su asistencia en el siguiente link: "+
+                        "http://localhost:8080/turnos/confirmar/" + turno.getIdConsulta() + "/" + paciente.getDni();
+                senderService.sendEmail(mailPaciente,motivo,mensaje);
+            }
+            turnoRepositorio.save(turno);
+        }else{
+            throw new MyException("Faltan datos, no se pudo actualizar el turno");
+        }
     }
 
     public void reservarTurno(Integer dni, Integer idTurno){
@@ -103,6 +90,15 @@ public class TurnoServicio  implements UserDetailsService {
         turno.setObservaciones(observaciones);
 
         turnoRepositorio.save(turno);
+    }
+
+    public void deletePacientes(Integer dni){
+        List<Turno> turnos = turnoRepositorio.listarTurnosPorPacientes(dni);
+        for (Turno turno:
+             turnos) {
+            turno.setPaciente(null);
+            turnoRepositorio.save(turno);
+        }
     }
     
     @Transactional(/*readOnly = true*/)
@@ -130,10 +126,19 @@ public class TurnoServicio  implements UserDetailsService {
     }
     }
          public void eliminar(Integer IdConsulta) throws MyException{
-
-        turnoRepositorio.deleteById(IdConsulta);
-
-    }
+            Turno turno = getOne(IdConsulta);
+            if(turno.getPaciente() != null){
+                Paciente paciente = turno.getPaciente();
+                String mailPaciente = paciente.getMail();
+                String motivo = "Cancelacion de turno";
+                String mensaje = "Buenas tardes " + paciente.getNombre_paciente() + " nos comunicamos por " +
+                        "éste medio para avisarle que el turno del día " + turno.getFechaConsulta() +
+                        " con el medico: " + turno.getMedico().getNombre() + " ha sido cancelado. Le pedimos que vuelva" +
+                        " a reservar otro turno. Desde ya, muchas gracias!";
+                senderService.sendEmail(mailPaciente,motivo,mensaje);
+            }
+            turnoRepositorio.deleteById(IdConsulta);
+        }
   
      public Turno getOne(Integer IdConsulta){
          return turnoRepositorio.getOne(IdConsulta);

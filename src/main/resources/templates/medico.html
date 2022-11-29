@@ -12,6 +12,9 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/vistaMedico.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <!--Iconos Footer-->
+    <script src="https://kit.fontawesome.com/5c022e6466.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -21,7 +24,7 @@
     <div class="container col-xxl-8 px-4 py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-                <img src="/img/UsuarioDefecto.jpeg" class="figure-img img-fluid rounded" alt="fotoMedicoPorDefecto">
+                <img th:src="@{/imagen/perfil/__${session.usuariosession.idUsuario}__}" class="figure-img img-fluid rounded" alt="fotoMedicoPorDefecto">
             </div>
             <div class="col-lg-6">
                 <tittle id="nombreMEdico">
@@ -81,7 +84,7 @@
         </div>
     </div> -->
 </main>
-
+<footer th:replace="/fragments/footer :: footer"></footer>
 
 <!--BootStrap JavaScript-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"

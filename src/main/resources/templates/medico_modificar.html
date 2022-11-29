@@ -10,6 +10,9 @@
 
 
   <link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/footer.css">
+    <!--Iconos Footer-->
+    <script src="https://kit.fontawesome.com/5c022e6466.js" crossorigin="anonymous"></script>
 
 
 </head>
@@ -24,7 +27,7 @@
     </div>
   </div>
 
-  <form class="row g-3" th:action="@{/medicos/modificar/__${medico.idUsuario}__}" method="POST">
+  <form class="row g-3" th:action="@{/medicos/modificar/__${medico.idUsuario}__}" method="POST" enctype="multipart/form-data">
     <input type = "number" hidden name ="id" th:value ="${medico.idUsuario}" />
     <div class="row g-3">
       <div class="col-sm-6">
@@ -44,7 +47,12 @@
           Valid last name is required.
         </div>
       </div>
-
+        
+                <div class="col-12">
+                    <label for="file" class="form-label">Subir imagen</label>
+                    <input type="file" class="form-control" name="archivo" id="archivo">
+                </div>
+        
       <div class="col-12">
         <label for="email" class="form-label">Email</label>
         <input th:value="${medico.mail}" type="email" class="form-control" name="mail" id="email" placeholder="you@example.com" required="@">
@@ -102,7 +110,7 @@
   </form>
 
 </div>
-
+<footer th:replace="/fragments/footer :: footer"></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"

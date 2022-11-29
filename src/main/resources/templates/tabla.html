@@ -8,9 +8,12 @@
     <title>Profesionales</title>
 
     <link rel="stylesheet" href="/css/style-tabla.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
+    <!--Iconos Footer-->
+    <script src="https://kit.fontawesome.com/5c022e6466.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
 <main>
     <div class="datagrid">
         <table>
@@ -43,12 +46,17 @@
                     <td><button class="button-6" role="button" th:text="${medico.apellido}"> </button></td>
                     <td th:text="${medico.nombre}"></td>
                     <td th:text="${medico.especialidad}"></td>
-                    <td><button class="button-7" role="button" name="alta-baja" th:id="'alta-' + ${medico.idUsuario}" th:if="${medico.alta == false}">Alta</button><button name="alta-baja" th:id="'baja-' + ${medico.idUsuario}" class="button-8" role="button" th:if="${medico.alta == true}">Baja</button></td>
+                    <td>
+                        <button class="button-7" role="button" name="alta-baja" th:id="'alta-' + ${medico.idUsuario}" th:if="${medico.alta == false}">Alta</button>
+                        <button name="alta-baja" th:id="'baja-' + ${medico.idUsuario}" class="button-8" role="button" th:if="${medico.alta == true}">Baja</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </main>
+    <footer th:replace="/fragments/footer :: footer"></footer>
+
 </body>
 <script>
 const buttons = document.querySelectorAll('[name="alta-baja"]')
@@ -61,7 +69,7 @@ const enviarId = async (button) => {
 
    console.log(buttonId)
 
-   //hago el fetch con el method post y le paso el json
+   //hago el fetch con el method post
    const response = await fetch(`/admin/listamedicos/${getBotonId(buttonId)}`, {
     method: 'POST', // or 'PUT'
 

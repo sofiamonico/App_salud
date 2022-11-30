@@ -22,6 +22,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,6 +36,9 @@ public class MedicoServicio implements UserDetailsService {
     MedicoRepositorio medicoRepositorio;
     @Autowired
     ImagenServicio imagenServicio;
+
+    @Autowired
+    EmailSenderService senderService;
 
     //VA A RECIBIR DOBLE CONTRASEÑA PORQUE SE USA PARA VERIFICAR QUE SEAN IGUALES
     //PERO LA CONTRASEÑA2 NO SE GUARDA
@@ -88,7 +92,6 @@ public class MedicoServicio implements UserDetailsService {
     }
 
     @Transactional
-
     public void actualizar(MultipartFile archivo, Integer idUsuario, String nombre, String apellido, String mail,
                            String contrasenia,String contrasenia2, String especialidad,
                            String obraSocial, Double valorConsulta) throws MyException, IOException {
@@ -119,6 +122,51 @@ public class MedicoServicio implements UserDetailsService {
 
         }
 
+    }
+
+    public int calcularPorcentaje (ArrayList<Integer> puntuaciones){
+        int suma = 0;
+        for (int i = 0; i < puntuaciones.size(); i++) {
+            suma += puntuaciones.get(i);
+        }
+
+        int promedio = suma /(puntuaciones.size());
+        return  promedio;
+    }
+
+    public void agregarPuntuacion(Integer puntuacion, Integer id){
+        Medico medico = getOne(id);
+        if(medico.getPuntuaciones() == null){
+            ArrayList<Integer> puntuaciones = new ArrayList();
+            puntuaciones.add(puntuacion);
+            medico.setPuntuaciones(puntuaciones);
+      }else{
+            ArrayList<Integer> puntuaciones = medico.getPuntuaciones();
+            puntuaciones.add(puntuacion);
+            medico.setPuntuaciones(puntuaciones);
+        }
+        medicoRepositorio.save(medico);
+    }
+
+    public void pedidoDeActualizacionParaAdmins(String nombre, Integer dni, Integer telefono, String mail, String obraSocial) throws MyException{
+            List<Medico> medicosAdmin = medicoRepositorio.traerAdmins();
+            Iterator<Medico> it = medicosAdmin.iterator();
+            String obraSocialParaMail;
+        if(obraSocial.equals("true")){
+            obraSocialParaMail = "Si";
+        }else{
+            obraSocialParaMail = "No";
+        }
+        while (it.hasNext()) {
+                Medico medico = it.next();
+                String emailAdmin = medico.getMail();
+                String asunto = "Pedido de actualización de datos";
+                String mensaje = "Buenos dias, " + medico.getApellido() + ". Recibimos un pedido de acutalización de un paciente, su DNI es: " +
+                        dni + ". Datos actualizados: \n" + "NOMBRE COMPLETO: " + nombre + "\nEMAIL: " + mail + "\nTELEFONO: " + telefono + "\nTIENE OBRA SOCIAL: " + obraSocialParaMail +
+                        "\n Le pedimos que cuando tenga actualizado los datos, se contacte con el paciente para que pueda volver a pedir turnos!";
+
+                senderService.sendEmail(emailAdmin,asunto,mensaje);
+            }
     }
 
     public void darDeBajaAlta(Integer idMedico) throws MyException {

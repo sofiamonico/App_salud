@@ -47,10 +47,22 @@ public class PortalControlador {
 
         return "tablaBusqueda.html";
     }
-   
 
 
 
+    @GetMapping("/puntuar/{id}")
+    public String puntuacion(@PathVariable Integer id, ModelMap modelo) {
+        Medico medico = medicoServicio.getOne(id);
+        modelo.addAttribute("medico", medico);
+        return "puntuarMedico.html";
+    }
+
+    @PostMapping("/puntuado/{id}")
+    public String aplicarPuntuacion(@PathVariable Integer id, @RequestParam Integer puntuacion) {
+        medicoServicio.agregarPuntuacion(puntuacion,id);
+
+        return "redirect:/";
+    }
 
     @GetMapping("/registrarse")
     public String registrar() {

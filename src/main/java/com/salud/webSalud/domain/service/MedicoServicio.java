@@ -3,6 +3,7 @@ package com.salud.webSalud.domain.service;
 import com.salud.webSalud.domain.exception.MyException;
 import com.salud.webSalud.persistence.entity.Imagen;
 import com.salud.webSalud.persistence.entity.Medico;
+import com.salud.webSalud.persistence.entity.Turno;
 import com.salud.webSalud.persistence.enums.Especialidad;
 import com.salud.webSalud.persistence.enums.Rol;
 import com.salud.webSalud.persistence.repository.MedicoRepositorio;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
@@ -99,17 +101,22 @@ public class MedicoServicio implements UserDetailsService {
             medico.setNombre(nombre);
             medico.setApellido(apellido);
             medico.setMail(mail);
-            medico.setContrasenia(new BCryptPasswordEncoder().encode(contrasenia));
-            String idImagen = null;
-            if(medico.getImagen() != null){
-                idImagen = medico.getImagen().getMime(); // deberia ser  id de la imagen
-                
+            if(obraSocial.equals("true")){
+                medico.setObraSocial(true);
+            }else{
+                medico.setObraSocial(false);
             }
-            
+            medico.setValorConsulta(valorConsulta);
+            medico.setContrasenia(new BCryptPasswordEncoder().encode(contrasenia));
+            Integer idImagen = null;
+            if(medico.getImagen() != null){
+                idImagen = medico.getImagen().getIdImagen(); // deberia ser  id de la imagen
+            }
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
-           medico.setImagen(imagen);
-            
+            medico.setImagen(imagen);
+
             medicoRepositorio.save(medico);
+
         }
 
     }
@@ -123,6 +130,7 @@ public class MedicoServicio implements UserDetailsService {
         }
         medicoRepositorio.save(medico);
     }
+
 
     public Medico getOne(Integer idMedico) {
         return medicoRepositorio.getOne(idMedico);

@@ -33,7 +33,7 @@ private ImagenRepositorio imagenRepositorio;
     }
     
     
-    public Imagen actualizar(MultipartFile archivo, String idImagen )throws MyException, IOException {
+    public Imagen actualizar(MultipartFile archivo, Integer idImagen )throws MyException, IOException {
         
     
         if (archivo != null){

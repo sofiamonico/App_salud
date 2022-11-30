@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,6 +42,7 @@ import org.springframework.web.multipart.MultipartFile;
     public String especialidad(@PathVariable String especialidad, ModelMap modelo){
         List<Medico> medicos = new ArrayList();
         medicos = medicoServicio.buscarPorEspecialidad(especialidad);
+
         modelo.addAttribute("medicos", medicos);
         String resultado="";
         switch (especialidad){
@@ -80,15 +83,16 @@ import org.springframework.web.multipart.MultipartFile;
 
         @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
         @PostMapping("/modificar/{id}")
-        public String modificandoMedico(@PathVariable MultipartFile archivo, @PathVariable Integer id,@RequestParam String nombre, @RequestParam String apellido,
+        public String modificandoMedico(@PathVariable Integer id, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido,
                                         @RequestParam String mail, @RequestParam String especialidad,
                                         @RequestParam String obraSocial, @RequestParam Double valorConsulta, @RequestParam String contrasenia,
-                                        @RequestParam String contrasenia2, ModelMap modelo) throws MyException, IOException {
+                                        @RequestParam String contrasenia2, ModelMap modelo) throws MyException {
+
             try {
                 medicoServicio.actualizar(archivo,id,nombre,apellido,mail,contrasenia,contrasenia2,especialidad,obraSocial, Double.valueOf(valorConsulta));
                 modelo.put("exito", "El medico fue modificado correctamente!");
                 return "redirect:/medicos/perfil";
-            } catch (MyException e) {
+            } catch (MyException | IOException e) {
                 modelo.put("error", e.getMessage());
                 return "medico_modificar.html";
             }
@@ -109,9 +113,23 @@ import org.springframework.web.multipart.MultipartFile;
     public String administrarMisTurnos(HttpSession session, ModelMap modelo){
              Medico usuario = (Medico) session.getAttribute("usuariosession");
             List<Turno> turnos = turnoServicio.listaTurnosPorMedico(usuario.getIdUsuario());
+            Iterator<Turno> it = turnos.iterator();
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            List<Turno> turnosSinAtender = new ArrayList<>();
+            while (it.hasNext()) {
+                Turno turno = it.next();
+                String newFecha = turno.getFechaConsulta().replace("-", "/");
+                LocalDate fecha = LocalDate.parse(newFecha, formato);
+                Date fechaConsulta = java.sql.Date.valueOf(fecha);
+                Date now = new Date();
+                if(now.compareTo(fechaConsulta) <= 0){
+                    turnosSinAtender.add(turno);
+                }
+            }
+
             LocalDate hoy = LocalDate.now();
             modelo.put("fechaHoy", hoy);
-            modelo.addAttribute("turnos", turnos);
+            modelo.addAttribute("turnos", turnosSinAtender);
             modelo.addAttribute("usuario", usuario);
         return "administrarTurnos.html";
     }
@@ -141,7 +159,13 @@ import org.springframework.web.multipart.MultipartFile;
                 }
             }
         }
-        modelo.addAttribute("pacientesAtendidos", pacientesAtendidos);
+
+        // Eliminar duplicados de la lista usando Java 8 Stream
+        List<Paciente> listWithoutDuplicates = pacientesAtendidos.stream()
+                .distinct()
+                .collect(Collectors.toList());
+
+        modelo.addAttribute("pacientesAtendidos", listWithoutDuplicates);
         modelo.addAttribute("pacientesSinAtender", pacientesSinAtender);
         modelo.addAttribute("turnosAtendidos", turnosAtendidos);
         modelo.addAttribute("usuario", usuario);

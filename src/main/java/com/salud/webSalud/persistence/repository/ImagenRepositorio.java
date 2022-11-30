@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author ematr
  */
 @Repository
-public interface ImagenRepositorio extends JpaRepository<Imagen, String>{
+public interface ImagenRepositorio extends JpaRepository<Imagen, Integer>{
     
     
 }

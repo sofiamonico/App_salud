@@ -7,6 +7,7 @@ package com.salud.webSalud.web.controller;
 
 
 import com.salud.webSalud.domain.exception.MyException;
+import com.salud.webSalud.domain.service.MedicoServicio;
 import com.salud.webSalud.domain.service.PacienteServicio;
 import com.salud.webSalud.domain.service.TurnoServicio;
 import com.salud.webSalud.persistence.entity.Medico;
@@ -29,6 +30,8 @@ public class PacienteControlador {
     private PacienteServicio pacienteServicio;
     @Autowired
     private TurnoServicio turnoServicio;
+    @Autowired
+    private MedicoServicio medicoServicio;
     
     @GetMapping("/registrarse/{idTurno}")
     public String registrarPaciente(@PathVariable Integer idTurno, ModelMap modelo){
@@ -107,6 +110,26 @@ public class PacienteControlador {
         }catch(MyException ex){
             modelo.put("error", ex.getMessage());
             return"redirect:../lista";
+        }
+    }
+
+    @GetMapping("/pedir_actualizacion")
+    public String pedirActualizacionPaciente(){
+
+        return "pedirActualizacionPaciente.html";
+    }
+
+    @PostMapping("/pedido_actualizacion")
+    public String pedidoDeActualizacion(@RequestParam String nombre_paciente, @RequestParam String dni,
+                                        @RequestParam String dni2, @RequestParam String telefono,
+                                        @RequestParam String mail, @RequestParam String obraSocial, ModelMap modelo ){
+        try{
+            medicoServicio.pedidoDeActualizacionParaAdmins(nombre_paciente,Integer.parseInt(dni),Integer.parseInt(telefono),mail,obraSocial);
+            modelo.put("exito", "Los datos se enviaron correctamente a los Admins, en un rato nos contactaremos con usted!");
+            return "index.html";
+        }catch(MyException ex){
+            modelo.put("error", ex.getMessage());
+            return "pedirActualizacionPaciente.html";
         }
     }
 }

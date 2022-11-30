@@ -24,7 +24,7 @@
 </div>
 
 <div class="card text-center">
-    <h2>¿Sos ésta persona?</h2>
+    <h2>¿Éstos datos son correctos?</h2>
     <div class="card-header" th:text="${paciente.nombre_paciente}">
     </div>
     <div class="card-body">
@@ -36,9 +36,9 @@
     </div>
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <form th:action="@{'/turnos/reservarTurno/' + ${idTurno}} + '/'+ ${paciente.dni}" method="GET">
-            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Si</button>
+            <a type="submit" class="btn btn-dark">Si</a>
         </form>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">No</button>
+        <a href="/pacientes/pedir_actualizacion" type="button" class="btn btn-outline-secondary btn-lg px-4">No</a>
     </div>
 </div>
 <footer th:replace="/fragments/footer :: footer"></footer>

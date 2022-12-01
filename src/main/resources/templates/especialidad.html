@@ -26,7 +26,7 @@
 <main>
     <div class="contenedor">
         <div class="foto">
-            <img  th:if="${espe} == 'cardiologia'" src="/img/cardiologia.jpg" alt="Imagen Ilustrativa">
+            <img  th:if="${espe == 'cardiologia'}" src="/img/cardiologia.jpg" alt="Imagen Ilustrativa">
             <img  th:if="${espe == 'ginecologia'}" src="/img/ginecologia.jpg" alt="Imagen Ilustrativa">
             <img th:if="${espe == 'clinico'}" src="/img/clinico.jpg" alt="Imagen Ilustrativa">
             <img th:if="${espe == 'pediatria'}" src="/img/pediatra.jpeg" alt="Imagen Ilustrativa">

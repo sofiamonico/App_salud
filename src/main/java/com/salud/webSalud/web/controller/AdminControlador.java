@@ -41,4 +41,5 @@ public class AdminControlador {
         medicoServicio.darDeBajaAlta(id);
         return "tabla.html";
     }
+
 }

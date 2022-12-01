@@ -129,7 +129,7 @@ p.textoNosotros {
 }
 
 #rectanguloGris{
-    margin-top: -48px;
+    margin-top: -562px;
   margin-left: 1067px;
   width: 300px;
   height: 672px;
@@ -139,15 +139,12 @@ p.textoNosotros {
   z-index: 2;
 }
 
-
+.FOTOS{
+    margin-top: 90px;
+    margin-left: 78px;
+}
 .especialidades1{
-    
      display: flex;
-    /* justify-content: center;
-    flex-direction: row-reverse;*/
-     margin-top: 130px;
-     margin-left: -1000px;
-     list-style: none;
 }
 #Especialidades .especialidades1 img{
      max-height: 180px;
@@ -156,7 +153,8 @@ p.textoNosotros {
  }
 
 #Especialidades .especialidades1 li{
-     margin-left: 8px;
+     
+     list-style: none;
  }
  #Especialidades .especialidades1 .area{
      display: flex;

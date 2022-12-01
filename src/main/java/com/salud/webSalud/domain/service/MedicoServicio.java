@@ -4,8 +4,13 @@ import com.salud.webSalud.domain.exception.MyException;
 import com.salud.webSalud.persistence.entity.Imagen;
 import com.salud.webSalud.persistence.entity.Medico;
 import com.salud.webSalud.persistence.entity.Turno;
+import com.salud.webSalud.persistence.enums.Atencion;
+import static com.salud.webSalud.persistence.enums.Atencion.PRESENCIAL;
+import static com.salud.webSalud.persistence.enums.Atencion.TELEMEDICINA;
 import com.salud.webSalud.persistence.enums.Especialidad;
 import com.salud.webSalud.persistence.enums.Rol;
+import static com.salud.webSalud.persistence.enums.Rol.ADMIN;
+import static com.salud.webSalud.persistence.enums.Rol.USER;
 import com.salud.webSalud.persistence.repository.MedicoRepositorio;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +45,7 @@ public class MedicoServicio implements UserDetailsService {
     //PERO LA CONTRASEÑA2 NO SE GUARDA
     @Transactional
     public void registrarMedico(String nombre, String apellido, String mail,String especialidad,
-                                String obraSocial, String contrasenia,String contrasenia2, Double valorConsulta, MultipartFile archivo) throws MyException {
+                                String obraSocial, String contrasenia,String contrasenia2, Double valorConsulta, MultipartFile archivo, String direccion, String atencion) throws MyException {
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
 
         Medico medico = new Medico();
@@ -51,6 +56,14 @@ public class MedicoServicio implements UserDetailsService {
         medico.setRol(Rol.USER);
         medico.setAlta(true);
         medico.setValorConsulta(valorConsulta);
+        if(atencion.toUpperCase().equals("PRESENCIAL")){
+            medico.setAtencion(Atencion.PRESENCIAL);
+            medico.setDireccion(direccion);
+        }else{
+            medico.setAtencion(Atencion.TELEMEDICINA);
+        }
+        
+        
         
         Imagen imagen = imagenServicio.guardar(archivo);
         medico.setImagen(imagen);
@@ -91,7 +104,7 @@ public class MedicoServicio implements UserDetailsService {
 
     public void actualizar(MultipartFile archivo, Integer idUsuario, String nombre, String apellido, String mail,
                            String contrasenia,String contrasenia2, String especialidad,
-                           String obraSocial, Double valorConsulta) throws MyException, IOException {
+                           String obraSocial, Double valorConsulta, String direccion, String atencion) throws MyException, IOException {
 
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
         Optional<Medico> respuesta = medicoRepositorio.findById(idUsuario);
@@ -114,7 +127,13 @@ public class MedicoServicio implements UserDetailsService {
             }
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
             medico.setImagen(imagen);
-
+            if(atencion.toUpperCase().equals("PRESENCIAL")){
+             medico.setAtencion(Atencion.PRESENCIAL);
+                medico.setDireccion(direccion);
+            }else{
+            medico.setAtencion(Atencion.TELEMEDICINA);
+        }
+            
             medicoRepositorio.save(medico);
 
         }
@@ -190,5 +209,15 @@ public class MedicoServicio implements UserDetailsService {
             throw new
                     UsernameNotFoundException("User not exist with name :" +email);
         }
+    }
+    
+    public void cambiarRol(Integer idMedico){
+        Medico medico = getOne(idMedico);
+        if(medico.getRol() == USER){
+            medico.setRol(Rol.ADMIN);
+        }else{
+            medico.setRol(Rol.USER);
+        }
+        medicoRepositorio.save(medico);
     }
 }

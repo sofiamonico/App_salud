@@ -1,5 +1,6 @@
 package com.salud.webSalud.persistence.entity;
 
+import com.salud.webSalud.persistence.enums.Atencion;
 import com.salud.webSalud.persistence.enums.Especialidad;
 import com.salud.webSalud.persistence.enums.Rol;
 
@@ -40,6 +41,10 @@ public class Medico {
     private List<Turno> turnos;
     @OneToOne
     private Imagen imagen;
+    @Enumerated(EnumType.STRING)
+    private Atencion atencion;
+    @Column(nullable=true)
+    private String direccion;
 
     public Medico() {
     }
@@ -171,6 +176,22 @@ public class Medico {
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
+    }
+
+    public Atencion getAtencion() {
+        return atencion;
+    }
+
+    public void setAtencion(Atencion atencion) {
+        this.atencion = atencion;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
     
     

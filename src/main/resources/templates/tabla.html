@@ -94,7 +94,7 @@
     button.addEventListener("click", enviarId)
     );
  
-    //-----------
+    //-----------FUNCION ADMIN-USER
     
     const botones = document.querySelectorAll('[name="admin-user"]')
 
@@ -107,7 +107,7 @@
     console.log(buttonUser)
 
     //hago el fetch con el method post
-    const response = await fetch(`/admin/cambiarRol/${getBotonUser(buttonUser)}`, {
+    const response = await fetch(`/medicos/cambiarRol/${getBotonUser(buttonUser)}`, {
     method: 'POST', // or 'PUT'
 
     })

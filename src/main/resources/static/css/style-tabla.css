@@ -1,132 +1,102 @@
 *{
-    margin: 0;
+    margin: 0 auto;
     padding: 0px;
     box-sizing: border-box;
- }
- main{
-    padding: 20px;
- }
- 
-.datagrid table {
-    border-collapse: collapse;
-    text-align: left;
-    width: 100%;
-    
 }
+main{
+    padding: 20px;
+}
+.datagrid table { 
+    border-collapse: collapse; 
+    text-align: left; 
+    width: 100%; 
+} 
 
 .datagrid {
-    font: normal 12px/150% Arial, Helvetica, sans-serif;
-    background: #fff;
+    font: normal 12px/150% Geneva, Arial, Helvetica, sans-serif; 
+    background: #fff; 
     overflow: hidden;
-    border: 2px solid #652299;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    border: 2px solid #8029A6;
 }
 
-.datagrid table td,
+.datagrid table td, 
 .datagrid table th {
-    padding: 2px 13px;
+    padding: 10px 3px; 
 }
 
 .datagrid table thead th {
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #652299), color-stop(1, #4D1A75));
-    background: -moz-linear-gradient(center top, #652299 5%, #4D1A75 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#652299', endColorstr='#4D1A75');
-    background-color: #652299;
-    color: #FFFFFF;
-    font-size: 14px;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #981FCC), color-stop(1, #981BA6) );
+    background:-moz-linear-gradient( center top, #981FCC 5%, #981BA6 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#981FCC', endColorstr='#981BA6');
+    background-color:#981FCC;
+    color:#FFFFFF;
+    font-size: 16px;
     font-weight: bold;
-    border-left: 1px solid #714399;
+    border-left: 2px solid #60187A;
+} 
+
+.datagrid table thead th:first-child { border: none; }
+.datagrid table tbody td { 
+    color: #8F3A84; 
+    border-left: 2px solid #60187A;
+    font-size: 16px;
+    font-weight: normal; 
 }
 
-.datagrid table thead th:first-child {
-    border: none;
+.datagrid table tbody .alt td { background: #FFFFFF; color: #8F3A84; }
+.datagrid table tbody td:first-child { border-left: none; }
+.datagrid table tbody tr:last-child td { border-bottom: none; }
+.datagrid table tfoot td div { 
+    border-top: 2px solid #8029A6;
+    background: #FFFFFF;
+} 
+
+.datagrid table tfoot td { padding: 0; font-size: 11px } 
+.datagrid table tfoot td div{ padding: 2px; }
+.datagrid table tfoot td ul { 
+    margin: 0; 
+    padding:0; 
+    list-style: none; 
+    text-align: right; 
 }
 
-.datagrid table tbody td {
-    
-    border-left: 1px solid #E7BDFF;
-    font-size: 12px;
-    font-weight: normal;
-}
-
-.datagrid table tbody .alt td {
-    background: #F4E3FF;
-
-}
-
-.datagrid table tbody td:first-child {
-    border-left: none;
-}
-
-.datagrid table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-.datagrid table tfoot td div {
-    border-top: 1px solid #652299;
-    background: #F4E3FF;
-}
-
-.datagrid table tfoot td {
-    padding: 0;
-    font-size: 12px
-}
-
-.datagrid table tfoot td div {
-    padding: 2px;
-}
-
-.datagrid table tfoot td ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-align: right;
-}
-
-.datagrid table tfoot li {
-    display: inline;
-}
-
-.datagrid table tfoot li a {
-    text-decoration: none;
-    display: inline-block;
-    padding: 2px 8px;
+.datagrid table tfoot  li { display: inline; }
+.datagrid table tfoot li a { 
+    text-decoration: none; 
+    display: inline-block;  
+    padding: 2px 8px; 
     margin: 1px;
     color: #FFFFFF;
-    border: 1px solid #652299;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #652299), color-stop(1, #4D1A75));
-    background: -moz-linear-gradient(center top, #652299 5%, #4D1A75 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#652299', endColorstr='#4D1A75');
-    background-color: #652299;
-}
+    border: 1px solid #981BA6;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px; 
+    border-radius: 4px; 
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #981BA6), color-stop(1, #981BA6) );
+    background:-moz-linear-gradient( center top, #981BA6 5%, #981BA6 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#981BA6', endColorstr='#981BA6');
+    background-color:#981BA6; }
 
-.datagrid table tfoot ul.active,
-.datagrid table tfoot ul a:hover {
+.datagrid table tfoot ul.active, 
+.datagrid table tfoot ul a:hover { 
     text-decoration: none;
-    border-color: #4D1A75;
-    color: #FFFFFF;
-    background: none;
-    background-color: #652299;
+    border-color: #981BA6; 
+    color: #F194FF; 
+    background: none; 
+    background-color:#981BA6;
 }
-
 .button-6 {
-    
+
     box-sizing: border-box;
-    color: rgba(0, 0, 0, 0.85);
+    color: #8F3A84;
     cursor: pointer;
     display: inline-flex;
-    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
-   
+    font-family: Geneva, Arial, Helvetica, sans-serif; 
+
     font-weight: 600;
-   
+
     line-height: 1.25;
     margin: 0;
-   background: none;
+    background: none;
     position: relative;
     text-decoration: none;
     transition: all 250ms;
@@ -137,15 +107,15 @@
     width: 110px;
     outline:none;
     border-width: 0ch;
-    
-  }
-  .button-6:focus {
-    color: rgba(143, 16, 126, 0.445);
-  }
- 
- 
-  /* CSS */
-  .button-7 {
+
+}
+.button-6:focus {
+    color: #4D1A75;
+}
+
+
+/* CSS */
+.button-7 {
     background: #42ff4bc4;
     border: 1px solid #42ff4bc4;
     border-radius: 6px;
@@ -158,7 +128,7 @@
     font-size: 16px;
     font-weight: 600;
     line-height: 16px;
-    
+
     outline: 0;
     padding: 8px 10px;
     text-align: center;
@@ -168,52 +138,89 @@
     -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: middle;
-  }
-  
-  .button-7:hover,
-  .button-7:active {
+}
+
+.button-7:hover,
+.button-7:active {
     background-color: initial;
     background-position: 0 0;
     color: #42ff4bc4;
-  }
-  
-  .button-7:active {
+}
+
+.button-7:active {
     opacity: .5;
-  }
-/* CSS */
+}
+
 .button-8 {
     margin-left: 10px;
-  background: #ff4842c7;
-  border: 1px solid #ff4842c7;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 16px;
-  
-  outline: 0;
-  padding: 8px 10px;
-  text-align: center;
-  text-rendering: geometricprecision;
-  text-transform: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
+    background:#ff4842c7;
+    border: 1px solid #ff4842c7;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+
+    outline: 0;
+    padding: 8px 10px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
 }
 
 .button-8:hover,
 .button-8:active {
-  background-color: initial;
-  background-position: 0 0;
-  color: #ff4842c7;
+    background-color: initial;
+    background-position: 0 0;
+    color: #ff4842c7;
 }
 
 .button-8:active {
-  opacity: .5;
+    opacity: .5;
+}
+
+.button-9 {
+    margin-left: 10px;
+    background: #8F3A84;
+    border: 1px solid #8F3A84;;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+
+    outline: 0;
+    padding: 8px 10px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.button-9:hover,
+.button-9:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #8F3A84;
+}
+
+.button-9:active {
+    opacity: .5;
 }

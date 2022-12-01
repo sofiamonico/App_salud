@@ -41,4 +41,9 @@ public class AdminControlador {
         medicoServicio.darDeBajaAlta(id);
         return "tabla.html";
     }
+    
+    @PostMapping("/cambiarRol/{id}")
+    public String cambiarRol(@PathVariable Integer id) throws MyException {
+        return "tabla.html";
+    }
 }

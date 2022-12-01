@@ -22,6 +22,9 @@ public interface MedicoRepositorio extends JpaRepository<Medico,Integer> {
     public List<Medico> buscarPorEspecialidad(@Param("especialidad")String especialidad);
 
 
+    @Query(value = "SELECT * FROM medico WHERE medico.rol = 'ADMIN'", nativeQuery = true)
+    public List<Medico> traerAdmins();
+
 }
 
 

@@ -18,19 +18,20 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminControlador {
+
     @Autowired
     MedicoServicio medicoServicio;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/dashboard")
-    public String panelAdmin(HttpSession session, ModelMap modelo){
+    public String panelAdmin(HttpSession session, ModelMap modelo) {
         Medico usuario = (Medico) session.getAttribute("usuariosession");
         modelo.addAttribute("usuario", usuario);
         return "panelAdmin.html";
     }
 
     @GetMapping("/listamedicos")
-    public String listarMedicos(ModelMap modelo){
+    public String listarMedicos(ModelMap modelo) {
         List<Medico> medicos = medicoServicio.listarUsuarios();
         modelo.addAttribute("medicos", medicos);
         return "tabla.html";
@@ -42,4 +43,7 @@ public class AdminControlador {
         return "tabla.html";
     }
 
+    @PostMapping("/cambiarRol/{id}")
+    public String cambiarRol(@PathVariable Integer id) throws MyException {
+        return "tabla.html";
 }

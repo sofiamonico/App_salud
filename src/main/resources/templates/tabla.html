@@ -56,8 +56,8 @@
                             <button class="button-8" role="button" name="alta-baja"  th:id="'baja-' + ${medico.idUsuario}" th:if="${medico.alta == true}">Baja</button>
                         </td>
                         <td>
-                            <button class="button-9" role="button" name="admin-user" th:id="'admin-' + ${medico.idUsuario}"> <!--th:if="${medico.rol == USER}--->Volver Administrador</button>
-                            <button class="button-9" role="button" name="admin-user" th:id="'user-' + ${medico.idUsuario}"> <!--th:if="${medico.rol == ADMIN}"--->Volver Usuario</button>
+                            <button class="button-9" role="button" name="admin-user" th:id="'admin-' + ${medico.idUsuario}" th:if="${medico.rol == T(com.salud.webSalud.persistence.enums.Rol).USER}">Volver Administrador</button>
+                            <button class="button-9" role="button" name="admin-user" th:id="'user-' + ${medico.idUsuario}" th:if="${medico.rol == T(com.salud.webSalud.persistence.enums.Rol).ADMIN}">Volver Usuario</button>
                         </td>
 
                     </tr>
@@ -68,6 +68,8 @@
     <footer th:replace="/fragments/footer :: footer"></footer>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 <script>
     const buttons = document.querySelectorAll('[name="alta-baja"]')
 
@@ -91,10 +93,9 @@
     buttons.forEach((button) =>
     button.addEventListener("click", enviarId)
     );
-</script>
-
-<!---REVISAR
-<script>
+ 
+    //-----------
+    
     const botones = document.querySelectorAll('[name="admin-user"]')
 
     const adminUser = async (button) => {
@@ -106,7 +107,7 @@
     console.log(buttonUser)
 
     //hago el fetch con el method post
-    const response = await fetch(`/admin/CambiarRol/${getBotonUser(buttonUser)}`, {
+    const response = await fetch(`/admin/cambiarRol/${getBotonUser(buttonUser)}`, {
     method: 'POST', // or 'PUT'
 
     })
@@ -115,7 +116,11 @@
     }
 
     botones.forEach((button) =>
-    botones.addEventListener("click", adminUser)
+    button.addEventListener("click", adminUser)
     );
-</script>--->
+</script>
+
+
+    
+
 </html>

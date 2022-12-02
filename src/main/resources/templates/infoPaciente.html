@@ -36,7 +36,7 @@
     </div>
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <form th:action="@{'/turnos/reservarTurno/' + ${idTurno}} + '/'+ ${paciente.dni}" method="GET">
-            <a type="submit" class="btn btn-dark">Si</a>
+            <button type="submit" class="btn btn-dark">Si</button>
         </form>
         <a href="/pacientes/pedir_actualizacion" type="button" class="btn btn-outline-secondary btn-lg px-4">No</a>
     </div>

@@ -66,8 +66,16 @@ import org.springframework.web.multipart.MultipartFile;
     @GetMapping("/{id}")
     public String vistaMedico(@PathVariable Integer id, ModelMap modelo) {
         Medico medico = medicoServicio.getOne(id);
-        int promedioPuntuaciones = medicoServicio.calcularPorcentaje(medico.getPuntuaciones());
+        int promedioPuntuaciones = 0;
+        if(medico.getPuntuaciones() != null){
+            promedioPuntuaciones = medicoServicio.calcularPorcentaje(medico.getPuntuaciones());
+        }
         modelo.put("puntuacion", promedioPuntuaciones);
+        int precioConsulta=0;
+        if(medico.getValorConsulta() != null){
+            precioConsulta = (int) Math.round(medico.getValorConsulta());
+        }
+        modelo.put("valorConsulta", precioConsulta);
         modelo.addAttribute("medico", medico);
         List<Turno> turnos = turnoServicio.listaTurnosPorMedico(id);
         modelo.addAttribute("turnos", turnos);

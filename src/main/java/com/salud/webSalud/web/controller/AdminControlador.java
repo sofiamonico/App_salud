@@ -46,4 +46,5 @@ public class AdminControlador {
     @PostMapping("/cambiarRol/{id}")
     public String cambiarRol(@PathVariable Integer id) throws MyException {
         return "tabla.html";
+    }
 }

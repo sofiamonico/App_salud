@@ -52,8 +52,10 @@ public class MedicoServicio implements UserDetailsService {
         medico.setAlta(true);
         medico.setValorConsulta(valorConsulta);
         
+        if(archivo != null){
         Imagen imagen = imagenServicio.guardar(archivo);
         medico.setImagen(imagen);
+        } 
         switch (especialidad.toUpperCase()){
             case "CARDIOLOGIA":
                 medico.setEspecialidad(Especialidad.CARDIOLOGIA);

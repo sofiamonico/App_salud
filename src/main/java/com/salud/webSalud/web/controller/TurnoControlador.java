@@ -48,9 +48,9 @@ public class TurnoControlador {
     }
 
     @GetMapping("/reservarTurno/{idTurno}/{dni}")
-    public String reservarTurno (@PathVariable Integer dni, @PathVariable Integer idTurno, ModelMap modelo){
+    public String reservarTurno (@PathVariable Integer dni,@PathVariable String fecha,@PathVariable String hora, @PathVariable Integer idTurno, ModelMap modelo){
 
-        turnoServicio.reservarTurno(dni,idTurno);
+        turnoServicio.reservarTurno(dni,fecha, hora,idTurno);
         modelo.put("exito", "El turno fue registrado correctamente!");
         return "index.html";
     }

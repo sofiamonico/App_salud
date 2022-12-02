@@ -2,6 +2,7 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
+
     <head>
         <meta charset="UTF-8">
         <title>Inicio-Medicos</title>
@@ -19,7 +20,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     </head>
 
-    <body>
+ <body>
+
 
     <head th:replace="/fragments/navbar :: header"></head>
     <div th:if="${exito != null}" class="alert alert-success d-flex align-items-center" role="alert">

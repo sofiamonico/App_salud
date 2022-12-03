@@ -41,8 +41,8 @@
                         <h6 th:text="'Valor consulta: $' + ${valorConsulta}"></h6>
                         <h6 th:if="${medico.obraSocial} == true" >Recibe Obra Social.</h6>
                         <h6 th:if="${medico.obraSocial} == false" >No recibe Obra Social.</h6>
-                        <!--<h6 th:if="${medico.atencion == T(com.salud.webSalud.persistence.enums.ATENCION).TELEMEDICINA}">Atención médica: Telemedicina</h6>
-                        <h6 th:if="${medico.atencion == T(com.salud.webSalud.persistence.enums.ATENCION).PRESENCIAL}" th:text="'Atención médica: Consultorio. Dirreción: ' + ${medico.dirrecion}"></h6>-->
+                        <h6 th:if="${medico.atencion == T(com.salud.webSalud.persistence.enums.Atencion).TELEMEDICINA}">Atención médica: Telemedicina</h6>
+                        <h6 th:if="${medico.atencion == T(com.salud.webSalud.persistence.enums.Atencion).PRESENCIAL}" th:text="'Atención médica: Consultorio. Dirección: ' + ${medico.direccion}"></h6>
                         <h6>Puntuaciones:</h6>
                     </div>
                     <div class="d-grid gap-2 d-sm-flex">

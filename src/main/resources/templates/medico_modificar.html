@@ -32,8 +32,8 @@
             <div class="row g-3">
                 <div class="col-sm-6">
                     <label for="firstName" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" id="firstName" placeholder="" th:value="${medico.nombre}"
-                           required="">
+                    <input type="text" class="form-control" name="nombre" id="firstName" placeholder="" value=""
+                           required="" th:value ="${medico.nombre}">
                     <div class="invalid-feedback">
                         Valid first name is required.
                     </div>
@@ -41,8 +41,8 @@
 
                 <div class="col-sm-6">
                     <label for="lastName" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" name="apellido" id="lastName" placeholder="" th:value="${medico.apellido}"
-                           required="">
+                    <input type="text" class="form-control" name="apellido" id="lastName" placeholder="" value=""
+                           required="" th:value ="${medico.apellido}">
                     <div class="invalid-feedback">
                         Valid last name is required.
                     </div>
@@ -53,9 +53,10 @@
                     <input type="file" class="form-control" name="archivo" id="archivo">
                 </div>
 
+
                 <div class="col-12">
                     <label for="email" class="form-label">Email</label>
-                    <input th:value="${medico.mail}" type="email" class="form-control" name="mail" id="email" placeholder="you@example.com" required="@">
+                    <input type="email" class="form-control" name="mail" id="email" placeholder="you@example.com" required="@" th:value ="${medico.mail}">
                     <div class="invalid-feedback">
                         Please enter a valid email address for shipping updates.
                     </div>
@@ -71,34 +72,23 @@
 
                 <div class="col-12">
                     <label for="password" class="form-label">Confirmar Contraseña</label>
-                    <input type="password" class="form-control" name="contrasenia2" id="contrasena" placeholder="" required="password">
+                    <input type="password" class="form-control" name="contrasenia2" id="contrasenia" placeholder="" required="password">
                     <div class="invalid-feedback">
                         Please enter the same password.
                     </div>
                 </div>
 
-                <div class="col-12">
-                    <label for="Especialidad" class="form-label">Especialidad</label>
-                    <select name="especialidad" class="form-select" id="ObraSocial" required="">
-                        <option value="">Selecione</option>
-                        <option value="Pediatria">Pediatria</option>
-                        <option value="Ginecologia">Ginecologia</option>
-                        <option value="Clinica">Clínica</option>
-                        <option value="Cardiologia">Cardiologia</option>
-                    </select>
-                </div>
-
 
                 <div class="col-md-5">
                     <label>
-                        Valor de consulta: <input   type="number" name="valorConsulta" class="form-control" th:value="${medico.valorConsulta}" style="margin-top: 10px;"/>
+                        Valor de consulta: <input type="number" name="valorConsulta" class="form-control" style="margin-top: 10px;" th:value ="${medico.valorConsulta}">
                     </label>
                 </div>
-
-                <div class="col-md-5" style="margin-left: 110px;">
+                <br>
+                <div class="col-md-5" style="margin-left: 70px;">
                     <label for="ObraSocial" class="form-label">¿Recibe obra social?</label>
                     <select name="obraSocial" class="form-select" id="ObraSocial" required="">
-                        <option value="">Selecione</option>
+                        <option value="">Seleccione</option>
                         <option value="true">Si</option>
                         <option value="false">No</option>
                     </select>
@@ -106,20 +96,23 @@
                 </div>
 
                 <div class="col-md-5">
-                    <label for="Espacio" class="form-label">Tipo de atención médica </label>
-                    <select name="espacio" class="form-select" id="Espacio" required="">
+                    <label for="Espacio" class="form-label">Modalidad de atención </label>
+                    <select name="atencion" class="form-select" id="espacio" required="">
                         <option value="">Seleccione</option>
-                        <option value="true">Virtual</option>
-                        <option value="false">Presencial</option>
+                        <option value="Telemedicina" id="telemedicina">Telemedicina</option>
+                        <option value="Presencial" id="presencial">Presencial</option>
                     </select>
-                    <input type="text" class="form-control" name="direccion" id="Direccion" placeholder="ejemplo.com/ Calle ejemplo 111" required="@">
+                    <!--<input type="text" class="form-control" name="direccion" id="Direccion" placeholder="ejemplo.com/ Calle ejemplo 111" required="@">-->
                     <div class="invalid-feedback">
                         Please enter a valid email address for shipping updates.
                     </div>
                 </div>
+                <div class="col-md-5" id="input-direccion" style="margin-left: 70px; margin-top:22px">
+
+                </div>
 
             </div>
-            <button class="w-100 btn btn-dark btn-lg " type="submit" style="margin:10px">Registrarse</button>
+            <button class="w-100 btn btn-dark btn-lg " type="submit" style="margin:10px">Modificar</button>
         </form>
 
     </div>
@@ -127,5 +120,32 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
     crossorigin="anonymous"></script>
+    <script>
+         const select= document.getElementById("espacio")
+
+const agregarInput = () => {
+  const divInput = document.getElementById("input-direccion");
+  console.log("acaaaaaa")
+  divInput.innerHTML = ` <label  >
+  Dirección de consultorio: <input type="text" class="form-control" name="direccion" id="Direccion" placeholder="Calle ejemplo 111"  >
+</label>`
+}
+
+const vaciarInput = () =>{
+  const divInput = document.getElementById("input-direccion");
+  divInput.innerHTML = ``;
+}
+
+const orquestador = () =>{
+console.log(select.value)
+    if(select.value === 'Presencial'){
+      agregarInput()
+    }else{
+      vaciarInput();
+    }
+}
+
+select.addEventListener("click", orquestador);
+    </script>
    </body>
 </html>

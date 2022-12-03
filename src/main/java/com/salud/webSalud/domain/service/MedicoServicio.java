@@ -106,10 +106,10 @@ public class MedicoServicio implements UserDetailsService {
 
     @Transactional
     public void actualizar(MultipartFile archivo, Integer idUsuario, String nombre, String apellido, String mail,
-                           String contrasenia,String contrasenia2, String especialidad,
+                           String contrasenia,String contrasenia2,
                            String obraSocial, Double valorConsulta, String direccion, String atencion) throws MyException, IOException {
 
-        validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
+        validarModificar(nombre, apellido, mail, contrasenia, contrasenia2);
         Optional<Medico> respuesta = medicoRepositorio.findById(idUsuario);
 
         if (respuesta.isPresent()) {
@@ -211,6 +211,27 @@ public class MedicoServicio implements UserDetailsService {
         }
         if (especialidad == null || especialidad.isEmpty()) {
             throw new MyException("La especialidad no puede ser nula o estar vacío");
+        }
+        if (apellido == null || apellido.isEmpty()) {
+            throw new MyException("El apellido no puede ser nulo o estar vacío");
+        }
+        if (mail.isEmpty() || mail == null) {
+            throw new MyException("El mail no puede ser nulo o estar vacío");
+        }
+        if (contrasenia.isEmpty() || contrasenia == null || contrasenia.length() <= 5) {
+            throw new MyException("La contraseña no puede ser nula o estar vacía, y debe tener más de 5 dígitos");
+        }
+        if (!contrasenia.equals(contrasenia2)) {
+            throw new MyException("Las contraseñas ingresadas deben ser iguales");
+        }
+
+    }
+
+    public void validarModificar(String nombre, String apellido, String mail,
+                         String contrasenia, String contrasenia2) throws MyException {
+
+        if (nombre == null || nombre.isEmpty()) {
+            throw new MyException("El nombre no puede ser nulo o estar vacío");
         }
         if (apellido == null || apellido.isEmpty()) {
             throw new MyException("El apellido no puede ser nulo o estar vacío");

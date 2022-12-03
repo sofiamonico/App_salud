@@ -24,8 +24,12 @@
         <div class="container col-xxl-8 px-4 py-5">
             <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                 <div class="col-10 col-sm-8 col-lg-6">
+<<<<<<< HEAD
+                    <img th:src="@{/imagen/perfil/__${medico.idUsuario}__}" class="figure-img img-fluid rounded" alt="fotoMedicoPorDefecto">
+=======
                     <img src="/img/UsuarioDefecto.jpeg" th:if="${medico.imagen == null}" class="figure-img img-fluid rounded" alt="fotoMedicoPorDefecto">
                     <img th:src="@{/imagen/perfil/__${medico.idUsuario}__}" th:if="${medico.imagen != null}" class="figure-img img-fluid rounded" alt="fotoMedicoPorDefecto">
+>>>>>>> ae358aa94491e95babccc43dc820780d0214d770
                 </div>
                 <div class="col-lg-6">
                     <tittle id="nombreMEdico">
@@ -68,6 +72,7 @@
                             <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal"   class="btn btn-secondary btn-lg">Sacar Turno</button>
                         </form>
                     </div>
+
                 </div>
             </div>
     </main>

@@ -53,7 +53,9 @@ public class Medico {
     public Medico() {
     }
 
+
     public Medico(Integer idUsuario, String nombre, String apellido, String mail, String contrasenia, Boolean alta, Integer horarioInicio, Integer horarioFinal, Double valorConsulta, ArrayList<Integer> puntuaciones, Boolean obraSocial, Rol rol, Especialidad especialidad, List<Turno> turnos, Imagen imagen) {
+
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -68,7 +70,7 @@ public class Medico {
         this.rol = rol;
         this.especialidad = especialidad;
         this.turnos = turnos;
-        this.imagen = imagen;
+
     }
 
     public ArrayList<Integer> getPuntuaciones() {
@@ -77,6 +79,7 @@ public class Medico {
 
     public void setPuntuaciones(ArrayList<Integer> puntuaciones) {
         this.puntuaciones = puntuaciones;
+
     }
 
     public Integer getIdUsuario() {

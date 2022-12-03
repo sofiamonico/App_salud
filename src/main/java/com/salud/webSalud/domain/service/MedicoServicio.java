@@ -4,9 +4,11 @@ import com.salud.webSalud.domain.exception.MyException;
 import com.salud.webSalud.persistence.entity.Imagen;
 import com.salud.webSalud.persistence.entity.Medico;
 import com.salud.webSalud.persistence.entity.Turno;
+
 import com.salud.webSalud.persistence.enums.Atencion;
 import static com.salud.webSalud.persistence.enums.Atencion.PRESENCIAL;
 import static com.salud.webSalud.persistence.enums.Atencion.TELEMEDICINA;
+
 import com.salud.webSalud.persistence.enums.Especialidad;
 import com.salud.webSalud.persistence.enums.Rol;
 import static com.salud.webSalud.persistence.enums.Rol.ADMIN;
@@ -69,8 +71,10 @@ public class MedicoServicio implements UserDetailsService {
         
         
         
+        if(archivo != null){
         Imagen imagen = imagenServicio.guardar(archivo);
         medico.setImagen(imagen);
+        } 
         switch (especialidad.toUpperCase()){
             case "CARDIOLOGIA":
                 medico.setEspecialidad(Especialidad.CARDIOLOGIA);
@@ -130,6 +134,7 @@ public class MedicoServicio implements UserDetailsService {
             }
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
             medico.setImagen(imagen);
+
             if(atencion.toUpperCase().equals("PRESENCIAL")){
              medico.setAtencion(Atencion.PRESENCIAL);
                 medico.setDireccion(direccion);
@@ -137,6 +142,7 @@ public class MedicoServicio implements UserDetailsService {
             medico.setAtencion(Atencion.TELEMEDICINA);
         }
             
+
             medicoRepositorio.save(medico);
 
         }

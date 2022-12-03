@@ -1,9 +1,11 @@
 package com.salud.webSalud.persistence.entity;
 
+import com.salud.webSalud.persistence.enums.Atencion;
 import com.salud.webSalud.persistence.enums.Especialidad;
 import com.salud.webSalud.persistence.enums.Rol;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,6 +30,9 @@ public class Medico {
     private Integer horarioFinal;
     @Column(nullable = true)
     private Double valorConsulta;
+
+    @Column(nullable = true)
+    private ArrayList<Integer> puntuaciones;
     private Boolean obraSocial;
     @Enumerated(EnumType.STRING)
     private Rol rol;
@@ -40,11 +45,17 @@ public class Medico {
     private List<Turno> turnos;
     @OneToOne
     private Imagen imagen;
+    @Enumerated(EnumType.STRING)
+    private Atencion atencion;
+    @Column(nullable=true)
+    private String direccion;
 
     public Medico() {
     }
 
-    public Medico(Integer idUsuario, String nombre, String apellido, String mail, String contrasenia, Boolean alta, Integer horarioInicio, Integer horarioFinal, Double valorConsulta, Boolean obraSocial, Rol rol, Especialidad especialidad, List<Turno> turnos, Imagen imagen) {
+
+    public Medico(Integer idUsuario, String nombre, String apellido, String mail, String contrasenia, Boolean alta, Integer horarioInicio, Integer horarioFinal, Double valorConsulta, ArrayList<Integer> puntuaciones, Boolean obraSocial, Rol rol, Especialidad especialidad, List<Turno> turnos, Imagen imagen) {
+
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -54,11 +65,21 @@ public class Medico {
         this.horarioInicio = horarioInicio;
         this.horarioFinal = horarioFinal;
         this.valorConsulta = valorConsulta;
+        this.puntuaciones = puntuaciones;
         this.obraSocial = obraSocial;
         this.rol = rol;
         this.especialidad = especialidad;
         this.turnos = turnos;
-        this.imagen = imagen;
+
+    }
+
+    public ArrayList<Integer> getPuntuaciones() {
+        return puntuaciones;
+    }
+
+    public void setPuntuaciones(ArrayList<Integer> puntuaciones) {
+        this.puntuaciones = puntuaciones;
+
     }
 
     public Integer getIdUsuario() {
@@ -171,6 +192,22 @@ public class Medico {
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
+    }
+
+    public Atencion getAtencion() {
+        return atencion;
+    }
+
+    public void setAtencion(Atencion atencion) {
+        this.atencion = atencion;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
     
     

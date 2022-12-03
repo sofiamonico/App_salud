@@ -66,6 +66,8 @@ import org.springframework.web.multipart.MultipartFile;
     @GetMapping("/{id}")
     public String vistaMedico(@PathVariable Integer id, ModelMap modelo) {
         Medico medico = medicoServicio.getOne(id);
+        int promedioPuntuaciones = medicoServicio.calcularPorcentaje(medico.getPuntuaciones());
+        modelo.put("puntuacion", promedioPuntuaciones);
         modelo.addAttribute("medico", medico);
         List<Turno> turnos = turnoServicio.listaTurnosPorMedico(id);
         modelo.addAttribute("turnos", turnos);
@@ -86,10 +88,12 @@ import org.springframework.web.multipart.MultipartFile;
         public String modificandoMedico(@PathVariable Integer id, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido,
                                         @RequestParam String mail, @RequestParam String especialidad,
                                         @RequestParam String obraSocial, @RequestParam Double valorConsulta, @RequestParam String contrasenia,
-                                        @RequestParam String contrasenia2, ModelMap modelo) throws MyException {
+
+                                        @RequestParam String contrasenia2, ModelMap modelo, @RequestParam(required = false) String direccion, @RequestParam String atencion) throws MyException {
+
 
             try {
-                medicoServicio.actualizar(archivo,id,nombre,apellido,mail,contrasenia,contrasenia2,especialidad,obraSocial, Double.valueOf(valorConsulta));
+                medicoServicio.actualizar(archivo,id,nombre,apellido,mail,contrasenia,contrasenia2,especialidad,obraSocial, Double.valueOf(valorConsulta), direccion, atencion);
                 modelo.put("exito", "El medico fue modificado correctamente!");
                 return "redirect:/medicos/perfil";
             } catch (MyException | IOException e) {
@@ -104,6 +108,7 @@ import org.springframework.web.multipart.MultipartFile;
 
             Medico usuario = (Medico) session.getAttribute("usuariosession");
             modelo.addAttribute("usuario", usuario);
+            //th:if=usuario.imagen
             return "perfilMedico.html";
         }
 
@@ -170,6 +175,12 @@ import org.springframework.web.multipart.MultipartFile;
         modelo.addAttribute("turnosAtendidos", turnosAtendidos);
         modelo.addAttribute("usuario", usuario);
         return "administrarPacientes.html";
+    }
+    
+    @PostMapping("/cambiarRol/{id}")
+    public String cambiarRol(@PathVariable Integer id) throws MyException{
+        medicoServicio.cambiarRol(id);
+        return "tabla.html";
     }
 
 }

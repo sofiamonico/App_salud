@@ -17,7 +17,11 @@
 .pie-pagina .grupo-1{
    /* height: 250px;
     width: 1366px;*/
-    margin:40px;
+
+    margin-right:40px;
+    margin-bottom:40px;
+    margin-left:40px;
+
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-gap: 50px;

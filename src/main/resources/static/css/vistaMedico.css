@@ -24,3 +24,16 @@ fotoMedico{
 h4 {
 color: black;
 }
+
+.btn-secondary {
+    background: #8F3A84;
+    color: white;
+}
+
+.btn-secondary:hover,
+.btn-secondary:active {
+    background-color: white;
+    background-position: 0 0;
+    color: #8F3A84;
+    border-bottom-color: #8F3A84;
+}

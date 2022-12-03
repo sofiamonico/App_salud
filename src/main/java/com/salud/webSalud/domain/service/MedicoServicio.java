@@ -4,8 +4,15 @@ import com.salud.webSalud.domain.exception.MyException;
 import com.salud.webSalud.persistence.entity.Imagen;
 import com.salud.webSalud.persistence.entity.Medico;
 import com.salud.webSalud.persistence.entity.Turno;
+
+import com.salud.webSalud.persistence.enums.Atencion;
+import static com.salud.webSalud.persistence.enums.Atencion.PRESENCIAL;
+import static com.salud.webSalud.persistence.enums.Atencion.TELEMEDICINA;
+
 import com.salud.webSalud.persistence.enums.Especialidad;
 import com.salud.webSalud.persistence.enums.Rol;
+import static com.salud.webSalud.persistence.enums.Rol.ADMIN;
+import static com.salud.webSalud.persistence.enums.Rol.USER;
 import com.salud.webSalud.persistence.repository.MedicoRepositorio;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +29,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -36,11 +44,14 @@ public class MedicoServicio implements UserDetailsService {
     @Autowired
     ImagenServicio imagenServicio;
 
+    @Autowired
+    EmailSenderService senderService;
+
     //VA A RECIBIR DOBLE CONTRASEÑA PORQUE SE USA PARA VERIFICAR QUE SEAN IGUALES
     //PERO LA CONTRASEÑA2 NO SE GUARDA
     @Transactional
     public void registrarMedico(String nombre, String apellido, String mail,String especialidad,
-                                String obraSocial, String contrasenia,String contrasenia2, Double valorConsulta, MultipartFile archivo) throws MyException {
+                                String obraSocial, String contrasenia,String contrasenia2, Double valorConsulta, MultipartFile archivo, String direccion, String atencion) throws MyException {
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
 
         Medico medico = new Medico();
@@ -51,6 +62,14 @@ public class MedicoServicio implements UserDetailsService {
         medico.setRol(Rol.USER);
         medico.setAlta(true);
         medico.setValorConsulta(valorConsulta);
+        if(atencion.toUpperCase().equals("PRESENCIAL")){
+            medico.setAtencion(Atencion.PRESENCIAL);
+            medico.setDireccion(direccion);
+        }else{
+            medico.setAtencion(Atencion.TELEMEDICINA);
+        }
+        
+        
         
         if(archivo != null){
         Imagen imagen = imagenServicio.guardar(archivo);
@@ -90,10 +109,9 @@ public class MedicoServicio implements UserDetailsService {
     }
 
     @Transactional
-
     public void actualizar(MultipartFile archivo, Integer idUsuario, String nombre, String apellido, String mail,
                            String contrasenia,String contrasenia2, String especialidad,
-                           String obraSocial, Double valorConsulta) throws MyException, IOException {
+                           String obraSocial, Double valorConsulta, String direccion, String atencion) throws MyException, IOException {
 
         validar(nombre, apellido, mail, especialidad, contrasenia, contrasenia2);
         Optional<Medico> respuesta = medicoRepositorio.findById(idUsuario);
@@ -117,10 +135,63 @@ public class MedicoServicio implements UserDetailsService {
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
             medico.setImagen(imagen);
 
+            if(atencion.toUpperCase().equals("PRESENCIAL")){
+             medico.setAtencion(Atencion.PRESENCIAL);
+                medico.setDireccion(direccion);
+            }else{
+            medico.setAtencion(Atencion.TELEMEDICINA);
+        }
+            
+
             medicoRepositorio.save(medico);
 
         }
 
+    }
+
+    public int calcularPorcentaje (ArrayList<Integer> puntuaciones){
+        int suma = 0;
+        for (int i = 0; i < puntuaciones.size(); i++) {
+            suma += puntuaciones.get(i);
+        }
+
+        int promedio = suma /(puntuaciones.size());
+        return  promedio;
+    }
+
+    public void agregarPuntuacion(Integer puntuacion, Integer id){
+        Medico medico = getOne(id);
+        if(medico.getPuntuaciones() == null){
+            ArrayList<Integer> puntuaciones = new ArrayList();
+            puntuaciones.add(puntuacion);
+            medico.setPuntuaciones(puntuaciones);
+      }else{
+            ArrayList<Integer> puntuaciones = medico.getPuntuaciones();
+            puntuaciones.add(puntuacion);
+            medico.setPuntuaciones(puntuaciones);
+        }
+        medicoRepositorio.save(medico);
+    }
+
+    public void pedidoDeActualizacionParaAdmins(String nombre, Integer dni, Integer telefono, String mail, String obraSocial) throws MyException{
+            List<Medico> medicosAdmin = medicoRepositorio.traerAdmins();
+            Iterator<Medico> it = medicosAdmin.iterator();
+            String obraSocialParaMail;
+        if(obraSocial.equals("true")){
+            obraSocialParaMail = "Si";
+        }else{
+            obraSocialParaMail = "No";
+        }
+        while (it.hasNext()) {
+                Medico medico = it.next();
+                String emailAdmin = medico.getMail();
+                String asunto = "Pedido de actualización de datos";
+                String mensaje = "Buenos dias, " + medico.getApellido() + ". Recibimos un pedido de acutalización de un paciente, su DNI es: " +
+                        dni + ". Datos actualizados: \n" + "NOMBRE COMPLETO: " + nombre + "\nEMAIL: " + mail + "\nTELEFONO: " + telefono + "\nTIENE OBRA SOCIAL: " + obraSocialParaMail +
+                        "\n Le pedimos que cuando tenga actualizado los datos, se contacte con el paciente para que pueda volver a pedir turnos!";
+
+                senderService.sendEmail(emailAdmin,asunto,mensaje);
+            }
     }
 
     public void darDeBajaAlta(Integer idMedico) throws MyException {
@@ -192,5 +263,15 @@ public class MedicoServicio implements UserDetailsService {
             throw new
                     UsernameNotFoundException("User not exist with name :" +email);
         }
+    }
+    
+    public void cambiarRol(Integer idMedico){
+        Medico medico = getOne(idMedico);
+        if(medico.getRol() == USER){
+            medico.setRol(Rol.ADMIN);
+        }else{
+            medico.setRol(Rol.USER);
+        }
+        medicoRepositorio.save(medico);
     }
 }

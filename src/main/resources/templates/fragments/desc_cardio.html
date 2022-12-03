@@ -20,7 +20,7 @@
         <h5> Nuestros profesionales en esta especialidad son:</h5>
         <br>
         <br>
-        <ul id="cardiologos" style="text-align: left;">
+        <ul id="cardiologos" style="text-align: left; margin-left: 130px;">
             <li th:hidden="${medico.alta == false}"  th:each="medico : ${medicos}" >
                 <a th:href="@{'/medicos/' + ${medico.idUsuario}}" class="button-6" role="button" th:text="${medico.nombre} + ' ' + ${medico.apellido}"></a>
             </li>

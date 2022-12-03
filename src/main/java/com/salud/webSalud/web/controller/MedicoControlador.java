@@ -20,10 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -66,8 +63,16 @@ import org.springframework.web.multipart.MultipartFile;
     @GetMapping("/{id}")
     public String vistaMedico(@PathVariable Integer id, ModelMap modelo) {
         Medico medico = medicoServicio.getOne(id);
-        int promedioPuntuaciones = medicoServicio.calcularPorcentaje(medico.getPuntuaciones());
+        int promedioPuntuaciones = 0;
+        if(medico.getPuntuaciones() != null){
+            promedioPuntuaciones = medicoServicio.calcularPorcentaje(medico.getPuntuaciones());
+        }
         modelo.put("puntuacion", promedioPuntuaciones);
+        int precioConsulta=0;
+        if(medico.getValorConsulta() != null){
+            precioConsulta = (int) Math.round(medico.getValorConsulta());
+        }
+        modelo.put("valorConsulta", precioConsulta);
         modelo.addAttribute("medico", medico);
         List<Turno> turnos = turnoServicio.listaTurnosPorMedico(id);
         modelo.addAttribute("turnos", turnos);
@@ -86,14 +91,23 @@ import org.springframework.web.multipart.MultipartFile;
         @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
         @PostMapping("/modificar/{id}")
         public String modificandoMedico(@PathVariable Integer id, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido,
-                                        @RequestParam String mail, @RequestParam String especialidad,
+                                        @RequestParam String mail,
                                         @RequestParam String obraSocial, @RequestParam Double valorConsulta, @RequestParam String contrasenia,
+<<<<<<< HEAD
 
                                         @RequestParam String contrasenia2, ModelMap modelo, @RequestParam(required = false) String direccion, @RequestParam String atencion) throws MyException {
+=======
+                                        @RequestParam String contrasenia2, ModelMap modelo, @RequestParam Optional<String> direccion, @RequestParam String atencion) throws MyException {
+>>>>>>> ae358aa94491e95babccc43dc820780d0214d770
 
 
             try {
-                medicoServicio.actualizar(archivo,id,nombre,apellido,mail,contrasenia,contrasenia2,especialidad,obraSocial, Double.valueOf(valorConsulta), direccion, atencion);
+                if(direccion.isPresent()){
+                    medicoServicio.actualizar(archivo,id,nombre,apellido,mail,contrasenia,contrasenia2,obraSocial, Double.valueOf(valorConsulta), direccion.get(), atencion);
+                }else {
+                    medicoServicio.actualizar(archivo,id,nombre,apellido,mail,contrasenia,contrasenia2,obraSocial, Double.valueOf(valorConsulta), "", atencion);
+                }
+
                 modelo.put("exito", "El medico fue modificado correctamente!");
                 return "redirect:/medicos/perfil";
             } catch (MyException | IOException e) {

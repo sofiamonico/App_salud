@@ -1,23 +1,150 @@
-main {
+  /*NAVBAR*/
+  header {
+    background-color: #8F3A84;
+    align-items: center;
     font-family: Arial, Helvetica, sans-serif;
-}
+  }
 
-#titulo {
+  .navbar-brand {
+    color: black
+  }
+
+  .nav-link {
+    color: white;
+  }
+
+ /* .nav-link:focus,*/
+  .nav-link:/*hover*/ {
+    color: black;
+  }
+
+  .btn-success {
+    background-color: white;
     color: purple;
-    text-align: center;
-}
+    display: inline-block;
+    
+    font-size: smaller;
+    border-color: purple;
+  }
 
-.foto img {
+  .btn-outline-danger {
+    color: white;
+    border-color: black;
+    background-color: black;
+  }
+
+  .form-control {
+    border-color: black;
+    padding: 2px 3px;
+  }
+
+  .logo {
+    display: flex;
+  }
+
+  .logo img {
+    height: 100px;
+  }
+
+  /*MAIN*/
+  main {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  #titulo {
+    color: #8F3A84;
+    position: relative;
+    bottom: 80px;
+    right:60px;
+    /*text-align: center;*/
+  }
+
+  .descripcionTitulo{
+      margin-top: -300px; 
+      margin-left: 750px;
+  }
+  .foto img {
+    margin-left: -618px;
     text-align: left;
     height: 500px;
-}
+  }
 
-.informacion {
+  .informacion {
     text-align: center;
     color: black;
-}
+  }
+  h1 {
+  
+  }
+  h4 {
+    width: 500px;
+    position: relative;
+    bottom: 80px;
+  }
 
-.contenedor {
+  h5   {
+   margin-left: -600px;
+  }
+
+  .contenedor {
     display: flex;
     align-items: flex-start;
-}
+  }
+  
+  ul  .pediatras .ginecologas .clinicos .cardiologos{
+   
+  }
+  
+  .listaMedicosEspecialidad{
+      width: 1366px;
+      height:450px;
+      margin-top: 90px;
+  }
+  /* CSS */
+  .button-6 {
+
+    
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+   
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: 300px;
+    outline:white;
+    border-width: 0ch;
+    border-color: #F0F0F1;
+  }
+  
+  .button-6:hover,
+  .button-6:focus {
+    
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    color: rgba(143, 16, 126, 0.445);
+  }
+  
+  .button-6:hover {
+    transform: translateY(-1px);
+  }
+  
+  .button-6:active {
+    background-color: #F0F0F1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
+  }

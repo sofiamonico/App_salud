@@ -118,18 +118,19 @@ p.textoNosotros {
 }
 .titulo3{
   width: 100px;  
+  margin-left: 40px;
 }
 .titulo3 h1{
-    margin-left: 110px;
+    margin-left: 120px;
     padding: 20px;
     height: 20px;
     width: 600px;
-    font-size: 50px;
+    font-size: 41px;
        
 }
 
 #rectanguloGris{
-    margin-top: -48px;
+    margin-top: -672px;
   margin-left: 1067px;
   width: 300px;
   height: 672px;
@@ -139,15 +140,14 @@ p.textoNosotros {
   z-index: 2;
 }
 
-
+.FOTOS{
+    margin-top: 55px;
+    margin-left: 78px;
+}
 .especialidades1{
-    
      display: flex;
-    /* justify-content: center;
-    flex-direction: row-reverse;*/
-     margin-top: 130px;
-     margin-left: -1000px;
-     list-style: none;
+
+
 }
 #Especialidades .especialidades1 img{
      max-height: 180px;
@@ -156,7 +156,8 @@ p.textoNosotros {
  }
 
 #Especialidades .especialidades1 li{
-     margin-left: 8px;
+     
+     list-style: none;
  }
  #Especialidades .especialidades1 .area{
      display: flex;
@@ -175,14 +176,27 @@ p.textoNosotros {
     transform: translate3d(1px, 3px, 0);
 
   }
-
- #Especialidades .especialidades1 .area h2{
-    display: flex;
-    position: absolute;
-    font-weight: bold;
-    align-content: space-around;
-    font-family: 'Expletus Sans', 'Arial Narrow', Arial, sans-serif;
+  #card-2{
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+  }
+  #card-3{
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
     }
+ #card-4{
+          font-size: 18px;
+          display: flex;
+          justify-content: center;
+      }
+ #card-5{
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+        }
+
 
  /*CONTEINER 4 TURNOS */
     #Turnos{

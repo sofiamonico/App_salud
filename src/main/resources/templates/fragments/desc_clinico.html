@@ -1,24 +1,35 @@
 
 <div th:if="${espe == 'clinico'}" class="informacion">
-    <tittle id="titulo">
-        <h1><strong>Clínica</strong></h1>
-    </tittle>
-    <p>
-    <h4>Es un especialista en adultos que enfoca al paciente con una concepción integral del ser humano,
+    <div class="descripcion"> 
+        <div class="foto">
+             <img th:if="${espe == 'clinico'}" src="/img/clinico.jpg" alt="Imagen Ilustrativa">
+        </div> 
+        
+        <div class="descripcionTitulo">
+          <tittle id="titulo">
+          <h1><strong>CLÍNICA</strong></h1>
+          </tittle>
+   
+          <h4>Es un especialista en adultos que enfoca al paciente con una concepción integral del ser humano,
         capacitado para prevenir, diagnosticar, tratar y rehabilitar la patología prevalente, así como para
-        guiar al paciente por todos los niveles de atenciÃ³n y realizar promoción de la salud.
+        guiar al paciente por todos los niveles de atención y realizar promoción de la salud.</h4>
         <br>
-
+         </div>
+        
+      </div>
+        <div class="listaMedicosEspecialidad">
         <h5> Nuestros profesionales en esta especialidad son:</h5>
         <br>
         <br>
-    <ul id="clinicos" style="text-align: left;" >
+        <ul id="clinicos" style="text-align: left; margin-left: 130px;" >
         <li th:hidden="${medico.alta == false}" th:each="medico : ${medicos}" >
             <a th:href="@{'/medicos/' + ${medico.idUsuario}}" class="button-6" role="button" th:text="${medico.nombre} + ' ' + ${medico.apellido}"></a>
-        </li>
-    </ul>
-    </h4>
-    </p>
-    <br>
+         </li>
+         </ul>
+    
+    
+          <br>
+        </div>
+
 </div>
 

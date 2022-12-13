@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -47,10 +49,22 @@ public class PortalControlador {
 
         return "tablaBusqueda.html";
     }
-   
 
 
 
+    @GetMapping("/puntuar/{id}")
+    public String puntuacion(@PathVariable Integer id, ModelMap modelo) {
+        Medico medico = medicoServicio.getOne(id);
+        modelo.addAttribute("medico", medico);
+        return "puntuarMedico.html";
+    }
+
+    @PostMapping("/puntuado/{id}")
+    public String aplicarPuntuacion(@PathVariable Integer id, @RequestParam Integer puntuacion) {
+        medicoServicio.agregarPuntuacion(puntuacion,id);
+
+        return "redirect:/";
+    }
 
     @GetMapping("/registrarse")
     public String registrar() {
@@ -60,12 +74,17 @@ public class PortalControlador {
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String apellido,
                            @RequestParam String mail, @RequestParam String especialidad,
-                           @RequestParam String obraSocial, @RequestParam Integer valorConsulta,@RequestParam String contrasenia,
-                           @RequestParam String contrasenia2,  ModelMap modelo, MultipartFile archivo){
+                           @RequestParam String obraSocial, @RequestParam Integer valorConsulta, @RequestParam String contrasenia,
+                           @RequestParam String contrasenia2, @RequestParam Optional<String> direccion, @RequestParam String atencion,
+                           ModelMap modelo, MultipartFile archivo){
             //VER FORMATO DE LOS HORARIOS
             //RECIBE PERFECTO LOS PARAMETROS
        try {
-            medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial, contrasenia, contrasenia2, Double.valueOf(valorConsulta),archivo);
+           if(direccion.isPresent()){
+               medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial, contrasenia, contrasenia2, Double.valueOf(valorConsulta),archivo, direccion.get(), atencion);
+           }else{
+               medicoServicio.registrarMedico(nombre,apellido,mail,especialidad,obraSocial, contrasenia, contrasenia2, Double.valueOf(valorConsulta),archivo, "", atencion);
+           }
             modelo.put("exito", "El medico fue registrado correctamente!");
             return "redirect:/";
         } catch (MyException e) {

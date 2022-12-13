@@ -15,8 +15,8 @@ header {
     color: white;
 }
 
-.nav-link:focus,
-.nav-link:hover {
+
+.nav-link {
     color: black;
     margin-right: 40px;
 
@@ -46,7 +46,9 @@ header {
 
 .ingresar{
     position: relative;
-    right: 40px;
+    right: 70px;
+    
+    
 }
 
 .logo {
@@ -56,3 +58,21 @@ header {
 .logo img {
     height: 100px;
 }
+<<<<<<< HEAD
+
+
+.dropdown-menu{
+ margin-right: 0px;
+}
+
+=======
+/*
+.dropdown-menu{
+ margin-right: 0px;
+}
+ul .navbar-nav{
+    color: white;
+    font size: 20px;
+    
+}*/
+>>>>>>> ae358aa94491e95babccc43dc820780d0214d770

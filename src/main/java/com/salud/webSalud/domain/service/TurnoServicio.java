@@ -78,9 +78,19 @@ public class TurnoServicio  implements UserDetailsService {
     public void reservarTurno(Integer dni, Integer idTurno){
         Paciente paciente= pacienteServicio.getOne(dni);
         Turno turno = getOne(idTurno);
-
+       
         turno.setPaciente(paciente);
-
+        if(turno.getPaciente() != null){
+           paciente = turno.getPaciente(); 
+            String mailPaciente = paciente.getMail(); 
+            String motivo = "Confirmacion de turno" ;
+            String mensaje = "Buenas Tardes " + paciente.getNombre_paciente() + " le informamos que el doctor " +
+                    turno.getMedico().getApellido() + " le confirma su turno para el dia " + turno.getFechaConsulta() + " a las " +
+                    turno.getHora() + ". Ante cualquier duda no dude en comunicarse con nosotros. \n"+
+                    "Además le adjuntamos el siguiente link con el que podrá puntuar a su Medico luego de la consulta: \n" +
+                    "http://localhost:8080/puntuar/" + turno.getMedico().getIdUsuario();
+            senderService.sendEmail(mailPaciente, motivo, mensaje);            
+        }
         turnoRepositorio.save(turno);
     }
 

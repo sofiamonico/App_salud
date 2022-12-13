@@ -56,13 +56,22 @@ public class TurnoControlador {
     }
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("/observaciones")
-    public String changeObservaciones (@RequestParam Optional<String> observaciones0, @RequestParam Optional<Integer> idTurno0, @RequestParam Optional<String> observaciones1, @RequestParam Optional<Integer> idTurno1){
+
+    public String changeObservaciones (@RequestParam Optional<String> observaciones0, @RequestParam Optional<Integer> idTurno0,
+                                       @RequestParam Optional<String> observaciones1, @RequestParam Optional<Integer> idTurno1,
+                                       @RequestParam Optional<String> observaciones2, @RequestParam Optional<Integer> idTurno2){
+
         if (observaciones0.isPresent() && idTurno0.isPresent()) {
             turnoServicio.changeObservaciones(observaciones0.get(), idTurno0.get());
         }
         if (observaciones1.isPresent() && idTurno1.isPresent()) {
             turnoServicio.changeObservaciones(observaciones1.get(), idTurno1.get());
         }
+
+        if (observaciones2.isPresent() && idTurno2.isPresent()) {
+            turnoServicio.changeObservaciones(observaciones2.get(), idTurno2.get());
+        }
+
         return "redirect:/medicos/mispacientes";
     }
 

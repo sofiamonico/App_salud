@@ -93,12 +93,8 @@ import org.springframework.web.multipart.MultipartFile;
         public String modificandoMedico(@PathVariable Integer id, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido,
                                         @RequestParam String mail,
                                         @RequestParam String obraSocial, @RequestParam Double valorConsulta, @RequestParam String contrasenia,
-<<<<<<< HEAD
-
-                                        @RequestParam String contrasenia2, ModelMap modelo, @RequestParam(required = false) String direccion, @RequestParam String atencion) throws MyException {
-=======
                                         @RequestParam String contrasenia2, ModelMap modelo, @RequestParam Optional<String> direccion, @RequestParam String atencion) throws MyException {
->>>>>>> ae358aa94491e95babccc43dc820780d0214d770
+
 
 
             try {

@@ -176,11 +176,26 @@ p.textoNosotros {
     transform: translate3d(1px, 3px, 0);
 
   }
-  .card-body{
+  #card-2{
       font-size: 18px;
       display: flex;
       justify-content: center;
   }
+  #card-3{
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+    }
+ #card-4{
+          font-size: 18px;
+          display: flex;
+          justify-content: center;
+      }
+ #card-5{
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+        }
 
 
  /*CONTEINER 4 TURNOS */

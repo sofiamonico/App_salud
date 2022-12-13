@@ -12,42 +12,6 @@
         <!--Iconos Footer-->
         <script src="https://kit.fontawesome.com/5c022e6466.js" crossorigin="anonymous"></script>
 
-<<<<<<< HEAD
-</head>
-<body>
-<head th:replace="/fragments/navbar :: header"></head>
-<div class="px-4 py-5 my-5 text-center">
-    <h1 class="display-5 fw-bold">Especialistas encontrados:</h1>
-    <div class="col-lg-6 mx-auto">
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Especialidad</th>
-                    <th scope="col">Obra Social</th>
-                </tr>
-                </thead>
-                <tbody th:each="medico : ${medicos}">
-                <tr th:hidden="${medico.alta == false}">
-                    <th scope="row" th:text="${medico.nombre}"></th>
-                    <td th:text="${medico.apellido}"></td>
-                    <td th:text="${medico.especialidad}"></td>
-                    <td th:if="${medico.obraSocial} == true">Si</td>
-                    <td th:if="${medico.obraSocial} == false">No</td>
-
-                    <td><a style="color:#8F3A84" th:href="@{'/medicos/' + ${medico.idUsuario}}">Sacar turno
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-range" viewBox="0 0 16 16" style="color:#8F3A84">
-
-                            <path d="M9 7a1 1 0 0 1 1-1h5v2h-5a1 1 0 0 1-1-1zM1 9h4a1 1 0 0 1 0 2H1V9z"/>
-                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                        </svg>
-                    </a></td>
-                </tr>
-                </tbody>
-            </table>
-=======
     </head>
     <body>
     <head th:replace="/fragments/navbar :: header"></head>
@@ -81,8 +45,6 @@
                             </tr>
                         </tbody>
                     </table>
->>>>>>> ae358aa94491e95babccc43dc820780d0214d770
-
                 </div>
             </div> 
         </div>
